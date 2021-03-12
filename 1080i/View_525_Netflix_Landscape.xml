@@ -124,14 +124,27 @@
 					
 					<!-- PLOT -->
 					<control type="textbox">
-						<height max="204">auto</height>
+						<height max="240">auto</height>
 						<width>620</width>
 						<label>$VAR[Plots]</label>
 						<textcolor>$INFO[Skin.String(NetflixPrimaryTextColor)]</textcolor>
 						<align>left</align>
 						<include condition="Skin.HasSetting(UseHelveticaNeueNetflix_font)">font_Netflix_Plot</include>
 						<include condition="!Skin.HasSetting(UseHelveticaNeueNetflix_font)">font_Plot</include>
+						<visible>Skin.HasSetting(View525_UseFixedLayout)</visible>
 					</control>
+					
+					<control type="textbox">
+						<height max="140">auto</height>
+						<width>620</width>
+						<label>$VAR[Plots]</label>
+						<textcolor>$INFO[Skin.String(NetflixPrimaryTextColor)]</textcolor>
+						<align>left</align>
+						<include condition="Skin.HasSetting(UseHelveticaNeueNetflix_font)">font_Netflix_Plot</include>
+						<include condition="!Skin.HasSetting(UseHelveticaNeueNetflix_font)">font_Plot</include>
+						<visible>!Skin.HasSetting(View525_UseFixedLayout)</visible>
+					</control>
+					
 					<!-- Genre (no random cast,genre,director,nominations -->
 					<control type="grouplist">
 						<height>60</height>
@@ -145,26 +158,29 @@
 				</control>
 				 <!-- media flags , fixed -->
                 <control type="group">
-					<posx>80</posx>
+					<posx>70</posx>
                     <height>52</height>
-                    <top>690</top>
+                    <top>700</top>
                     <include>mediaflags</include>
-					<visible>Skin.HasSetting(View525_UseFixedLayout)</visible>
-					<animation effect="zoom" alignx="true" end="80,80" time="0" condition="Skin.String(mediaflagsstyle,large) | Skin.String(mediaflagsstyle,large_color)">Conditional</animation>
+					<visible>Skin.HasSetting(View525_UseFixedLayout) + !String.IsEmpty(ListItem.VideoAspect)</visible>
+					
+					<animation effect="zoom" alignx="true" end="70,70" time="0" condition="Skin.String(mediaflagsstyle,large) | Skin.String(mediaflagsstyle,large_color)">Conditional</animation>
 				</control>
+				
 				<!-- media flags , non-fixed -->
 				<control type="group">
-					<posx>700</posx>
-                    <height>52</height>
-                    <top>570</top>
+					<posx>80</posx>
+					<height>52</height>
+                    <top>580</top>
                     <include>mediaflags</include>
-					<visible>!Skin.HasSetting(View525_UseFixedLayout)</visible>
+					<visible>!Skin.HasSetting(View525_UseFixedLayout) + !String.IsEmpty(ListItem.VideoAspect)</visible>
+					
 					<!-- <animation effect="slide" end="-280,-5" time="0" condition="String.IsEqual(ListItem.DBTYPE,movie) | String.IsEqual(ListItem.DBTYPE,episode) | String.IsEqual(ListItem.DBTYPE,tvshow)">Conditional</animation>
 					 -->
 					<!-- <animation effect="zoom" alignx="true" end="80,80" time="0" condition="!String.IsEqual(ListItem.DBTYPE,movie) + [Skin.String(mediaflagsstyle,large) | Skin.String(mediaflagsstyle,large_color)]">Conditional</animation>
 					<animation effect="zoom" alignx="true" end="80,80" time="0" condition="String.IsEqual(ListItem.DBTYPE,movie) + [Skin.String(mediaflagsstyle,large) | Skin.String(mediaflagsstyle,large_color)]">Conditional</animation>
 					-->
-					<animation effect="zoom" alignx="true" end="80,80" time="0" condition="[Skin.String(mediaflagsstyle,large) | Skin.String(mediaflagsstyle,large_color)]">Conditional</animation>
+					<animation effect="zoom" alignx="true" end="70,70" time="0" condition="[Skin.String(mediaflagsstyle,large) | Skin.String(mediaflagsstyle,large_color)]">Conditional</animation>
 				</control>
                 <!-- rating , fixed -->
                 <control type="group">

@@ -101,7 +101,7 @@
 					
 					<!-- subtitle: MOTTO for Movies-->
 					<control type="label">
-						<top>-8</top>
+						<top>-10</top>
 						<height>50</height>
 						<width>700</width>
 						<include condition="Skin.HasSetting(UseHelveticaNeueNetflix_font)">font_Netflix_DetailRow</include>
@@ -116,7 +116,8 @@
 					
 					<!-- PLOT -->
 					<control type="textbox">
-						<height max="204">auto</height>
+						<top>0</top>
+						<height max="205">auto</height>
 						<width>620</width>
 						<label>$VAR[Plots]</label>
 						<textcolor>$INFO[Skin.String(NetflixPrimaryTextColor)]</textcolor>
@@ -125,6 +126,7 @@
 						<include condition="!Skin.HasSetting(UseHelveticaNeueNetflix_font)">font_Plot</include>					</control>
 					<!-- Genre (no random cast,genre,director,nominations -->
 					<control type="grouplist">
+						<top>5</top>
 						<height>60</height>
 						<orientation>horizontal</orientation>
 						<itemgap>10</itemgap>
@@ -135,20 +137,21 @@
 				</control>
 				<!-- media flags if TV SHOWS/SEASONS -->
                 <control type="group">
-                    <visible>String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)</visible>
-					<posx>945</posx>
+                    <visible>[String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)] + !String.IsEmpty(ListItem.VideoAspect)</visible>
+					<posx>90</posx>
                     <height>50</height>
-                    <top>620</top>
+                    <top>640</top>
                     <include>mediaflags</include>
+					<animation effect="zoom" end="80,80" time="0" condition="Skin.String(mediaflagsstyle,large) | Skin.String(mediaflagsstyle,large_color)">Conditional</animation>
                 </control>
 				<!-- media flags if not TV Shows -->
                 <control type="group">
-                    <visible>![String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)]</visible>
-					<posx>60</posx>
-					<height>52</height>
+                    <visible>![String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,season)] + !String.IsEmpty(ListItem.VideoAspect)</visible>
+					<posx>90</posx>
+					<height>50</height>
                     <top>640</top>
                     <include>mediaflags</include>
-					<animation effect="zoom" end="70,70" time="0" condition="Skin.String(mediaflagsstyle,large) | Skin.String(mediaflagsstyle,large_color)">Conditional</animation>					
+					<animation effect="zoom" end="65,65" time="0" condition="Skin.String(mediaflagsstyle,large) | Skin.String(mediaflagsstyle,large_color)">Conditional</animation>					
 				</control>
 							
 				<!-- rating -->
@@ -162,14 +165,13 @@
 				<!-- CAST when Trailer, without focus option -->
 				<control type="panel"> 
 					<top>700</top>
-					<left>1050</left>
+					<right>50</right>
 					<height>300</height>
 					<width>790</width>
 					<orientation>horizontal</orientation>
 					<visible>Player.HasVideo + Skin.HasSetting(ShowCastOnTrailer) + [String.IsEqual(ListItem.DBTYPE,tvshow) | String.IsEqual(ListItem.DBTYPE,movie)]</visible>
 					<animation effect="fade" start="0" end="100" delay="200" time="3000" pulse="false" condition="Player.HasVideo">Conditional</animation>
-					<animation effect="slide" end="-400,0" time="0" pulse="false" condition="$EXP[UseTitanShape] | Skin.HasSetting(View523_SameHeight)">Conditional</animation>
-					
+					<!--animation effect="slide" end="10,0" time="0" pulse="false" condition="$EXP[UseTitanShape] | Skin.HasSetting(View523_SameHeight)">Conditional</animation-->
 					<itemlayout height="225" width="158">
 						<control type="image">
 							<texture border="1" diffuse="diffuse/poster.png" background="true" fallback="DefaultActor.png">$INFO[ListItem.Thumb]</texture>
@@ -222,7 +224,7 @@
 			<!-- View 523 -->
 			<control type="fixedlist" id="523">
 				<include condition="$EXP[InVideoMode] + !Skin.HasSetting(View523_SameHeight)">focused4</include>
-				<include condition="$EXP[UseTitanShape] | Skin.HasSetting(View523_SameHeight)">focused1</include>
+				<include condition="$EXP[UseTitanShape] | Skin.HasSetting(View523_SameHeight)">focused3</include>
 				<include condition="$EXP[InGameMode]">focused1</include>
 				<viewtype label="31018">icons</viewtype>
 				<left>60</left>
@@ -705,6 +707,9 @@
 	</include>
 	<include name="focused1">
 		<focusposition>1</focusposition>
+	</include>
+	<include name="focused3">
+		<focusposition>3</focusposition>
 	</include>
 	
 

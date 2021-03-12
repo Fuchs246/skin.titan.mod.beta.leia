@@ -139,6 +139,7 @@
 				<onright>SetFocus(5026,0,absolute)</onright>
 				<onup>526</onup>
 				<ondown>526</ondown>
+				<visible>String.IsEqual(Window(Home).Property(SkinHelper.ForcedView),526) | String.IsEmpty(Window(Home).Property(SkinHelper.ForcedView))</visible>
 				<focusedlayout height="65" width="480" condition="Container.Content(seasons)">
 					<control type="group">
 						<posx>40</posx>

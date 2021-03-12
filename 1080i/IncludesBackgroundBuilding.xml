@@ -79,10 +79,16 @@
 		</variable>
 		
 		<variable name="BackgroundOverlayTexture_Colordiffuse">
-			<value condition="$EXP[IsNetflixLayout]">$INFO[Skin.String(NetflixBGColor)]</value>
+			<value condition="$EXP[IsNetflixLayout] + Skin.HasSetting(DisableColors)">$INFO[Window(Home).Property(TMDbHelper.ListItem.Colors.Main)]</value>
+			<value condition="$EXP[IsNetflixLayout] + !Skin.HasSetting(DisableColors)">$INFO[Skin.String(NetflixBGColor)]</value>
 			<value condition="Control.IsVisible(507) + Skin.HasSetting(View507_ShowInfo)">$INFO[Skin.String(ViewDetailsBGColor)]</value>
 			<value condition="!$EXP[IsNetflixLayout] + Skin.String(BackgroundOverlayColor) + !Skin.String(BackgroundOverlayColor,None)">$INFO[Skin.String(BackgroundOverlayColor)]</value>
 			<value>FFFFFFFF</value>
+		</variable>
+		
+		<variable name="Netflix_Preview_Colordiffuse">
+			<value condition="Skin.HasSetting(DisableColors)">$INFO[Window(Home).Property(TMDbHelper.ListItem.Colors.Main)]</value>
+			<value condition="!Skin.HasSetting(DisableColors)">$INFO[Skin.String(NetflixBGColor)]</value>
 		</variable>
 
 	<include name="DialogOverlayExtra">

@@ -2748,4 +2748,86 @@ msgctxt "#31902"
 msgid "Netflix Info"
 msgstr "Netflix Info"
 
+msgctxt "#31921"
+msgid "Default OSD button for PVR Radio playback"
+msgstr "Standard Button im OSD bei PVR Radio Wiedergabe"
 
+msgctxt "#31922"
+msgid "unknown"
+msgstr "Unbekannt"
+
+msgctxt "#31923"
+msgid "Adventure"
+msgstr "Abenteuer"
+
+msgctxt "#31924"
+msgid "Action"
+msgstr "Action"
+
+msgctxt "#31925"
+msgid "Animation"
+msgstr "Animation"
+
+msgctxt "#31926"
+msgid "Documentary"
+msgstr "Dokumentarflim"
+
+msgctxt "#31927"
+msgid "Drama"
+msgstr "Drama"
+
+msgctxt "#31928"
+msgid "Family"
+msgstr "Familie"
+
+msgctxt "#31929"
+msgid "Fantasy"
+msgstr "Fantasy"
+
+msgctxt "#31930"
+msgid "History"
+msgstr "Historie"
+
+msgctxt "#31931"
+msgid "Horror"
+msgstr "Horror"
+
+msgctxt "#31932"
+msgid "Comedy"
+msgstr "Komödie"
+
+msgctxt "#31933"
+msgid "War"
+msgstr "Kriegsfilm"
+
+msgctxt "#31934"
+msgid "Crime"
+msgstr "Krimi"
+
+msgctxt "#31935"
+msgid "Romance"
+msgstr "Liebesfilm"
+
+msgctxt "#31936"
+msgid "Music"
+msgstr "Musik"
+
+msgctxt "#31937"
+msgid "Mystery"
+msgstr "Mystery"
+
+msgctxt "#31938"
+msgid "Science Fiction"
+msgstr "Science Fiction"
+
+msgctxt "#31940"
+msgid "TV Movie"
+msgstr "TV-Film"
+
+msgctxt "#31941"
+msgid "Western"
+msgstr "Western"
+
+msgctxt "#31942"
+msgid "Thriller"
+msgstr "Thriller"

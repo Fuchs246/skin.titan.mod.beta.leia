@@ -6,7 +6,7 @@
 		<label2>$LOCALIZE[32022]</label2>
 		<icon>resource://resource.images.skinicons.wide/livetv.png</icon>
 		<thumb>$INFO[Window(Home).Property(SkinHelper.PvrBackground)]</thumb>
-		<action>ActivateWindow(TVGuide)</action>
+		<action>ActivateWindow(TVChannels)</action>
 	</shortcut>
 	<!-- all movies tile -->
 	<shortcut>
@@ -31,7 +31,7 @@
 		<icon>resource://resource.images.skinicons.wide/music.png</icon>
 		<thumb>$INFO[Window(Home).Property(SkinHelper.AllMusicBackground)]</thumb>
 		<thumb />
-		<action>ActivateWindow(Music,musicdb://artists/,return)</action>
+		<action>ActivateWindow(Music,musicdb://,return)</action>
 	</shortcut>
 	<!-- musicvideos tile -->
 	<shortcut>

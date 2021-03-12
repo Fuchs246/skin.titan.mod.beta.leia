@@ -167,6 +167,7 @@
 				<onright>SetFocus(5027,0,absolute)</onright>
 				<onup>527</onup>
 				<ondown>527</ondown>
+				<visible>String.IsEqual(Window(Home).Property(SkinHelper.ForcedView),527) | String.IsEmpty(Window(Home).Property(SkinHelper.ForcedView))</visible>
 				<!-- default , clearlogo-->
 				<itemlayout width="750" height="210" condition="![Skin.HasSetting(LogoViewPreferClearArt) | Skin.HasSetting(LogoViewPreferLandscape) | Skin.HasSetting(LogoViewPreferBanner)]">
 					<control type="image">

@@ -116,7 +116,7 @@
 					<control type="image">
 						<height>130</height>
 						<aspectratio align="center" aligny="center">keep</aspectratio>
-						<colordiffuse>$INFO[Skin.String(ViewDetailsHighlightTextColor)]</colordiffuse>
+						<!--colordiffuse>$INFO[Skin.String(ViewDetailsHighlightTextColor)]</colordiffuse-->
 						<texture background="true">$INFO[Skin.String(SkinHelper.studiologos.path)]$INFO[ListItem.Studio,,.png]</texture>
 					</control>
 				</control>

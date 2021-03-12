@@ -71,7 +71,7 @@
 			<preloaditems>2</preloaditems>
 			<focusposition>0</focusposition>
 			<orientation>horizontal</orientation>
-			<height max="365">auto</height>
+			<height max="380">auto</height>
 			<visible>$PARAM[visible]</visible>
 			<itemlayout height="$PARAM[height]" width="$PARAM[width]">
 				<control type="group">
@@ -222,22 +222,22 @@
 	
 	<!--extra fanart sourcing -->
     <variable name="extraFanartLocation">
-        <value condition="[container.content(movies) | String.IsEqual(ListItem.DBTYPE,movie)]">$INFO[listitem.path,,extrafanart]</value>
-        <value condition="[container.content(tvshows) | String.IsEqual(ListItem.DBTYPE,tvshow)]">$INFO[listitem.filenameandpath,,extrafanart]</value>
-        <value condition="[container.content(seasons) | String.IsEqual(ListItem.DBTYPE,season)]">$INFO[container.listitem.path,,extrafanart]</value>
+        <value condition="String.Contains(listitem.filenameandpath,extrafanart) + [container.content(movies) | String.IsEqual(ListItem.DBTYPE,movie)]">$INFO[listitem.path,,extrafanart]</value>
+        <value condition="String.Contains(listitem.filenameandpath,extrafanart) + [container.content(tvshows) | String.IsEqual(ListItem.DBTYPE,tvshow)]">$INFO[listitem.filenameandpath,,extrafanart]</value>
+        <value condition="String.Contains(listitem.filenameandpath,extrafanart) + [container.content(seasons) | String.IsEqual(ListItem.DBTYPE,season)]">$INFO[container.listitem.path,,extrafanart]</value>
     </variable>
 	<!--extra thumbs sourcing-->
     <variable name="extraThumbsLocation">
-        <value condition="[container.content(movies) | String.IsEqual(ListItem.DBTYPE,movie)]">$INFO[listitem.path,,extrathumbs]</value>
-        <value condition="[container.content(tvshows) | String.IsEqual(ListItem.DBTYPE,tvshow)]">$INFO[listitem.filenameandpath,,extrathumbs]</value>
-        <value condition="[container.content(seasons) | String.IsEqual(ListItem.DBTYPE,season)]">$INFO[container.listitem.path,,extrathumbs]</value>
+        <value condition="String.Contains(listitem.filenameandpath,extrathumbs) + [container.content(movies) | String.IsEqual(ListItem.DBTYPE,movie)]">$INFO[listitem.path,,extrathumbs]</value>
+        <value condition="String.Contains(listitem.filenameandpath,extrathumbs) + [container.content(tvshows) | String.IsEqual(ListItem.DBTYPE,tvshow)]">$INFO[listitem.filenameandpath,,extrathumbs]</value>
+        <value condition="String.Contains(listitem.filenameandpath,extrathumbs) + [container.content(seasons) | String.IsEqual(ListItem.DBTYPE,season)]">$INFO[container.listitem.path,,extrathumbs]</value>
     </variable>
 	
 	<!-- video extra(s) -->
 	<variable name="BonusContent">
         <value condition="String.Contains(listitem.filenameandpath,VIDEO_TS)">$INFO[listitem.path,,VIDEO_TS\extras]</value>
-		 <value condition="String.Contains(listitem.filenameandpath,BDMV)">$INFO[listitem.path,,BDMV\extras]</value>
-		<value>$INFO[listitem.path,,extras]</value>
+		<value condition="String.Contains(listitem.filenameandpath,BDMV)">$INFO[listitem.path,,BDMV\extras]</value>
+		<value condition="String.Contains(listitem.filenameandpath,extras)">$INFO[listitem.path,,extras]</value>
 	</variable>
 	
 	<!-- videoinfo -->

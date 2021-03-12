@@ -5,6 +5,14 @@
     <include>DefaultSkinSettings</include>
     <include condition="Skin.HasSetting(KeepWidgetFocus)">WidgetPlaybackFocus</include>
     <onload>RunScript(script.skinshortcuts,type=buildxml&amp;mainmenuID=300&amp;group=mainmenu|powermenu)</onload>
+	<onload condition="Skin.HasSetting(DisableColors)">Skin.SetBool(TMDbHelper.EnableColors)</onload>  <!-- (DisableColors) name ändern in (Enable_Colors) --> 
+	<onload condition="!Skin.HasSetting(DisableColors)">Skin.Reset(TMDbHelper.EnableColors)</onload>
+	<onload condition="Skin.HasSetting(LightColors)">Skin.SetString(TMDbHelper.Colors.Luminance,0.4)</onload>    
+	<onload condition="Skin.HasSetting(LightColors)">Skin.SetString(TMDbHelper.Colors.Saturation,0.6)</onload>
+	<onload condition="!Skin.HasSetting(LightColors)">Skin.SetString(TMDbHelper.Colors.Luminance,0.1)</onload>    
+	<onload condition="!Skin.HasSetting(LightColors)">Skin.SetString(TMDbHelper.Colors.Saturation,0.6)</onload>
+	<onload>SetProperty(TMDbHelper.WidgetContainer,$PARAM[widgetid],Home)</onload>
+    <onload>SetProperty(TMDbHelper.Colors.SourceImage,fanart,Home)</onload>
 	<!-- <onload>RunScript(script.embuary.helper,action=getkodisetting,setting=myvideos.selectaction)</onload> - custom defined actions possible, but huge workaraound - var/include RespectBool_selectaction -->
 	<include condition="Skin.String(widgets_rotate) + !Skin.String(widgets_rotate,disabled)">WidgetsAutoRotateUnload</include>
     <onunload condition="!Skin.HasSetting(SectionBackgroundHomeOnly)">SetProperty(SectionBackground,$INFO[Control.GetLabel(99004)])</onunload>

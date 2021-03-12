@@ -190,8 +190,9 @@ Container(id).ListItem(offset).Thumb
 	<include name="Netflix_Genre">
 			<visible>!String.IsEmpty(ListItem.Genre) | !String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.Genre))</visible>
 			<control type="group">
-				<height>60</height>
-				<width>60</width>
+				<top>10</top>
+				<height>45</height>
+				<width>45</width>
 				<control type="image">
 					<texture aligny="center" align="center">diffuse/roundmask.png</texture>
 					<colordiffuse>$INFO[Skin.String(ViewNetfixHighlightTextColor)]</colordiffuse>
@@ -205,13 +206,13 @@ Container(id).ListItem(offset).Thumb
 			</control>
 			
 			<control type="label">
+				<top>10</top>
 				<width>auto</width>
-				<height>50</height>
-				<aligny>center</aligny>
+				<height>40</height>
 				<label>$VAR[ListItemGenre,[B],[/B]]</label>
 				<textcolor>$INFO[Skin.String(NetflixSecondaryTextColor)]</textcolor>
 				<align>left</align>
-				<aligny>center</aligny>
+				
 				<include condition="Skin.HasSetting(UseHelveticaNeueNetflix_font)">font_Netflix_DetailRow</include>
 				<include condition="!Skin.HasSetting(UseHelveticaNeueNetflix_font)">font_Def_DetailRow</include>
 			</control>
@@ -672,8 +673,8 @@ Container(id).ListItem(offset).Thumb
 			
 			<width>$PARAM[tagwidth]</width>
 			<top>$PARAM[tagtop]</top>
-			<left>5</left>
-			<right>5</right>
+			<left>10</left>
+			<right>10</right>
 			<height>50</height>
 			<include condition="Skin.HasSetting(ThumbsLabelAlignmentCenter)">aligncenter</include>
 			<align>left</align>
@@ -707,6 +708,17 @@ Container(id).ListItem(offset).Thumb
 				<effect type="zoom" end="115,115" time="200" tween="sine" easing="out" center="auto" />
 				<effect type="zoom" end="93,93" time="150" tween="sine" delay="200" easing="out" center="auto" />
 			</animation>
+		</include>
+		
+		<include name="Focus_Zoom_Animation_SimpleVerHome">
+			<animation type="Focus" reversible="false">
+				<effect type="zoom" end="115,115" time="200" tween="sine" easing="out" center="auto" />
+				<effect type="zoom" end="93,93" time="150" tween="sine" delay="200" easing="out" center="auto" />
+			</animation>
+			<animation effect="slide" delay="0" start="0" end="20,0" time="0" condition="Skin.HasSetting(SimpleVerHomeLeftAlign) + !Skin.HasSetting(UseDefaultVerticalLayout)">Conditional</animation>
+			<animation effect="slide" delay="0" start="0" end="-20,0" time="0" condition="!Skin.HasSetting(SimpleVerHomeLeftAlign) + !Skin.HasSetting(UseDefaultVerticalLayout)">Conditional</animation>
+			<animation effect="slide" delay="0" start="0" end="10,0" time="0" condition="Skin.HasSetting(SimpleVerHomeLeftAlign) + Skin.HasSetting(UseDefaultVerticalLayout)">Conditional</animation>
+			<animation effect="slide" delay="0" start="0" end="-10,0" time="0" condition="!Skin.HasSetting(SimpleVerHomeLeftAlign) + Skin.HasSetting(UseDefaultVerticalLayout)">Conditional</animation>
 		</include>
 	<!-- Scrollbars -->
 	<include name="scollbar">

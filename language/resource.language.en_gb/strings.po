@@ -3031,3 +3031,107 @@ msgstr "Netflix Info"
 msgctxt "#31920"
 msgid "Use alternate episode name (Tvheadend)"
 msgstr ""
+
+msgctxt "#31921"
+msgid "Default OSD button for PVR Radio playback"
+msgstr ""
+
+msgctxt "#31923"
+msgid "Adventure"
+msgstr ""
+
+msgctxt "#31924"
+msgid "Action"
+msgstr ""
+
+msgctxt "#31925"
+msgid "Animation"
+msgstr ""
+
+msgctxt "#31926"
+msgid "Documentary"
+msgstr ""
+
+msgctxt "#31927"
+msgid "Drama"
+msgstr ""
+
+msgctxt "#31928"
+msgid "Family"
+msgstr ""
+
+msgctxt "#31929"
+msgid "Fantasy"
+msgstr ""
+
+msgctxt "#31930"
+msgid "History"
+msgstr ""
+
+msgctxt "#31931"
+msgid "Horror"
+msgstr ""
+
+msgctxt "#31932"
+msgid "Comedy"
+msgstr ""
+
+msgctxt "#31933"
+msgid "War"
+msgstr ""
+
+msgctxt "#31934"
+msgid "Crime"
+msgstr ""
+
+msgctxt "#31935"
+msgid "Romance"
+msgstr ""
+
+msgctxt "#31936"
+msgid "Music"
+msgstr ""
+
+msgctxt "#31937"
+msgid "Mystery"
+msgstr ""
+
+msgctxt "#31938"
+msgid "Science Fiction"
+msgstr ""
+
+msgctxt "#31940"
+msgid "TV Movie"
+msgstr ""
+
+msgctxt "#31941"
+msgid "Western"
+msgstr ""
+
+msgctxt "#31942"
+msgid "Thriller"
+msgstr ""
+
+msgctxt "#31943"
+msgid "Text Widget Details(Fokus)"
+msgstr ""
+
+msgctxt "#31944"
+msgid "Action & Adventure"
+msgstr ""
+
+msgctxt "#31945"
+msgid "Sci-Fi & Fantasy"
+msgstr ""
+
+msgctxt "#31946"
+msgid "War & Politics"
+msgstr ""
+
+msgctxt "#31947"
+msgid "Kids"
+msgstr ""
+
+msgctxt "#31948"
+msgid "Soap"
+msgstr ""

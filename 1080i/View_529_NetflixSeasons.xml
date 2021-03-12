@@ -23,21 +23,21 @@
 				<control type="image">
 					<description>Dimmed Fanart BG</description>
 					<visible>!Control.HasFocus(529001)</visible>
-					<visible>Skin.HasSetting(View529_EnableBottomPanel)</visible>
+					<visible>Skin.HasSetting(View529_EnableBottomPanel) + ControlGroup(529005).HasFocus</visible>
 					<fadetime>350</fadetime>
-					<bordersize>0,0,0,418</bordersize>
+					<bordersize>0,0,0,415</bordersize>
 					<texture background="true" diffuse="colors/color_trans_20.png">$VAR[netflixThumb]</texture>
 					<aspectratio scalediffuse="true" aligny="top">scale</aspectratio>
-					<animation effect="slide" start="0,1080" end="0,0" tween="quadratic" easing="in" time="400">VisibleChange</animation>
+					<animation effect="slide" delay="200" start="0,1080" end="0,0" tween="quadratic" easing="in" time="0">VisibleChange</animation>
 				</control>
 				<control type="image">
-					<visible>!Skin.HasSetting(View529_EnableBottomPanel)</visible>
+					<visible>!Skin.HasSetting(View529_EnableBottomPanel) | [Skin.HasSetting(View529_EnableBottomPanel) + !ControlGroup(529005).HasFocus]</visible>
 					<description>Dimmed Fanart BG</description>
 					<visible>!Control.HasFocus(529001)</visible>
 					<fadetime>350</fadetime>
 					<texture background="true" diffuse="colors/color_trans_10.png">$VAR[netflixThumb]</texture>
 					<aspectratio scalediffuse="true" aligny="top">scale</aspectratio>
-					<animation effect="slide" start="0,1080" end="0,0" tween="quadratic" easing="in" time="400">VisibleChange</animation>
+					<animation effect="slide" delay="200" start="0,1080" end="0,0" tween="quadratic" easing="in" time="0">VisibleChange</animation>
 				</control>
 			</control>
 			
@@ -57,7 +57,7 @@
 				<control type="button" id="529001">
 					<texturefocus />
 					<texturenofocus />
-					<onfocus>RunScript(script.embuary.helper,action=lookforfile,file='"$INFO[listitem.path]$INFO[listitem.FolderName,,-trailer.mp4]"',prop=trailer_avail)</onfocus>
+					<onfocus condition="!String.StartsWith(ListItem.FolderPath,plugin)">RunScript(script.embuary.helper,action=lookforfile,file='"$INFO[listitem.path]$INFO[listitem.FolderName,,-trailer.mp4]"',prop=trailer_avail)</onfocus>
 					<onleft>9000</onleft>
 					<height>1</height>
 					
@@ -343,7 +343,7 @@
 								<aligny>center</aligny>
 								<textcolor>$INFO[Skin.String(NetflixSecondaryTextColor)]</textcolor>
 								<selectedcolor>white</selectedcolor>
-								<info>ListItem.Plot</info>
+								<label>$VAR[Plots]</label>
 							</control>
 						</itemlayout>
 						<focusedlayout height="430" width="460" condition="!Skin.HasSetting(View529_EpisodeInfoRight)">
@@ -383,7 +383,7 @@
 								<aligny>center</aligny>
 								<textcolor>$INFO[Skin.String(NetflixPrimaryTextColor)]</textcolor>
 								<selectedcolor>white</selectedcolor>
-								<info>ListItem.Plot</info>
+								<label>$VAR[Plots]</label>
 							</control>
 						</focusedlayout>
 						<itemlayout height="430" width="860" condition="Skin.HasSetting(View529_EpisodeInfoRight)">
@@ -430,7 +430,7 @@
 								<aligny>center</aligny>
 								<textcolor>$INFO[Skin.String(NetflixSecondaryTextColor)]</textcolor>
 								<selectedcolor>$INFO[Skin.String(NetflixSecondaryTextColor)]</selectedcolor>
-								<label>$INFO[ListItem.Plot]</label>
+								<label>$VAR[Plots]</label>
 							</control>
 							<control type="label">
 								<width>100%</width>
@@ -492,7 +492,7 @@
 								<aligny>center</aligny>
 								<textcolor>$INFO[Skin.String(NetflixPrimaryTextColor)]</textcolor>
 								<selectedcolor>$INFO[Skin.String(NetflixPrimaryTextColor)]</selectedcolor>
-								<label>$INFO[ListItem.Plot]</label>
+								<label>$VAR[Plots]</label>
 							</control>
 							<control type="label">
 								<width>100%</width>
@@ -590,7 +590,7 @@
 						<itemlayout height="400" width="270">
 							<control type="group">
 								<height>250</height>
-								<width>250</width>
+								<width>200</width>
 								<include content="Circle_CastWidget">
 									<param name="colordiffuse" value="$INFO[Skin.String(NetflixViewDetailsBorderFocusColor)]" />
 									<param name="autoscroll" value="false" />
@@ -601,7 +601,7 @@
 						<focusedlayout height="400" width="270">
 							<control type="group">
 								<height>250</height>
-								<width>250</width>
+								<width>200</width>
 								<include>Focus_Zoom_Animation</include>
 								<control type="group">
 									<include content="Circle_CastWidget">
@@ -612,7 +612,8 @@
 								</control>
 							</control>
 						</focusedlayout>
-						<content>plugin://script.embuary.helper?info=getcast&amp;type=tvshow&amp;title='$ESCINFO[ListItem.TVShowTitle]'</content>
+						<content>plugin://script.skin.helper.service/?action=getcast&amp;tvshow=$INFO[ListItem.TVShowTitle]&amp;downloadthumbs=true</content>
+						<!--content>plugin://script.embuary.helper?info=getcast&amp;type=tvshow&amp;title='$ESCINFO[ListItem.TVShowTitle]'</content>
 						<!-- <content>plugin://script.embuary.helper?info=getcast&amp;type=tvshow&amp;dbid=$INFO[ListItem.DBID]&amp;idtype=season</content> -->
 					</control>
 				
@@ -638,6 +639,9 @@
 						<onclick>SetProperty(TrailerPlaying,true,home)</onclick>
 						<onclick condition="!String.IsEmpty(Container(5290062).ListItem.Property(LocalTrailer))">PlayMedia($INFO[Container(5290062).ListItem.Property(LocalTrailer)],1)</onclick>
 						<onclick condition="String.IsEmpty(Container(5290062).ListItem.Property(LocalTrailer))">PlayMedia($INFO[Container(5290062).ListItem.FilenameAndPath],1)</onclick>
+						<ondown condition="Player.HasVideo">Stop</ondown>
+						<onback condition="Player.HasVideo">Stop</onback>
+						<onup condition="Player.HasVideo">fullscreen</onup>
 						
 						<itemlayout height="250" width="440">
 							<control type="group">
@@ -674,8 +678,8 @@
 								<thumb>$VAR[TVShowArt]</thumb>
 							</item>
 						</content>
-						<content target="videos" sortby="file" limit="3">$VAR[529_OnlineTrailerLookup]</content>
-						<!-- <content target="videos" sortby="file" limit="3">plugin://plugin.video.youtube/search/?q=$INFO[ListItem.TVShowTitle]$INFO[System.Language, $LOCALIZE[20410] ,]</content> -->
+						<!--content target="videos" sortby="file" limit="3">$VAR[529_OnlineTrailerLookup]</content-->
+						<content target="videos" sortby="file" limit="3">plugin://plugin.video.youtube/search/?q=$VAR[529_OnlineTrailerLookup] ,$LOCALIZE[20364] ,$INFO[System.Language]</content>
 					</control>
 				</control>
 				
@@ -788,7 +792,7 @@
 			<control type="list" id="529">
 				<description>need prop first load,clear bahaviour</description>
 				<include>HiddenObject</include>
-				<onfocus>RunScript(script.embuary.helper,action=encode,string='"$INFO[ListItem.TVShowTitle]"',prop=EncodedTitle)</onfocus>
+				<onfocus>RunScript(script.embuary.helper,action=encode,string='"$INFO[Container.ShowTitle]"',prop=EncodedTitle)</onfocus>
 				<onfocus>SetFocus(529001)</onfocus>
 				<visible>Container.Content(seasons)</visible>
 				<viewtype label="31902">Netflix Info</viewtype>
@@ -873,7 +877,7 @@
 			<height>45</height>
 			<aspectratio align="left" aligny="center">keep</aspectratio>
 			<colordiffuse>$INFO[Skin.String(ViewNetfixHighlightTextColor)]</colordiffuse>
-			<texture background="true">$INFO[Container(5055).ListItem.Rating,rating/,.png]</texture>
+			<texture background="true">$VAR[rating_value_texture]</texture>
 		</control>
 		<control type="label">
 			<visible>!String.IsEmpty(ListItem.Year)</visible>	
@@ -903,7 +907,7 @@
 		<control type="label">
 			<posy>5</posy>
 			<width>auto</width>
-			<label>$VAR[Season_PluSing]$INFO[Container(5055).ListItem.Property(TotalSeasons), , | ]$INFO[Container(5055).ListItem.Property(TotalEpisodes),, $LOCALIZE[20360]]$INFO[Container(5055).ListItem.Status, | ,]</label>
+			<label>$VAR[Season_Episodes]</label>
 			<height>35</height>
 			<aligny>center</aligny>
 			<textcolor>$INFO[Skin.String(NetflixPrimaryTextColor)]</textcolor>
@@ -941,17 +945,17 @@
 	<include name="ClearLogo_or_Title">
 		<top>240</top>
 		<control type="image">
-			<visible>!String.IsEmpty(ListItem.Art(tvshow.clearlogo)) | !String.IsEmpty(ListItem.Art(clearlogo))</visible>
+			<visible>!String.IsEmpty(Window(home).Property(SkinHelper.ListItem.Art.ClearLogo))</visible>
 			<height>265</height>
 			<bordersize>10</bordersize>
 			<aspectratio align="$PARAM[align]" aligny="top">keep</aspectratio>
-			<texture background="true">$VAR[ListItemClearLogo]</texture>
+			<texture background="true">$INFO[Window(home).Property(SkinHelper.ListItem.Art.ClearLogo)]</texture>
 		</control>
 		<control type="textbox">
 			<description>Fallback Label</description>
 			<left>10</left>
 			<width>36%</width>
-			<visible>String.IsEmpty(ListItem.Art(tvshow.clearlogo)) + String.IsEmpty(ListItem.Art(clearlogo))</visible>
+			<visible>String.IsEmpty(Window(home).Property(SkinHelper.ListItem.Art.ClearLogo))</visible>
 			<height>255</height>
 			<wrapmultiline>true</wrapmultiline>
 			<font>Netflix_Title</font>
@@ -1114,7 +1118,9 @@
 	!String.EndsWith(Network.DHCPAddress,$LOCALIZE[15208]] not connected
 	-->
 	<variable name="529_OnlineTrailerLookup">
-		<value condition="!$EXP[IsOfflineMode] + System.HasAddon(plugin.video.youtube)">plugin://plugin.video.youtube/search/?q=$INFO[ListItem.TVShowTitle]$INFO[System.Language, $LOCALIZE[20410] ,]</value>
+		<!--value condition="!$EXP[IsOfflineMode] + System.HasAddon(plugin.video.youtube)">plugin://plugin.video.youtube/search/?q=$INFO[Window(home).Property(EncodedTitle)]$INFO[System.Language, $LOCALIZE[20410] ,]</value-->
+		<value condition="!String.StartsWith(ListItem.FolderPath,plugin) + !String.IsEmpty(Window(home).Property(EncodedTitle))">$INFO[Window(home).Property(EncodedTitle)]</value>
+		<value condition="String.StartsWith(ListItem.FolderPath,plugin)">$INFO[ListItem.TVShowTitle]</value>
 	</variable>
 	<variable name="TVShowArt">
 		<value condition="!String.IsEmpty(ListItem.Art(tvshow.landscape))">$INFO[ListItem.Art(tvshow.landscape)]</value>
@@ -1122,8 +1128,12 @@
 		<value>$INFO[ListItem.Art(thumb)]</value>
 	</variable>
 	<variable name="Season_PluSing">
-		<value condition="!String.IsEmpty(Container(5055).ListItem.Property(TotalSeasons)) + Integer.IsEqual(Container(5055).ListItem.Property(TotalSeasons),1)">$LOCALIZE[20373]</value>
-		<value condition="!String.IsEmpty(Container(5055).ListItem.Property(TotalSeasons))">$LOCALIZE[33054]</value>
+		<value condition="!String.IsEmpty(Container(5290051).NumItems) + Integer.IsEqual(Container(5290051).NumItems,1)">$LOCALIZE[20373]</value>
+		<value condition="!String.IsEmpty(Container(5290051).NumItems)">$LOCALIZE[33054]</value>
+	</variable>
+	<variable name="Season_Episodes">
+		<value condition="!String.IsEmpty(Container(5055).ListItem.Property(TotalEpisodes))">$VAR[Season_PluSing]$INFO[Container(5055).ListItem.Property(TotalSeasons), , | ]$INFO[Container(5055).ListItem.Property(TotalEpisodes),, $LOCALIZE[20360]]$INFO[Window(home).Property(SkinHelper.ListItem.Status), | ,]</value>
+		<value>$VAR[Season_PluSing]$INFO[Container(5290051).NumItems, ,]$INFO[Window(home).Property(SkinHelper.ListItem.Status), | ,]</value>
 	</variable>
 	<include name="weird_onback">
 		<onback>SetFocus(878678)</onback>

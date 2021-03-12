@@ -5,7 +5,7 @@
         <control type="group">
             <left>50</left>
             <width>1820</width>
-            <height>500</height>
+            <height>470</height>
             <top>140</top>
             <!-- background panel -->
             <control type="image">
@@ -42,7 +42,7 @@
                     <visible>Control.IsVisible(505)</visible>
                 </control>
                 <control type="textbox">
-                    <height>329</height>
+                    <height>300</height>
                     <width>99%</width>
                     <label>$VAR[HomeMenuWidgetInfoPlotAlt]</label>
                     <textcolor>$INFO[Skin.String(ViewDetailsTextColor)]</textcolor>
@@ -52,20 +52,20 @@
                     <visible>!Control.IsVisible(505)</visible>
                 </control>
                 <control type="label">
-                    <height>45</height>
+                    <height>30</height>
                     <label></label>
                 </control>
                 <control type="group">
                     <height>100</height>
                     <width>99%</width>
-                    <left>5</left>
-                    <include>mediaflags</include>
-                    <visible>Control.IsVisible(505) | [!Control.IsVisible(505) + !String.IsEmpty(Window(Home).Property(ListItem.VideoCodec))]</visible>
+                    <include>mediaflags</include> <!-- keine anzeige spotlight (1508) nur SHS ???? -->
+                    <visible>[Control.IsVisible(505) | !Control.IsVisible(505)] + [!String.IsEmpty(Window(Home).Property(ListItem.VideoAspect)) | !String.IsEmpty(ListItem.VideoAspect)]</visible>
+					<animation effect="zoom" end="70,70" time="0" condition="Skin.String(mediaflagsstyle,large) | Skin.String(mediaflagsstyle,large_color)">Conditional</animation>
                 </control>
             </control>
             <control type="grouplist" id="505">
                 <width>800</width>
-                <bottom>10</bottom>
+                <bottom>30</bottom>
                 <left>10</left>
                 <height>55</height>
                 <orientation>horizontal</orientation>
@@ -87,10 +87,10 @@
                     <onclick>PlayMedia($ESCINFO[Container(1508).ListItem.FileNameAndPath])</onclick>
                 </control>
                 <control type="button" id="52">
-                    <description>Info</description>
+                    <description>Trailer</description> <!-- Info keine Funktion ersetzt durch Trailer --> 
                     <width>320</width>
                     <height>100%</height>
-                    <label>19033</label>
+                    <label>20410</label> <!-- old: 19033 -->
                     <onleft>51</onleft>
                     <onright>53</onright>
                     <ondown>77777</ondown>
@@ -98,8 +98,9 @@
                     <include content="WidgetsAutoRotate" condition="Skin.String(widgets_rotate_delay) + !Skin.String(widgets_rotate,disabled)">
                         <param name="interval" value="$INFO[Skin.String(widgets_rotate_delay)]" />
                     </include>
-                    <onclick>RunScript(script.skin.helper.service,action=showinfo)</onclick>
                     <onfocus>Setproperty(SkinHelper.WidgetContainer,1508)</onfocus>
+					<onclick>Playmedia($INFO[Window(Home).Property(SkinHelper.ListItem.Trailer)])</onclick> <!-- old: <onclick>RunScript(script.skin.helper.service,action=showinfo)</onclick> -->
+                    
                 </control>
                 <control type="radiobutton" id="53">
                     <label></label>
@@ -139,16 +140,16 @@
                 <right>60</right>
                 <top>10</top>
                 <width>960</width>
-                <height>555</height>
+                <height>540</height>
                 <orientation>horizontal</orientation>
                 <focusposition>2</focusposition>
                 <onup>51</onup>
                 <ondown>51</ondown>
                 <onfocus>51</onfocus>
                 <scrolltime tween="cubic" easing="inout">500</scrolltime>
-                <itemlayout width="960" height="555">
+                <itemlayout width="960" height="540">
                 </itemlayout>
-                <focusedlayout width="960" height="555">
+                <focusedlayout width="960" height="540">
                     <include content="HiddenWidgetButton">
                         <param name="widgetstyle" value="spotlight" />
                         <param name="widgetId" value="1508" />
@@ -211,7 +212,7 @@
             <!-- all widgets -->
             <control type="grouplist" id="77777">
                 <include content="NetFlixHome_WidgetPos" condition="Skin.HasSetting(NetflixHomeDisableFirstRow)">
-					<param name="top" value="100"/>
+					<param name="top" value="130"/>
 					<param name="bottom" value="5"/>
 				</include>
 				<include condition="!Skin.HasSetting(NetflixHomeDisableFirstRow)">NetFlixHome_WidgetPos</include>
@@ -276,6 +277,7 @@
                 <onclick condition="!String.IsEqual(Window(Home).Property(ShowViewSubMenu),show)">SetProperty(ShowViewSubMenu, show, Home)</onclick>
                 <onclick condition="String.IsEqual(Window(Home).Property(ShowViewSubMenu),show)">ClearProperty(ShowViewSubMenu, Home)</onclick>
                 <animation effect="fade" start="100" end="80" time="0" condition="!Control.HasFocus(99001)">Conditional</animation>
+				<animation effect="fade" start="100" end="10" time="200" condition="Control.HasFocus(300) | Control.HasFocus(4444) | Control.HasFocus(40003)">Conditional</animation>
             </control>
         </control>
 
@@ -389,7 +391,7 @@
 				<visible>!Skin.HasSetting(NetflixHomeDisableFirstRow)</visible>
 				<!-- INFOS -->
 				<control type="grouplist">
-					<animation time="300" effect="slide" end="0,120" reversible="true" easing="inout" condition="!String.IsEmpty(Window(Home).Property(FocusSpotlightButtons))">Conditional</animation>
+					<animation time="400" effect="slide" end="0,120" reversible="true" easing="inout" condition="!String.IsEmpty(Window(Home).Property(FocusSpotlightButtons))">Conditional</animation>
 					
 					<width>850</width>
 					<height>650</height>
@@ -457,30 +459,31 @@
                         <visible>String.IsEmpty(Window(Home).Property(FocusSpotlightButtons)) + [String.IsEqual(ListItem.DBTYPE,episode) | String.IsEqual(ListItem.Property(DBTYPE),episode) | String.IsEqual(Window(Home).Property(ListItem.DBTYPE,episode)) | String.IsEqual(Window(Home).Property(ListItem.Property(DBTYPE)),episode)]</visible>
                         <orientation>vertical</orientation>
                         <height>125</height>
-                        <width>600</width>
+                        <width>700</width>
                         <include>Default_Fade</include>
                         <!-- next episode label -->
                         <control type="label">
                             <visible>!Integer.IsGreater(ListItem.PercentPlayed,0)</visible>
-                            <height>25</height>
+                            <height>75</height>
                             <width>600</width>
                             <include condition="Skin.HasSetting(UseHelveticaNeueNetflix_font)">font_Netflix_Plot</include>
 							<include condition="!Skin.HasSetting(UseHelveticaNeueNetflix_font)">font_Plot</include>
 							<align>left</align>
                             <aligny>center</aligny>
                             <textcolor>$INFO[Skin.String(NetflixPrimaryTextColor)]</textcolor>
-                            <label>[CAPITALIZE][B]$LOCALIZE[31212][/B][/CAPITALIZE]</label>
+                            <label>$VAR[NetflixEpisodeInfoLabel]</label>
                         </control>
                         <!-- season x episode x & title -->
                         <control type="label">
-                            <height>25</height>
-                            <width>650</width>
+						    <visible>Integer.IsGreater(ListItem.PercentPlayed,0)</visible>
+                            <height>40</height>
+                            <width>600</width>
                             <include condition="Skin.HasSetting(UseHelveticaNeueNetflix_font)">font_Netflix_Plot</include>
 							<include condition="!Skin.HasSetting(UseHelveticaNeueNetflix_font)">font_Plot</include>
 							<align>left</align>
 							<aligny>center</aligny>
-                            <textcolor>$INFO[Skin.String(NetflixSecondaryTextColor)]</textcolor>
-                            <label>$VAR[NetflixEpisodeInfoLabel]</label>
+                            <textcolor>$INFO[Skin.String(NetflixPrimaryTextColor)]</textcolor>
+                            <label>[B]$INFO[ListItem.Title][/B] | $INFO[ListItem.Season,S,]$INFO[ListItem.Episode,E,]</label> <!-- ListItem.Label zeigt SxEx + Title SHS bei next episode nicht --> 
                         </control>
                         <!-- progress bar & continue label -->
                         <control type="group">
@@ -518,8 +521,8 @@
 					<!-- PLOT Episodes -->
 					<control type="textbox">
 						<visible>[String.IsEqual(ListItem.DBTYPE,episode) | String.IsEqual(ListItem.Property(DBTYPE),episode) | String.IsEqual(Window(Home).Property(ListItem.DBTYPE,episode)) | String.IsEqual(Window(Home).Property(ListItem.Property(DBTYPE)),episode)]</visible>
-						<top>5</top>
-						<height max="125">auto</height>
+						<top>0</top>
+						<height max="75">auto</height>
 						<width>600</width>
 						<label>$VAR[HomeMenuWidgetInfoPlot]</label>
 						<textcolor>$INFO[Skin.String(NetflixPrimaryTextColor)]</textcolor>
@@ -530,7 +533,7 @@
 					<!-- PLOT common -->
 					<control type="textbox">
 						<visible>![String.IsEqual(ListItem.DBTYPE,episode) | String.IsEqual(ListItem.Property(DBTYPE),episode) | String.IsEqual(Window(Home).Property(ListItem.DBTYPE,episode)) | String.IsEqual(Window(Home).Property(ListItem.Property(DBTYPE)),episode)]</visible>
-						<height max="205">auto</height>
+						<height max="170">auto</height>
 						<width>600</width>
 						<label>$VAR[HomeMenuWidgetInfoPlot]</label>
 						<textcolor>$INFO[Skin.String(NetflixPrimaryTextColor)]</textcolor>
@@ -552,21 +555,24 @@
 				
 				<!-- media flags -->
                 <control type="group">
-					<animation time="1200" effect="slide" end="0,150" reversible="false" easing="inout" condition="!String.IsEmpty(Window(Home).Property(FocusSpotlightButtons))">Conditional</animation>
+					<animation time="400" effect="slide" end="0,150" reversible="true" easing="inout" condition="!String.IsEmpty(Window(Home).Property(FocusSpotlightButtons))">Conditional</animation>
 					<posx>10</posx>
 					<height>52</height>
-                    <top>620</top>
+                    <top>580</top>
                     <include>mediaflags</include>
+					<visible>[Skin.String(HomeLayout,netflix2) + Skin.HasSetting(HomemenuMediaFlags)] | [Window.IsActive(3017) | Window.IsActive(3018)]</visible>
+					<visible>!String.IsEmpty(Window(Home).Property(ListItem.VideoAspect)) | !String.IsEmpty(ListItem.VideoAspect)</visible>
 					<animation alignx="true" aligny="true" effect="zoom" end="70,70" time="0" condition="Skin.String(mediaflagsstyle,large) | Skin.String(mediaflagsstyle,large_color)">Conditional</animation>					
 				</control>
 				<!-- ratings & studio -->
                 <control type="group">
                     <right>60</right>
-                    <top>520</top>
+                    <top>510</top>
                     <height>150</height>
                     <width>1000</width>
                     <include>AltRatingFooter</include>
-					<animation time="1200" effect="slide" end="0,150" reversible="false" easing="inout" condition="!String.IsEmpty(Window(Home).Property(FocusSpotlightButtons))">Conditional</animation>
+					<animation time="400" effect="slide" end="0,150" reversible="true" easing="inout" condition="!String.IsEmpty(Window(Home).Property(FocusSpotlightButtons))">Conditional</animation>
+					<animation effect="slide" start="0" end="0,-35" time="0" condition="Skin.HasSetting(WidgetAlignRight)">Conditional</animation>
 				</control>
 			
 			</control>
@@ -695,20 +701,19 @@
             <control type="grouplist" id="77777">
 				<description>shortcuts templates need overhaul, may not worth it, use seperate containers instead of whole group</description>
 				<!-- temp solution ,till widgetid header pos fixed/changed-->
-				<animation effect="slide" start="0" end="0,170" time="1200" condition="!String.IsEmpty(Window(Home).Property(FocusSpotlightButtons)) + String.EndsWith(Window(Home).Property(widgetstyle),netflixspotlight)" reversible="false">Conditional</animation>
+				<animation effect="slide" start="0" end="0,170" time="400" condition="!String.IsEmpty(Window(Home).Property(FocusSpotlightButtons)) + String.EndsWith(Window(Home).Property(widgetstyle),netflixspotlight)" reversible="true">Conditional</animation>
 				
 				<include content="NetFlixHome_WidgetPos" condition="Skin.HasSetting(NetflixHomeDisableFirstRow)">
 					<param name="top" value="100"/>
 					<param name="bottom" value="100"/>
 				</include>
-                <include content="NetFlixHome_WidgetPos" condition="!Skin.HasSetting(NetflixHomeDisableFirstRow)" />
-                
+                <include content="NetFlixHome_WidgetPos" condition="!Skin.HasSetting(NetflixHomeDisableFirstRow)"/>
 				<left>120</left>
-				<width>1800</width>
+				<width>1750</width>
 				<orientation>vertical</orientation>
 				<usecontrolcoords>true</usecontrolcoords>
 				<scrolltime tween="cubic" easing="in">300</scrolltime>
-				<itemgap>-40</itemgap>
+				<itemgap>-45</itemgap>
                 <pagecontrol>317</pagecontrol>
 				<ondown>1510</ondown>
 				<onup>77777</onup>
@@ -911,6 +916,9 @@
 				<focusedlayout height="80" width="315">
                     <!-- button focus color -->
 					<control type="image">
+						<animation type="Conditional" condition="Control.HasFocus(300) | String.IsEqual(Window(Home).Property(ShowViewSubMenu),show)">
+							<effect type="fade" start="0" end="100" time="10" delay="300"/>
+						</animation>
 						<include>NetflixHome_ICONPos</include>
 						<texture>colors/color_white.png</texture>
 						<width>437</width>
@@ -1054,7 +1062,7 @@
 
     <!-- Disabled Spotlight Widgets Height ,check, need also include for disabled header on home -->
     <include name="NetFlixHome_WidgetPos">
-		<param name="top" default="660" />
+		<param name="top" default="620" />
 		<param name="bottom" default="5" />
 		<definition>
 			<top>$PARAM[top]</top>
@@ -1136,19 +1144,20 @@
 	-->
     <include name="netflix_customhub_item">
         <control type="label" id="$PARAM[widgetid]3">
-            <top>20</top>
-			<height>55</height>
+            <top>30</top>
+			<height>50</height>
 			<width>100%</width>
             <align>left</align>
             <font>Bold30</font>
+			<textoffsetx>10</textoffsetx>
             <label>$INFO[Skin.String($PARAM[skinsetting].label)]</label>
             <textcolor>$INFO[Skin.String(ViewDetailsTextColor)]</textcolor>
             <visible>Skin.String($PARAM[skinsetting].label) + Skin.HasSetting(LockHubWidgets)</visible>
         </control>
 		<control type="button" id="$PARAM[widgetid]4">
-			<top>20</top>
+			<top>30</top>
 			<width>100%</width>
-            <height>55</height>
+            <height>45</height>
             <align>left</align>
             <font>Reg32</font>
             <textoffsetx>5</textoffsetx>
@@ -1160,9 +1169,9 @@
 			<visible>Skin.String($PARAM[skinsetting].label) + !Skin.HasSetting(LockHubWidgets)</visible>
         </control>
         <control type="button" id="$PARAM[widgetid]5">
-            <top>20</top>
+            <top>30</top>
 			<width>100%</width>
-            <height>55</height>
+            <height>45</height>
             <align>left</align>
             <font>Reg32</font>
             <textoffsetx>5</textoffsetx>
@@ -1177,7 +1186,7 @@
             <top>40</top>
 			<left>165</left>
             <width>100%</width>
-            <height>55</height>
+            <height>45</height>
             <aspectratio align="left">keep</aspectratio>
             <imagepath>busy_spinner/</imagepath>
             <timeperimage>100</timeperimage>
@@ -1189,12 +1198,15 @@
             <width>100%</width>
 			<top>40</top>
 			
-			<include content="height" condition="String.Contains(Skin.String(widgetstyle),poster)">
+			<include content="height">
+				<param name="height" value="420" />
+			</include>
+			<!--include content="height" condition="String.Contains(Skin.String(widgetstyle),poster)">
 				<param name="height" value="385" />
-			</include>
-			<include content="height" condition="String.Contains(Skin.String(widgetstyle),landscapewidedetails)">
+			</include-->
+			<!--include content="height" condition="String.Contains(Skin.String(widgetstyle),landscapewidedetails)">
 				<param name="height" value="395" />
-			</include>
+			</include-->
 			
 			<orientation>horizontal</orientation>
 			<include content="$PARAM[widgetStyle]">

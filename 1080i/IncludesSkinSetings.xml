@@ -26,6 +26,8 @@
                 <label>31115</label>
                 <label2>$INFO[Skin.String(HomeLayout.label)]</label2>
                 <onclick>RunScript(script.skin.helper.service,action=setskinsetting,setting=HomeLayout,header=$LOCALIZE[31124])</onclick>
+				<onclick condition="Skin.HasSetting(AutoShowWidgets)">Skin.ToggleSetting(AutoShowWidgets)</onclick>
+				<!--onclick condition="![Skin.String(HomeLayout,1small) | Skin.String(HomeLayout,2small) | Skin.String(HomeLayout,3small)] + Skin.String(SubmenuLayout, vertical)">RunScript(script.skin.helper.service,action=setskinconstant,setting=SubmenuLayout,header=$LOCALIZE[31314])</onclick-->
             </control>
             <!-- height of the tiles-->
             <control type="button" id="31770">
@@ -143,6 +145,8 @@
                 <label>31312</label>
                 <label2>$INFO[Skin.String(SubmenuLayout.label)]</label2>
                 <onclick>RunScript(script.skin.helper.service,action=setskinsetting,setting=SubmenuLayout,header=$LOCALIZE[31312])</onclick>
+				<onclick condition="Skin.HasSetting(AutoShowSubmenu)">Skin.ToggleSetting(AutoShowSubmenu)</onclick>
+				<onclick condition="Skin.HasSetting(LowerWidgets)">Skin.ToggleSetting(LowerWidgets)</onclick>
                 <visible>[Skin.String(HomeLayout, 1) | Skin.String(HomeLayout, 2) | Skin.String(HomeLayout, 3) | Skin.String(HomeLayout, 1small) | Skin.String(HomeLayout, 2small) | Skin.String(HomeLayout, 3small)]</visible>
             </control>
              <!--toggle rss feed-->
@@ -171,9 +175,10 @@
                 <include>SkinSettings_Button</include>
                 <label>31111</label>
                 <onclick>Skin.ToggleSetting(AutoShowWidgets)</onclick>
+				<onclick condition="Skin.HasSetting(AutoShowSubmenu) + Skin.String(HomeLayout, 2small) + Skin.String(SubmenuLayout, tiles)">Skin.ToggleSetting(AutoShowSubmenu)</onclick>
                 <selected>Skin.HasSetting(AutoShowWidgets)</selected>
                 <visible>!Skin.HasSetting(DisableAllWidgets)</visible>
-                <visible>[Skin.String(HomeLayout, 1small) | Skin.String(HomeLayout, 2small) | Skin.String(HomeLayout, 1) | Skin.String(HomeLayout, 2) | Skin.String(HomeLayout, simplehor) | String.Contains(Skin.String(HomeLayout), lowhorizontal)]</visible>
+                <visible>[Skin.String(HomeLayout, 1small) | Skin.String(HomeLayout, 2small) | Skin.String(HomeLayout, 1)| Skin.String(HomeLayout, simplehor) | String.Contains(Skin.String(HomeLayout), lowhorizontal)]</visible> <!--  | Skin.String(HomeLayout, 2) entfernt -->
             </control>
             <!-- lower widgets-->
             <control type="radiobutton" id="31660">
@@ -182,7 +187,8 @@
                 <onclick>Skin.ToggleSetting(LowerWidgets)</onclick>
                 <selected>Skin.HasSetting(LowerWidgets)</selected>
                 <visible>!Skin.HasSetting(DisableAllWidgets)</visible>
-                <visible>[Skin.String(HomeLayout, 1) | Skin.String(HomeLayout, 1small)] + Skin.HasSetting(AutoShowWidgets)</visible>
+				<visible>!Skin.String(SubmenuLayout, tiles)</visible>
+                <visible>[Skin.String(HomeLayout, 1) | Skin.String(HomeLayout, 1small)] + Skin.HasSetting(AutoShowWidgets) + Skin.String(SubmenuLayout, horizontal)</visible>
             </control>
 			<!--auto show home menu on netflix home or win10-->
             <control type="radiobutton" id="31725">
@@ -197,8 +203,12 @@
                 <include>SkinSettings_Button</include>
                 <label>31113</label>
                 <onclick>Skin.ToggleSetting(AutoShowSubmenu)</onclick>
+				<onclick condition="Skin.HasSetting(AutoShowWidgets) + Skin.String(HomeLayout, 2small) + Skin.String(SubmenuLayout, tiles)">Skin.ToggleSetting(AutoShowWidgets)</onclick>
                 <selected>Skin.HasSetting(AutoShowSubmenu)</selected>
 				<visible>!Skin.String(HomeLayout, enhanced)</visible>
+				<visible>!Skin.String(SubmenuLayout, vertical)</visible>
+				<visible>!Skin.String(SubmenuLayout, subpage)</visible>
+				<visible>[Skin.String(HomeLayout, 1small) | Skin.String(HomeLayout, 2small) | Skin.String(HomeLayout, 3small)| Skin.String(HomeLayout, 1) | Skin.String(HomeLayout, 2)]</visible>
             </control>
             <!--open submenu inline in vertical home-->
             <control type="radiobutton" id="23515">
@@ -337,7 +347,7 @@
                 <visible>!Skin.HasSetting(DisableAllWidgets) + !Skin.String(HomeLayout, 3) + !Skin.String(HomeLayout, 3small) + !Skin.String(HomeLayout, win10) + !Skin.String(HomeLayout, netflix2)</visible>
             </control>
             <!--hide widget details-->
-            <control type="radiobutton" id="31707">
+            <control type="radiobutton" id="31707"> <!-- !Skin.String(HomeLayout, 1) + !Skin.String(HomeLayout, 2) + !Skin.String(HomeLayout, 1small) + !Skin.String(HomeLayout, 2small) wieder entfernen wenn lösung gefunden -->  
                 <include>SkinSettings_Button</include>
                 <label>31707</label>
                 <onclick>Skin.ToggleSetting(HideWidgetDetailsPanel)</onclick>
@@ -350,7 +360,7 @@
                 <label>31529</label>
                 <onclick>Skin.ToggleSetting(HideHomeTileIndicators)</onclick>
                 <selected>Skin.HasSetting(HideHomeTileIndicators)</selected>
-                <visible>[Skin.String(HomeLayout, 1) | Skin.String(HomeLayout, 2) | Skin.String(HomeLayout, 1small) | Skin.String(HomeLayout, 2small) | Skin.String(HomeLayout, simplever)]</visible>
+                <visible>[Skin.String(HomeLayout, 1) | Skin.String(HomeLayout, 2) | Skin.String(HomeLayout, 1small) | [Skin.String(HomeLayout, 2small) + ![Skin.HasSetting(AutoShowWidgets) | Skin.HasSetting(AutoShowSubmenu)]] | Skin.String(HomeLayout, simplever)]</visible> <!-- [Skin.String(HomeLayout, 2small) + ![Skin.HasSetting(AutoShowWidgets) | Skin.HasSetting(AutoShowSubmenu)]] -->
                 <visible>![Skin.HasSetting(DisableAllWidgets) + Skin.HasSetting(DisableAllSubmenus)]</visible>
             </control>
 					<!-- use submenui as widget layout -->
@@ -497,7 +507,7 @@
                 <include>SkinSettings_Button</include>
                 <label>Enable experimental spotlight content</label>
                 <onclick>Skin.ToggleSetting(ExperimentalSpotlight)</onclick>
-                <visible>!Skin.HasSetting(NetflixHomeDisableFirstRow) + Skin.String(HomeLayout,netflix2)</visible>
+                <visible>!Skin.HasSetting(NetflixHomeDisableFirstRow) + [Skin.String(HomeLayout,netflix2) | Skin.String(HomeLayout,netflix)]</visible>
                 <selected>Skin.HasSetting(ExperimentalSpotlight)</selected>
             </control>
             <!-- Allow tvshows in experimental content -->
@@ -696,6 +706,27 @@
                 <onclick condition="Skin.HasSetting(BackgroundOverlayMediaViewOnly)">Skin.Reset(BackgroundOverlayMediaViewOnly)</onclick>
                 <selected>Skin.HasSetting(BackgroundOverlayHomeOnly)</selected>
                 <visible>Skin.String(BackgroundOverlayTexture)</visible>
+            </control>
+			<!--Color Monitor TMDB-helper -->
+			<control type="radiobutton" id="14012">
+                <include>SkinSettings_Button</include>
+                <label>Color Monitor (experimentally) TheMovieDb Helper Version 4 and higher</label>
+				<onclick condition="!System.HasAddon(plugin.video.themoviedb.helper)">InstallAddon(plugin.video.themoviedb.helper)</onclick>
+                <onclick>Skin.ToggleSetting(DisableColors)</onclick>
+                <onclick condition="!Skin.HasSetting(DisableColors)">Skin.SetBool(TMDbHelper.EnableColors)</onclick>
+				<onclick condition="Skin.HasSetting(DisableColors)">Skin.Reset(TMDbHelper.EnableColors)</onclick>
+                <selected>Skin.HasSetting(DisableColors)</selected>
+            </control>
+			<control type="radiobutton" id="14013">
+                <include>SkinSettings_Button</include>
+                <label>Color Monitor light colors</label>
+				<visible>Skin.HasSetting(DisableColors)</visible>
+                <onclick>Skin.ToggleSetting(LightColors)</onclick>
+                <onclick condition="!Skin.HasSetting(LightColors)">Skin.SetString(TMDbHelper.Colors.Luminance,0.1)</onclick>
+				<onclick condition="!Skin.HasSetting(LightColors)">Skin.SetString(TMDbHelper.Colors.Saturation,0.6)</onclick>
+				<onclick condition="Skin.HasSetting(LightColors)">Skin.SetString(TMDbHelper.Colors.Luminance,0.4)</onclick>
+				<onclick condition="Skin.HasSetting(LightColors)">Skin.SetString(TMDbHelper.Colors.Saturation,0.5)</onclick>
+                <selected>Skin.HasSetting(LightColors)</selected>
             </control>
             <!-- multi-image Background transition time-->
             <control type="button" id="13019">
@@ -1962,6 +1993,13 @@
                 <label2>$INFO[Skin.String(defaultosdbutton_music.label)]</label2>
                 <onclick>RunScript(script.skin.helper.service,action=setskinsetting,setting=defaultosdbutton_music,header=$LOCALIZE[31664])</onclick>
             </control>
+			<control type="button" id="31921">
+                <description>Default OSD button</description>
+                <include>SkinSettings_Button</include>
+                <label>$LOCALIZE[31921]</label>
+                <label2>$INFO[Skin.String(defaultosdbutton_musicPVR.label)]</label2>
+                <onclick>RunScript(script.skin.helper.service,action=setskinsetting,setting=defaultosdbutton_musicPVR,header=$LOCALIZE[31921])</onclick>
+            </control>
             <control type="radiobutton" id="5143">
                 <include>SkinSettings_Button</include>
                 <label>$LOCALIZE[31179]</label>
@@ -2918,7 +2956,7 @@
                 <onclick>RunScript(script.skin.helper.service,action=setresourceaddon,skinstring=WeatherIconPack,addontype=resource.images.weathericons)</onclick>
             </control>
             
-            <control type="button" id="17122"> <!-- check, double id -->
+            <control type="button" id="17117"> <!-- check, double id 17122 old -->
                 <description>Weather FanArt</description>
                 <include>SkinSettings_Button</include>
                 <label>31624</label>
@@ -3042,8 +3080,8 @@
                 <description>Do not display hour representation of the duration</description>
                 <include>SkinSettings_Button</include>
                 <label>31724</label>
-                <onclick>Skin.ToggleSetting(SkinHelper.DisableHoursDuration)</onclick>
-                <selected>Skin.HasSetting(SkinHelper.DisableHoursDuration)</selected>
+                <onclick>Skin.ToggleSetting(DisableHoursDuration)</onclick>
+                <selected>Skin.HasSetting(DisableHoursDuration)</selected>
             </control>
             <control type="radiobutton" id="31762">
                 <description>Keep widget focused when starting playback from home widget</description>
@@ -3212,6 +3250,12 @@
             <param name="id" value="31744" />
             <param name="label" value="Widget Details/Tiles/$LOCALIZE[31744]" />
             <param name="skinsetting" value="MainMenuFocusTextColor" />
+            <!-- <param name="visible" value="String.Contains(Skin.String(HomeLayout),hor) | String.Contains(Skin.String(HomeLayout),ver) | String.Contains(Skin.String(HomeLayout),netflix) | String.Contains(Skin.String(HomeLayout),win10)" /> -->
+        </include>
+		<include content="SkinSettings_ColorButton">
+            <param name="id" value="31943" />
+            <param name="label" value="Widget Details/Tiles/$LOCALIZE[31943]" />
+            <param name="skinsetting" value="WidgetDetailsFocusTextColor" />
             <!-- <param name="visible" value="String.Contains(Skin.String(HomeLayout),hor) | String.Contains(Skin.String(HomeLayout),ver) | String.Contains(Skin.String(HomeLayout),netflix) | String.Contains(Skin.String(HomeLayout),win10)" /> -->
         </include>
         <!--homemenu secondary focused button color-->
@@ -3581,114 +3625,6 @@
             <label>Default Game thumbnail shape</label>
             <label2>$INFO[Skin.String(game.thumbshape.default.label)]</label2>
             <onclick>RunScript(script.skin.helper.service,action=setskinsetting,setting=game.thumbshape.default,header=Select preferred thumbnail type)</onclick>
-        </control>
-        <control type="button" id="17172">
-            <include>SkinSettings_Button</include>
-            <label>Thumbnail shape NES</label>
-            <label2>$INFO[Skin.String(game.thumbshape.nes.label)]</label2>
-            <onclick>RunScript(script.skin.helper.service,action=setskinsetting,setting=game.thumbshape.nes,header=Select preferred thumbnail type)</onclick>
-        </control>
-        <control type="button" id="17173">
-            <include>SkinSettings_Button</include>
-            <label>Thumbnail shape SNES</label>
-            <label2>$INFO[Skin.String(game.thumbshape.snes.label)]</label2>
-            <onclick>RunScript(script.skin.helper.service,action=setskinsetting,setting=game.thumbshape.snes,header=Select preferred thumbnail type)</onclick>
-        </control>
-        <control type="button" id="17174">
-            <include>SkinSettings_Button</include>
-            <label>Thumbnail shape Nintendo64</label>
-            <label2>$INFO[Skin.String(game.thumbshape.n64.label)]</label2>
-            <onclick>RunScript(script.skin.helper.service,action=setskinsetting,setting=game.thumbshape.n64,header=Select preferred thumbnail type)</onclick>
-        </control>
-        <control type="button" id="17175">
-            <include>SkinSettings_Button</include>
-            <label>Thumbnail shape Gameboy</label>
-            <label2>$INFO[Skin.String(game.thumbshape.gb.label)]</label2>
-            <onclick>RunScript(script.skin.helper.service,action=setskinsetting,setting=game.thumbshape.gb,header=Select preferred thumbnail type)</onclick>
-        </control>
-        <control type="button" id="17176">
-            <include>SkinSettings_Button</include>
-            <label>Thumbnail shape NDS/3DS</label>
-            <label2>$INFO[Skin.String(game.thumbshape.nds.label)]</label2>
-            <onclick>RunScript(script.skin.helper.service,action=setskinsetting,setting=game.thumbshape.nds,header=Select preferred thumbnail type)</onclick>
-        </control>
-        <control type="button" id="17177">
-            <include>SkinSettings_Button</include>
-            <label>Thumbnail shape Nintendo Switch</label>
-            <label2>$INFO[Skin.String(game.thumbshape.switch.label)]</label2>
-            <onclick>RunScript(script.skin.helper.service,action=setskinsetting,setting=game.thumbshape.switch,header=Select preferred thumbnail type)</onclick>
-        </control>
-        <control type="button" id="17178">
-            <include>SkinSettings_Button</include>
-            <label>Thumbnail shape Playstation 3</label>
-            <label2>$INFO[Skin.String(game.thumbshape.ps3.label)]</label2>
-            <onclick>RunScript(script.skin.helper.service,action=setskinsetting,setting=game.thumbshape.ps3,header=Select preferred thumbnail type)</onclick>
-        </control>
-        <control type="button" id="17179">
-            <include>SkinSettings_Button</include>
-            <label>Thumbnail shape Playstation 2</label>
-            <label2>$INFO[Skin.String(game.thumbshape.ps2.label)]</label2>
-            <onclick>RunScript(script.skin.helper.service,action=setskinsetting,setting=game.thumbshape.ps2,header=Select preferred thumbnail type)</onclick>
-        </control>
-        <control type="button" id="17180">
-            <include>SkinSettings_Button</include>
-            <label>Thumbnail shape Playstation 1</label>
-            <label2>$INFO[Skin.String(game.thumbshape.ps1.label)]</label2>
-            <onclick>RunScript(script.skin.helper.service,action=setskinsetting,setting=game.thumbshape.ps1,header=Select preferred thumbnail type)</onclick>
-        </control>
-        <control type="button" id="17181">
-            <include>SkinSettings_Button</include>
-            <label>Thumbnail shape Playstation Portable</label>
-            <label2>$INFO[Skin.String(game.thumbshape.psp.label)]</label2>
-            <onclick>RunScript(script.skin.helper.service,action=setskinsetting,setting=game.thumbshape.psp,header=Select preferred thumbnail type)</onclick>
-        </control>
-        <control type="button" id="17182">
-            <include>SkinSettings_Button</include>
-            <label>Thumbnail shape PC (Microsoft Windows)</label>
-            <label2>$INFO[Skin.String(game.thumbshape.win.label)]</label2>
-            <onclick>RunScript(script.skin.helper.service,action=setskinsetting,setting=game.thumbshape.win,header=Select preferred thumbnail type)</onclick>
-        </control>
-        <control type="button" id="17183">
-            <include>SkinSettings_Button</include>
-            <label>Thumbnail shape PC (MS DOS)</label>
-            <label2>$INFO[Skin.String(game.thumbshape.dos.label)]</label2>
-            <onclick>RunScript(script.skin.helper.service,action=setskinsetting,setting=game.thumbshape.dos,header=Select preferred thumbnail type)</onclick>
-        </control>
-        <control type="button" id="17185">
-            <include>SkinSettings_Button</include>
-            <label>Thumbnail shape Sega Master System</label>
-            <label2>$INFO[Skin.String(game.thumbshape.msys.label)]</label2>
-            <onclick>RunScript(script.skin.helper.service,action=setskinsetting,setting=game.thumbshape.msys,header=Select preferred thumbnail type)</onclick>
-        </control>
-        <control type="button" id="17186">
-            <include>SkinSettings_Button</include>
-            <label>Thumbnail shape Sega Megadrive/Genesis</label>
-            <label2>$INFO[Skin.String(game.thumbshape.megadr.label)]</label2>
-            <onclick>RunScript(script.skin.helper.service,action=setskinsetting,setting=game.thumbshape.megadr,header=Select preferred thumbnail type)</onclick>
-        </control>
-        <control type="button" id="17187">
-            <include>SkinSettings_Button</include>
-            <label>Thumbnail shape Sega 32x</label>
-            <label2>$INFO[Skin.String(game.thumbshape.32x.label)]</label2>
-            <onclick>RunScript(script.skin.helper.service,action=setskinsetting,setting=game.thumbshape.32x,header=Select preferred thumbnail type)</onclick>
-        </control>
-        <control type="button" id="17188">
-            <include>SkinSettings_Button</include>
-            <label>Thumbnail shape Sega Saturn</label>
-            <label2>$INFO[Skin.String(game.thumbshape.saturn.label)]</label2>
-            <onclick>RunScript(script.skin.helper.service,action=setskinsetting,setting=game.thumbshape.saturn,header=Select preferred thumbnail type)</onclick>
-        </control>
-        <control type="button" id="17189">
-            <include>SkinSettings_Button</include>
-            <label>Thumbnail shape Sega Dreamcast</label>
-            <label2>$INFO[Skin.String(game.thumbshape.dcast.label)]</label2>
-            <onclick>RunScript(script.skin.helper.service,action=setskinsetting,setting=game.thumbshape.dcast,header=Select preferred thumbnail type)</onclick>
-        </control>
-        <control type="button" id="17190">
-            <include>SkinSettings_Button</include>
-            <label>Thumbnail shape Sega Gamegear</label>
-            <label2>$INFO[Skin.String(game.thumbshape.gear.label)]</label2>
-            <onclick>RunScript(script.skin.helper.service,action=setskinsetting,setting=game.thumbshape.gear,header=Select preferred thumbnail type)</onclick>
         </control>
     </include>
     

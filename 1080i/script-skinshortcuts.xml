@@ -100,7 +100,7 @@
 							<top>-2</top>
 							<width>620</width>
 							<height>80</height>
-							<texture diffuse="diffuse/panel.png" border="5" aligny="centter" colordiffuse="$INFO[Skin.String(ButtonFocusColor)]">colors/color_white.png</texture>
+							<texture diffuse="diffuse/panel.png" border="5" aligny="center" colordiffuse="$INFO[Skin.String(ButtonFocusColor)]">colors/color_white.png</texture>
 							<animation effect="fade" start="100" end="35" time="100" condition="!Control.HasFocus(211)">Conditional</animation>
 						</control>
 						<control type="image"> <!-- thumb -->

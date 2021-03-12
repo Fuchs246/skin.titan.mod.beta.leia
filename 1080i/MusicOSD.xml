@@ -2,8 +2,12 @@
 <!--Titan-->
 <window>
     <defaultcontrol always="true">200</defaultcontrol>
-    <onload>SetFocus($INFO[Skin.String(defaultosdbutton_music)])</onload>
-    
+    <!--onload>SetFocus($INFO[Skin.String(defaultosdbutton_music)])</onload-->
+    <zorder>2</zorder>
+	<onload condition="!VideoPlayer.Content(livetv)">SetFocus($INFO[Skin.String(defaultosdbutton_music)])</onload>
+    <onload condition="VideoPlayer.Content(livetv)">SetFocus($INFO[Skin.String(defaultosdbutton_musicPVR)])</onload>
+	<onunload>ClearProperty(subtitlemenu,home)</onunload>
+
     <controls>
 		<!-- hidden button to exit dialog in touchscreen mode -->
 		<control type="button">

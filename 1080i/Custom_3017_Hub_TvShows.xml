@@ -12,6 +12,5 @@
     <controls>
         <include>GlobalBackground</include>
         <include>HomeNetflix2</include>
-
 	</controls>
 </window>

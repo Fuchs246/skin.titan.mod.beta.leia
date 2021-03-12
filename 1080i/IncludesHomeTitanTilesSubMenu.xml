@@ -6,7 +6,7 @@
 		
         <control type="list" id="4444">
 			<posx>48</posx>
-			<bottom>-190</bottom>
+			<bottom>-200</bottom>
 			<width>1840</width>
 			<height>185</height>
 			<orientation>horizontal</orientation>
@@ -20,7 +20,7 @@
 			<onup condition="!Skin.HasSetting(AutoShowSubmenu)">ClearProperty(submenu, Home)</onup>
 			<ondown condition="!Skin.HasSetting(DisablePowerMenu)">ActivateWindow(111)</ondown>   
 			<animation effect="slide" start="0,0" end="0,-205" time="125">Visible</animation>
-            <animation effect="slide" start="-205,0" end="0,0" time="125">Hidden</animation>
+            <animation effect="slide" start="0,-205" end="0,0" time="125">Hidden</animation>
 			<visible allowhiddenfocus="true">
                 [String.Contains(Window(Home).Property(submenu),show) | Control.HasFocus(4444)] 
                 + !String.IsEqual(Window(Home).Property(ShowWidget),show) 
@@ -123,7 +123,7 @@
 			<!--submenu right 1-row pos 0-->
 			<control type="group">
 				<posx>599</posx>
-				<bottom>110</bottom>
+				<bottom>70</bottom>
 				<height>325</height>
 				<visible>[Skin.String(HomeLayout, 1) + String.Contains(Window(Home).Property(submenupos),0)]</visible>
 				<!-- movies submenu -->
@@ -137,7 +137,7 @@
 			<!--submenu right 1 row pos 1-->
 			<control type="group">
 				<posx>1210</posx>
-				<bottom>110</bottom>
+				<bottom>70</bottom>
 				<height>325</height>
 				<visible>[Skin.String(HomeLayout, 1) + String.Contains(Window(Home).Property(submenupos),1)]</visible>
 				<!-- movies submenu -->
@@ -151,7 +151,7 @@
 			<!--submenu left 1-row pos 2-->
 			<control type="group">
 				<posx>625</posx>
-				<bottom>110</bottom>
+				<bottom>70</bottom>
 				<height>325</height>
 				<visible>[Skin.String(HomeLayout, 1) + String.Contains(Window(Home).Property(submenupos),2)]</visible>
 				
@@ -182,7 +182,7 @@
 			<!--submenu right 3-row pos 3-->
 			<control type="group">
 				<posx>599</posx>
-				<bottom>345</bottom>
+				<bottom>365</bottom>
 				<height>325</height>
 				<visible>Skin.String(HomeLayout, 3) + String.Contains(Window(Home).Property(submenupos),3)</visible>
 				
@@ -198,7 +198,7 @@
 			<!--submenu right 3-row pos 0-->
 			<control type="group">
 				<posx>599</posx>
-				<posy>55</posy>
+				<posy>35</posy>
 				<visible>[Skin.String(HomeLayout, 3) + String.Contains(Window(Home).Property(submenupos),0)]</visible>
 				<!-- movies submenu -->
 				<control type="group">
@@ -228,7 +228,7 @@
 			<!--submenu right 3-row pos 6-->
 			<control type="group">
 				<posx>599</posx>
-				<bottom>55</bottom>
+				<bottom>75</bottom>
 				<height>325</height>
 				<visible>Skin.String(HomeLayout, 3) + String.Contains(Window(Home).Property(submenupos),6)</visible>
 				
@@ -261,7 +261,7 @@
 			<!--submenu right 3-row pos 4-->
 			<control type="group">
 				<posx>1210</posx>
-				<bottom>345</bottom>
+				<bottom>365</bottom>
 				<height>325</height>
 				<visible>Skin.String(HomeLayout, 3) + String.Contains(Window(Home).Property(submenupos),4)</visible>
 				
@@ -277,7 +277,7 @@
 			<!--submenu right 3-row pos 1-->
 			<control type="group">
 				<posx>1210</posx>
-				<posy>55</posy>
+				<posy>35</posy>
 				<visible>[Skin.String(HomeLayout, 3) + String.Contains(Window(Home).Property(submenupos),1)]</visible>
 				
 				<!-- movies submenu -->
@@ -309,7 +309,7 @@
 			<!--submenu right 3-row pos 7-->
 			<control type="group">
 				<posx>1210</posx>
-				<bottom>55</bottom>
+				<bottom>75</bottom>
 				<height>325</height>
 				<visible>Skin.String(HomeLayout, 3) + String.Contains(Window(Home).Property(submenupos),7)</visible>
 				
@@ -341,7 +341,7 @@
 			<!--submenu left 3 row pos 5-->
 			<control type="group">
 				<posx>625</posx>
-				<bottom>345</bottom>
+				<bottom>365</bottom>
 				<height>325</height>
 				<visible>Skin.String(HomeLayout, 3) + String.Contains(Window(Home).Property(submenupos),5)</visible>
 				<!-- movies submenu -->
@@ -356,7 +356,7 @@
 			<!--submenu left 3 row pos 2-->
 			<control type="group">
 				<posx>625</posx>
-				<posy>55</posy>
+				<posy>35</posy>
 				<visible>[Skin.String(HomeLayout, 3) + String.Contains(Window(Home).Property(submenupos),2)]</visible>
 				
 				<!-- movies submenu -->
@@ -388,7 +388,7 @@
 			<!--submenu left 3 row pos 8-->
 			<control type="group">
 				<posx>625</posx>
-				<bottom>55</bottom>
+				<bottom>75</bottom>
 				<height>325</height>
 				<visible>Skin.String(HomeLayout, 3) + String.Contains(Window(Home).Property(submenupos),8)</visible>
 				
@@ -422,8 +422,14 @@
 				<onback condition="!Skin.HasSetting(AutoShowSubmenu)">ClearProperty(submenu, Home)</onback>
 				<onup condition="!Skin.HasSetting(AutoShowSubmenu)">ClearProperty(submenu, Home)</onup>
 				<ondown condition="!Skin.HasSetting(DisablePowerMenu)">ActivateWindow(111)</ondown>
-				<visible allowhiddenfocus="true">[String.Contains(Window(Home).Property(submenu),show) | Control.HasFocus(4444)] + !Control.IsVisible(77551) + !Control.HasFocus(2)</visible>    
+				<!--visible allowhiddenfocus="true">[String.Contains(Window(Home).Property(submenu),show) | Control.HasFocus(4444)] + !Control.IsVisible(77551) + !Control.HasFocus(2)</visible--> <visible allowhiddenfocus="true">
+                [String.Contains(Window(Home).Property(submenu),show) | Control.HasFocus(4444)] 
+                + !String.IsEqual(Window(Home).Property(ShowWidget),show) 
+                + !Control.HasFocus(2) 
+                + Integer.IsGreater(Container(4445).NumItems,0)
+                </visible>   
 				<animation effect="slide" start="0,0" end="0,-200" time="150">VisibleChange</animation>
+				
 				
 				<itemlayout width="365" height="205">
 					<control type="group">

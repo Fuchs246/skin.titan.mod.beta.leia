@@ -16,8 +16,8 @@
     </include>
     
     <include name="mediaflags_large_layout">
-		<width>125</width>
-		<height>80</height>
+		<width>100</width>
+		<!--height>70</height-->
 		<aspectratio align="center" aligny="center">keep</aspectratio>
         <include condition="!window.isactive(fullscreenvideo) + !Skin.String(mediaflagsstyle,large_color)">mediaflags_colordiffuse</include>
         <include condition="window.isactive(fullscreenvideo) + !Skin.String(osdmediaflagsstyle,large_color)">mediaflags_colordiffuse</include>
@@ -38,68 +38,84 @@
             <posy>-25</posy>
             <posx>-25</posx>
 			<orientation>horizontal</orientation>
-			<!-- <usecontrolcoords>true</usecontrolcoords>
-			<itemgap>25</itemgap> -->
+			<usecontrolcoords>true</usecontrolcoords>
+			<itemgap>0</itemgap>
             <control type="image">
+				<height>75</height>
                 <include>mediaflags_large_layout</include>
                 <texture background="true">$VAR[mediaflags_large_path]$INFO[ListItem.VideoResolution,/resolution/,.png]</texture>
-                <visible>!String.IsEmpty(ListItem.VideoResolution)</visible>
+                <visible>!String.IsEmpty(Window(Home).Property(ListItem.VideoResolution)) | !String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.VideoResolution)) | !String.IsEmpty(ListItem.VideoResolution)</visible>
             </control>
             <control type="image">
+				<height>75</height>
                 <include>mediaflags_large_layout</include>
                 <texture background="true">$VAR[mediaflags_large_path]$INFO[ListItem.AudioCodec,/audio/,.png]</texture>
-                <visible>!String.IsEmpty(ListItem.AudioCodec) + !String.Contains(ListItem.FileNameAndPath,atmos)</visible>
+                <visible>!String.IsEmpty(Window(Home).Property(ListItem.AudioCodec)) | !String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.AudioCodec)) | !String.IsEmpty(ListItem.AudioCodec) + !String.Contains(ListItem.FileNameAndPath,atmos)</visible>
             </control>
 			<control type="image">
+				<height>75</height>
                 <include>mediaflags_large_layout</include>
                 <texture background="true">$VAR[mediaflags_large_path]/audio/Dolby_Atmos.png</texture>
 				<visible>String.Contains(ListItem.FileNameAndPath,atmos)</visible>
             </control>
 			<control type="image">
+				<height>75</height>
                 <include>mediaflags_large_layout</include>
                 <texture background="true">$VAR[mediaflags_large_path]$INFO[ListItem.AudioChannels,/channels/,.png]</texture>
-                <visible>!String.IsEmpty(ListItem.AudioChannels)</visible>
+                <visible>!String.IsEmpty(Window(Home).Property(ListItem.AudioChannels)) | !String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.AudioChannels)) | !String.IsEmpty(ListItem.AudioChannels)</visible>
             </control>
 			<control type="image">
+				<height>75</height>
                 <include>mediaflags_large_layout</include>
                 <texture background="true">$VAR[mediaflags_large_path]$VAR[mediaflags_large_source,/video/,.png]</texture>
+				<visible>!String.IsEmpty(Window(Home).Property(ListItem.VideoCodec)) | !String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.VideoCodec)) | !String.IsEmpty(ListItem.VideoCodec)</visible>
              </control>
             <control type="image">
+				<height>75</height>
                 <include>mediaflags_large_layout</include>
                 <texture background="true">$VAR[mediaflags_large_path]$INFO[ListItem.VideoAspect,/aspectratio/,.png]</texture>
-                <visible>!String.IsEmpty(ListItem.VideoAspect)</visible>
+                <visible>!String.IsEmpty(Window(Home).Property(ListItem.VideoAspect)) | !String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.VideoAspect)) | !String.IsEmpty(ListItem.VideoAspect)</visible>
             </control>
 			
-			<!-- temp removed, need revisit use a var but use fixed visibility content
+			<!-- temp removed, need revisit use a var but use fixed visibility content -->
             <control type="image">
+				<height>75</height>
                 <include>mediaflags_large_layout</include>
                 <texture background="true">$VAR[mediaflags_large_path]/cc.png</texture>
-                <visible>!String.IsEmpty(ListItem.SubtitleLanguage) + !Skin.String(mediaflagsstyle,large_color)</visible>
+                <visible>!String.IsEmpty(Window(Home).Property(ListItem.SubtitleLanguage)) | !String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.SubtitleLanguage)) | !String.IsEmpty(ListItem.SubtitleLanguage) + !Skin.String(mediaflagsstyle,large_color)</visible>
             </control>
-			-->
-			<!-- temp removed, not working 
+			
+			<!-- temp removed, not working -->
             <control type="image" >
-                <height>95</height>
+                <height>75</height>
                 <include>mediaflags_large_layout</include>
-                <texture background="true">$INFO[ListItem.AudioLanguage,$VAR[LanguageFlagIconPath],.png]</texture>
-                <visible>!String.IsEmpty(ListItem.AudioLanguage) + Skin.String(mediaflagsstyle,large_color)</visible>
+                <texture background="true">$VAR[LanguageFlag_AUD]</texture>
+                <visible>!String.IsEmpty(Window(Home).Property(ListItem.AudioLanguage)) | !String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.AudioLanguage)) | !String.IsEmpty(ListItem.AudioLanguage) + Skin.String(mediaflagsstyle,large_color)</visible>
             </control>
 			
             <control type="image">
-                <height>95</height>
+                <height>75</height>
                 <include>mediaflags_large_layout</include>
-                <texture background="true">$INFO[ListItem.SubtitleLanguage,$VAR[LanguageFlagIconPath],.png]</texture>
-                <visible>!String.IsEmpty(ListItem.SubtitleLanguage) + Skin.String(mediaflagsstyle,large_color)</visible>
+                <texture background="true">$VAR[LanguageFlag_SUB]</texture>
+                <visible>!String.IsEmpty(Window(Home).Property(ListItem.SubtitleLanguage)) | !String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.SubtitleLanguage)) | !String.IsEmpty(ListItem.SubtitleLanguage) + Skin.String(mediaflagsstyle,large_color)</visible>
             </control>
-			-->
+			
             <control type="image">
+				<height>75</height>
                 <include>mediaflags_large_layout</include>
                 <texture fallback="flags/flags_large/mpaa/NR.png">$VAR[mediaflags_large_rating]</texture>
-                <visible>!String.IsEmpty(ListItem.MPAA) + ![Skin.HasSetting(EnableTouchSupport) + Skin.String(mediaflagsstyle,large_color) + !Skin.HasSetting(CompactHeader)] + ![Control.IsVisible(523) | Control.IsVisible(525)]</visible>
+                <visible>!String.IsEmpty(Window(Home).Property(ListItem.MPAA)) | !String.IsEmpty(ListItem.MPAA) | !String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.MPAA))</visible>
             </control>
             <include>mediaflags_sets</include>
             <!-- next aired info-->
-            <control type="group">
+            <!--control type="image">
+				<height>75</height>
+				<left>0</left>
+                <include>mediaflags_large_layout</include>
+                <texture fallback="flags/flags_large/mpaa/NR.png">$VAR[mediaflags_large_rating]</texture>
+                <visible>Container.content(tvshows) + [!String.IsEmpty(Window(Home).Property(ListItem.MPAA)) | !String.IsEmpty(ListItem.MPAA) | !String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.MPAA))]</visible>
+            </control-->
+			<control type="group">
                 <visible>!String.IsEmpty(Control.GetLabel(44228))</visible>
                 <visible>Container.content(tvshows) | Container.content(seasons)</visible>
                 <width>40</width>
@@ -132,62 +148,68 @@
                 <visible>Container.content(tvshows) | Container.content(seasons)</visible>
                 <visible>String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.nextepisode.airdate)) + !String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.Status))</visible>
             </control>
-            
         </control>
     </include>
     
     <include name="mediaflags_large_widgets">
         <control type="grouplist">
-            <posy>-45</posy>
+            <posy>-25</posy>
             <posx>-25</posx>
             <itemgap>-10</itemgap>
 			<orientation>horizontal</orientation>
-            <control type="image">
+            <control type="image" id="11511">
+				<height>65</height>
                 <include>mediaflags_large_layout</include>
                 <texture background="true">$VAR[mediaflags_large_path]$INFO[Window(Home).Property(ListItem.VideoResolution),/resolution/,.png]</texture>
-                <visible>!String.IsEmpty(Window(Home).Property(ListItem.VideoResolution))</visible>
+                <visible>!String.IsEmpty(Window(Home).Property(ListItem.VideoResolution)) | !String.IsEmpty(ListItem.VideoResolution)  | !String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.VideoResolution))</visible>
             </control>
-            <control type="image">
+            <control type="image" id="11512">
+				<height>65</height>
                 <include>mediaflags_large_layout</include>
                 <texture background="true">$VAR[mediaflags_large_path]$INFO[Window(Home).Property(ListItem.AudioCodec),/audio/,.png]</texture>
-                <visible>!String.IsEmpty(Window(Home).Property(ListItem.AudioCodec))</visible>
+                <visible>!String.IsEmpty(Window(Home).Property(ListItem.AudioCodec)) | !String.IsEmpty(ListItem.AudioCodec)  | !String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.AudioCodec))</visible>
             </control>
-            <control type="image">
+            <control type="image" id="11513">
+				<height>65</height>
                 <include>mediaflags_large_layout</include>
                 <texture background="true">$VAR[mediaflags_large_path]$INFO[Window(Home).Property(ListItem.AudioChannels),/channels/,.png]</texture>
-                <visible>!String.IsEmpty(Window(Home).Property(ListItem.AudioChannels))</visible>
+                <visible>!String.IsEmpty(Window(Home).Property(ListItem.AudioChannels)) | !String.IsEmpty(ListItem.AudioChannels)  | !String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.AudioChannels))</visible>
             </control>
-            <control type="image">
+            <control type="image" id="11514">
+				<height>65</height>
                 <include>mediaflags_large_layout</include>
                 <texture background="true">$VAR[mediaflags_large_path]$VAR[mediaflags_large_source_widgets,/video/,.png]</texture>
-                <visible>!String.IsEmpty(Window(Home).Property(ListItem.VideoCodec))</visible>
+                <visible>!String.IsEmpty(Window(Home).Property(ListItem.VideoCodec)) | !String.IsEmpty(ListItem.VideoCodec)  | !String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.VideoCodec))</visible>
             </control>
-            <control type="image">
+            <control type="image" id="11515">
+				<height>65</height>
                 <include>mediaflags_large_layout</include>
                 <texture background="true">$VAR[mediaflags_large_path]$INFO[Window(Home).Property(ListItem.VideoAspect),/aspectratio/,.png]</texture>
-                <visible>!String.IsEmpty(Window(Home).Property(ListItem.VideoAspect))</visible>
+                <visible>!String.IsEmpty(Window(Home).Property(ListItem.VideoAspect)) | !String.IsEmpty(ListItem.VideoAspect)  | !String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.VideoAspect))</visible>
             </control>
-            <control type="image">
+            <control type="image" id="11516">
+				<height>65</height>
                 <include>mediaflags_large_layout</include>
                 <texture background="true">$VAR[mediaflags_large_path]/cc.png</texture>
-                <visible>!String.IsEmpty(Window(Home).Property(ListItem.SubtitleLanguage)) + !Skin.String(mediaflagsstyle,large_color)</visible>
+                <visible>[!String.IsEmpty(Window(Home).Property(ListItem.SubtitleLanguage)) | !String.IsEmpty(ListItem.SubtitleLanguage)  | !String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.SubtitleLanguage))] + !Skin.String(mediaflagsstyle,large_color)</visible>
             </control>
-            <control type="image" >
-                <height>95</height>
+            <control type="image"  id="11517">
+                <height>65</height>
                 <include>mediaflags_large_layout</include>
-                <texture background="true">$INFO[Window(Home).Property(ListItem.AudioLanguage),$VAR[LanguageFlagIconPath],.png]</texture>
-                <visible>!String.IsEmpty(Window(Home).Property(ListItem.AudioLanguage)) + Skin.String(mediaflagsstyle,large_color)</visible>
+                <texture background="true">$VAR[LanguageFlag_AUD]</texture>
+                <visible>![Window.IsActive(3018) | Window.IsActive(3017)] + [!String.IsEmpty(Window(Home).Property(ListItem.AudioLanguage)) | !String.IsEmpty(ListItem.AudioLanguage)  | !String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.AudioLanguage))] + Skin.String(mediaflagsstyle,large_color)</visible>
             </control>
-            <control type="image">
-                <height>95</height>
+            <control type="image" id="11518">
+                <height>65</height>
                 <include>mediaflags_large_layout</include>
-                <texture background="true">$INFO[Window(Home).Property(ListItem.SubtitleLanguage),$VAR[LanguageFlagIconPath],.png]</texture>
-                <visible>!String.IsEmpty(Window(Home).Property(ListItem.SubtitleLanguage)) + Skin.String(mediaflagsstyle,large_color)</visible>
+                <texture background="true">$VAR[LanguageFlag_SUB]</texture>
+                <visible>![Window.IsActive(3018) | Window.IsActive(3017)] + [!String.IsEmpty(Window(Home).Property(ListItem.SubtitleLanguage)) | !String.IsEmpty(ListItem.SubtitleLanguage)  | !String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.SubtitleLanguage))] + Skin.String(mediaflagsstyle,large_color)</visible>
             </control>
-            <control type="image" id="11510">
+            <control type="image" id="11519">
+				<height>65</height>
                 <include>mediaflags_large_layout</include>
-                <texture fallback="NR.png">$VAR[mediaflags_large_rating_widgets]</texture>
-                <visible>!String.IsEmpty(Window(Home).Property(ListItem.MPAA)) + !String.IsEqual(Window(Home).Property(ListItem.MPAA),NR.png) + ![Control.IsVisible(523) | Control.IsVisible(525)]</visible>
+                <texture fallback="flags/flags_large/mpaa/NR.png">$VAR[mediaflags_large_rating]</texture>
+                <visible>![Window.IsActive(3018) | Window.IsActive(3017)] + [!String.IsEmpty(Window(Home).Property(ListItem.MPAA)) | !String.IsEmpty(ListItem.MPAA) | !String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.MPAA))]</visible>
             </control>
         </control>
     </include>
@@ -231,11 +253,24 @@
             <control type="image">
                 <include>mediaflags_large_layout</include>
                 <texture background="true">$VAR[mediaflags_large_path]/cc.png</texture>
-                <visible>!String.IsEmpty(VideoPlayer.SubtitleLanguage)</visible>
+                <visible>!String.IsEmpty(VideoPlayer.SubtitleLanguage) + !Skin.String(osdmediaflagsstyle,large_color)</visible>
             </control>
+			<control type="image" >
+                
+                <include>mediaflags_large_layout</include>
+                <texture background="true">$VAR[LanguageFlag_AUD]</texture>
+                <visible>!String.IsEmpty(VideoPlayer.AudioLanguage) + Skin.String(osdmediaflagsstyle,large_color)</visible>
+            </control>
+			
+            <control type="image">
+                
+                <include>mediaflags_large_layout</include>
+                <texture background="true">$VAR[LanguageFlag_SUB]</texture>
+                <visible>!String.IsEmpty(VideoPlayer.SubtitleLanguage) + Skin.String(osdmediaflagsstyle,large_color)</visible>
+			</control>	
             <control type="image">
                 <include>mediaflags_large_layout</include>
-                <texture fallback="flags/mpaa/NR.png">$VAR[mediaflags_large_rating]</texture>
+                <texture>$VAR[mediaflags_large_rating]</texture>
             </control>
         </control>
     </include>
@@ -249,7 +284,7 @@
 		<value condition="String.Contains(ListItem.Filename,dvb)">dvb</value>
 		<value condition="String.Contains(ListItem.Filename,web-dl)">web-dl</value>
 		<value condition="String.Contains(ListItem.Filename,dvd) | String.IsEqual(ListItem.FileExtension,iso) | String.IsEqual(ListItem.FileExtension,ifo)">dvd</value>
-		<value condition="!IsEmpy(ListItem.VideoCodec)">$INFO[ListItem.VideoCodec]</value>
+		<value condition="!String.IsEmpty(ListItem.VideoCodec)">$INFO[ListItem.VideoCodec]</value>
        
         <value condition="[String.Contains(Player.Filenameandpath,PDTV) | String.Contains(Player.Filenameandpath,sdtv)]">sdtv</value>
 		<value condition="String.Contains(Player.Filenameandpath,hdtv)">hdtv</value>
@@ -271,7 +306,7 @@
         <value condition="String.Contains(Window(Home).Property(ListItem.Filename),dvb)">dvb</value>
         <value condition="String.Contains(Window(Home).Property(ListItem.Filename),web-dl)">web-dl</value>
         <value condition="String.Contains(Window(Home).Property(ListItem.Filename),dvd) | String.IsEqual(Window(Home).Property(ListItem.FileExtension),iso) | String.IsEqual(Window(Home).Property(ListItem.FileExtension),ifo)">dvd</value>
-        <value condition="!IsEmpy(Window(Home).Property(ListItem.VideoCodec))">$INFO[Window(Home).Property(ListItem.VideoCodec)]</value>
+        <value condition="!String.IsEmpty(Window(Home).Property(ListItem.VideoCodec))">$INFO[Window(Home).Property(ListItem.VideoCodec)]</value>
     </variable>
     
     <variable name="mediaflags_large_rating_widgets">
@@ -286,16 +321,13 @@
 		<value condition="String.Contains(Window(Home).Property(ListItem.mpaa),UK:12)">$VAR[mediaflags_large_path]/mpaa/BBFC_12_Certificate_UK.png</value>
 		<value condition="String.Contains(Window(Home).Property(ListItem.mpaa),UK:15)">$VAR[mediaflags_large_path]/mpaa/BBFC_15_Certificate_UK.png</value>
 		<value condition="String.Contains(Window(Home).Property(ListItem.mpaa),UK:18)">$VAR[mediaflags_large_path]/mpaa/BBFC_18_Certificate_UK.png</value>
-		<value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),Germany:16) | String.Contains(Window(Home).Property(ListItem.mpaa),ab 16) | String.IsEqual(Window(Home).Property(ListItem.mpaa),16) | String.Contains(Window(Home).Property(ListItem.mpaa),FSK 16) | String.Contains(Window(Home).Property(ListItem.mpaa),Rated 16)]">$VAR[mediaflags_large_path]/mpaa/FSK-16.png</value>
-		<value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),Germany:6)| String.Contains(Window(Home).Property(ListItem.mpaa),ab 6) | String.IsEqual(Window(Home).Property(ListItem.mpaa),6) | String.Contains(Window(Home).Property(ListItem.mpaa),FSK 16) | String.Contains(Window(Home).Property(ListItem.mpaa),Rated 6)]">$VAR[mediaflags_large_path]/mpaa/FSK-6.png</value>
-		<value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),Germany:12) | String.Contains(Window(Home).Property(ListItem.mpaa),ab 12) | String.IsEqual(Window(Home).Property(ListItem.mpaa),12) | String.Contains(Window(Home).Property(ListItem.mpaa),FSK 12) | String.Contains(Window(Home).Property(ListItem.mpaa),Rated 12)]">$VAR[mediaflags_large_path]/mpaa/FSK-12.png</value>
-		<value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),Germany:18) | String.Contains(Window(Home).Property(ListItem.mpaa),ab 18) | String.IsEqual(Window(Home).Property(ListItem.mpaa),18) | String.Contains(Window(Home).Property(ListItem.mpaa),FSK 18) | String.Contains(Window(Home).Property(ListItem.mpaa),Rated 18)]">$VAR[mediaflags_large_path]/mpaa/FSK-18.png</value>
-		<value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),Germany) | String.Contains(Window(Home).Property(ListItem.mpaa),FSK)| String.Contains(Window(Home).Property(ListItem.mpaa),o.A)| String.Contains(Window(Home).Property(ListItem.mpaa),Rated 0)]">$VAR[mediaflags_large_path]/mpaa/FSK-0.png</value>
-		<value condition="String.Contains(Window(Home).Property(ListItem.mpaa),besorolás alatt)">$VAR[mediaflags_large_path]/mpaa/HU_BA.png</value>
-		<value condition="String.Contains(Window(Home).Property(ListItem.mpaa),korhatárra való tekintett nélkül megtekintetheto)">$VAR[mediaflags_large_path]/mpaa/HU_KN.png</value>
-		<value condition="String.Contains(Window(Home).Property(ListItem.mpaa),12 éven aluliak számára a megtekintése nagykorú felügyelete mellett ajánlott)">$VAR[mediaflags_large_path]/mpaa/HU_12.png</value>
-		<value condition="String.Contains(Window(Home).Property(ListItem.mpaa),16 éven aluliak számára nem ajánlott)">$VAR[mediaflags_large_path]/mpaa/HU_16.png</value>
-		<value condition="String.Contains(Window(Home).Property(ListItem.mpaa),18 éven aluliak számára nem ajánlott)">$VAR[mediaflags_large_path]/mpaa/HU_18.png</value>
+		
+		<value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),Germany:16) | String.Contains(Window(Home).Property(ListItem.mpaa),ab 16) | String.Contains(Window(Home).Property(ListItem.mpaa),16) | String.Contains(Window(Home).Property(ListItem.mpaa),FSK 16) | String.Contains(Window(Home).Property(ListItem.mpaa),Rated 16)]">$VAR[mediaflags_large_path]/mpaa/FSK-16.png</value>
+		<value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),Germany:6)| String.Contains(Window(Home).Property(ListItem.mpaa),ab 6) | String.Contains(Window(Home).Property(ListItem.mpaa),6) | String.Contains(Window(Home).Property(ListItem.mpaa),FSK 6) | String.Contains(Window(Home).Property(ListItem.mpaa),Rated 6)]">$VAR[mediaflags_large_path]/mpaa/FSK-6.png</value>
+		<value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),Germany:12) | String.Contains(Window(Home).Property(ListItem.mpaa),ab 12) | String.Contains(Window(Home).Property(ListItem.mpaa),12) | String.Contains(Window(Home).Property(ListItem.mpaa),FSK 12) | String.Contains(Window(Home).Property(ListItem.mpaa),Rated 12)]">$VAR[mediaflags_large_path]/mpaa/FSK-12.png</value>
+		<value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),Germany:18) | String.Contains(Window(Home).Property(ListItem.mpaa),ab 18) | String.Contains(Window(Home).Property(ListItem.mpaa),18) | String.Contains(Window(Home).Property(ListItem.mpaa),FSK 18) | String.Contains(Window(Home).Property(ListItem.mpaa),Rated 18)]">$VAR[mediaflags_large_path]/mpaa/FSK-18.png</value>
+		<value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),Germany:0) | String.Contains(Window(Home).Property(ListItem.mpaa),ab 0) | String.Contains(Window(Home).Property(ListItem.mpaa),0) | String.Contains(Window(Home).Property(ListItem.mpaa),FSK 0) | String.Contains(Window(Home).Property(ListItem.mpaa),Rated 0)]">$VAR[mediaflags_large_path]/mpaa/FSK-0.png</value>
+		
 		<value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),France:U) | String.Contains(Window(Home).Property(ListItem.mpaa),partir de 3 ans) | String.Contains(Window(Home).Property(ListItem.mpaa),partir de 6 ans)]">$VAR[mediaflags_large_path]/mpaa/csaU.png</value>
 		<value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),France:-10) | String.Contains(Window(Home).Property(ListItem.mpaa),Interdit aux moins de 10 ans) | String.Contains(Window(Home).Property(ListItem.mpaa),des propos ou des images peuvent heurter)]">$VAR[mediaflags_large_path]/mpaa/csa10.png</value>
 		<value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),France:-12) | String.Contains(Window(Home).Property(ListItem.mpaa),Interdit aux moins de 12 ans)]">$VAR[mediaflags_large_path]/mpaa/csa12.png</value>
@@ -313,6 +345,8 @@
 		<value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),Brazil:16) | String.Contains(Window(Home).Property(ListItem.mpaa),16 anos)]">$VAR[mediaflags_large_path]/mpaa/MPAA_Brazil_16.png</value>
 		<value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),Brazil:18) | String.Contains(Window(Home).Property(ListItem.mpaa),18 anos)]">$VAR[mediaflags_large_path]/mpaa/MPAA_Brazil_18.png</value>
 		<value condition="String.Contains(Window(Home).Property(ListItem.mpaa),Australia:)">$INFO[Window(Home).Property(ListItem.MPAA),$VAR[mediaflags_large_path]/mpaa/australia_),.png]</value>
+		
+		<value condition="!String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.MPAA))">$VAR[mediaflags_large_path]/mpaa/$INFO[Window(Home).Property(SkinHelper.ListItem.MPAA)].png</value>
 		<value condition="!String.IsEmpty(Window(Home).Property(ListItem.MPAA))">$VAR[mediaflags_large_path]/mpaa/$INFO[Window(Home).Property(ListItem.MPAA)].png</value>
     </variable>
     
@@ -328,16 +362,13 @@
 		<value condition="String.Contains(ListItem.mpaa,UK:12)">$VAR[mediaflags_large_path]/mpaa/BBFC_12_Certificate_UK.png</value>
 		<value condition="String.Contains(ListItem.mpaa,UK:15)">$VAR[mediaflags_large_path]/mpaa/BBFC_15_Certificate_UK.png</value>
 		<value condition="String.Contains(ListItem.mpaa,UK:18)">$VAR[mediaflags_large_path]/mpaa/BBFC_18_Certificate_UK.png</value>
-		<value condition="String.Contains(ListItem.mpaa,Germany:16) | String.Contains(ListItem.mpaa,ab 16) | String.IsEqual(ListItem.mpaa,16) | String.Contains(ListItem.mpaa,FSK 16) | String.Contains(ListItem.mpaa,Rated 16)">$VAR[mediaflags_large_path]/mpaa/FSK-16.png</value>
-		<value condition="String.Contains(ListItem.mpaa,Germany:6)| String.Contains(ListItem.mpaa,ab 6) | String.IsEqual(ListItem.mpaa,6) | String.Contains(ListItem.mpaa,FSK 16) | String.Contains(ListItem.mpaa,Rated 6)">$VAR[mediaflags_large_path]/mpaa/FSK-6.png</value>
-		<value condition="String.Contains(ListItem.mpaa,Germany:12) | String.Contains(ListItem.mpaa,ab 12) | String.IsEqual(ListItem.mpaa,12) | String.Contains(ListItem.mpaa,FSK 12) | String.Contains(ListItem.mpaa,Rated 12)">$VAR[mediaflags_large_path]/mpaa/FSK-12.png</value>
-		<value condition="String.Contains(ListItem.mpaa,Germany:18) | String.Contains(ListItem.mpaa,ab 18) | String.IsEqual(ListItem.mpaa,18) | String.Contains(ListItem.mpaa,FSK 18) | String.Contains(ListItem.mpaa,Rated 18)">$VAR[mediaflags_large_path]/mpaa/FSK-18.png</value>
-		<value condition="String.Contains(ListItem.mpaa,Germany)|String.Contains(ListItem.mpaa,FSK)| String.Contains(ListItem.mpaa,o.A)| String.Contains(ListItem.mpaa,Rated 0)">$VAR[mediaflags_large_path]/mpaa/FSK-0.png</value>
-		<value condition="String.Contains(ListItem.mpaa,besorolás alatt)">$VAR[mediaflags_large_path]/mpaa/HU_BA.png</value>
-		<value condition="String.Contains(ListItem.mpaa,korhatárra való tekintett nélkül megtekintetheto)">$VAR[mediaflags_large_path]/mpaa/HU_KN.png</value>
-		<value condition="String.Contains(ListItem.mpaa,12 éven aluliak számára a megtekintése nagykorú felügyelete mellett ajánlott)">$VAR[mediaflags_large_path]/mpaa/HU_12.png</value>
-		<value condition="String.Contains(ListItem.mpaa,16 éven aluliak számára nem ajánlott)">$VAR[mediaflags_large_path]/mpaa/HU_16.png</value>
-		<value condition="String.Contains(ListItem.mpaa,18 éven aluliak számára nem ajánlott)">$VAR[mediaflags_large_path]/mpaa/HU_18.png</value>
+		
+		<value condition="String.Contains(ListItem.mpaa,Germany:16) | String.Contains(ListItem.mpaa,ab 16) | String.Contains(ListItem.mpaa,16) | String.Contains(ListItem.mpaa,FSK 16) | String.Contains(ListItem.mpaa,Rated 16)">$VAR[mediaflags_large_path]/mpaa/FSK-16.png</value>
+		<value condition="String.Contains(ListItem.mpaa,Germany:6) | String.Contains(ListItem.mpaa,ab 6) | String.Contains(ListItem.mpaa,6) | String.Contains(ListItem.mpaa,FSK 6) | String.Contains(ListItem.mpaa,Rated 6)">$VAR[mediaflags_large_path]/mpaa/FSK-6.png</value>
+		<value condition="String.Contains(ListItem.mpaa,Germany:12) | String.Contains(ListItem.mpaa,ab 12) | String.Contains(ListItem.mpaa,12) | String.Contains(ListItem.mpaa,FSK 12) | String.Contains(ListItem.mpaa,Rated 12)">$VAR[mediaflags_large_path]/mpaa/FSK-12.png</value>
+		<value condition="String.Contains(ListItem.mpaa,Germany:18) | String.Contains(ListItem.mpaa,ab 18) | String.Contains(ListItem.mpaa,18) | String.Contains(ListItem.mpaa,FSK 18) | String.Contains(ListItem.mpaa,Rated 18)">$VAR[mediaflags_large_path]/mpaa/FSK-18.png</value>
+		<value condition="String.Contains(ListItem.mpaa,Germany:0) | String.Contains(ListItem.mpaa,ab 0) | String.Contains(ListItem.mpaa,0) | String.Contains(ListItem.mpaa,FSK 0) | String.Contains(ListItem.mpaa,Rated 0)">$VAR[mediaflags_large_path]/mpaa/FSK-0.png</value>
+		
 		<value condition="String.Contains(ListItem.mpaa,France:U) | String.Contains(ListItem.mpaa,partir de 3 ans) | String.Contains(ListItem.mpaa,partir de 6 ans)">$VAR[mediaflags_large_path]/mpaa/csaU.png</value>
 		<value condition="String.Contains(ListItem.mpaa,France:-10) | String.Contains(ListItem.mpaa,Interdit aux moins de 10 ans) | String.Contains(ListItem.mpaa,des propos ou des images peuvent heurter)">$VAR[mediaflags_large_path]/mpaa/csa10.png</value>
 		<value condition="String.Contains(ListItem.mpaa,France:-12) | String.Contains(ListItem.mpaa,Interdit aux moins de 12 ans)">$VAR[mediaflags_large_path]/mpaa/csa12.png</value>
@@ -355,8 +386,20 @@
 		<value condition="String.Contains(ListItem.mpaa,Brazil:16) | String.Contains(ListItem.mpaa,16 anos)">$VAR[mediaflags_large_path]/mpaa/MPAA_Brazil_16.png</value>
 		<value condition="String.Contains(ListItem.mpaa,Brazil:18) | String.Contains(ListItem.mpaa,18 anos)">$VAR[mediaflags_large_path]/mpaa/MPAA_Brazil_18.png</value>
 		<value condition="String.Contains(ListItem.mpaa,Australia:)">$INFO[ListItem.MPAA,$VAR[mediaflags_large_path]/mpaa/australia_,.png]</value>
+		
+		<!--value condition="String.Contains(ListItem.mpaa,Germany)|String.Contains(ListItem.mpaa,FSK)| String.Contains(ListItem.mpaa,o.A)| String.Contains(ListItem.mpaa, )">$VAR[mediaflags_large_path]/mpaa/nl-al.png</value-->
 		<value condition="!String.IsEmpty(ListItem.MPAA)">$VAR[mediaflags_large_path]/mpaa/$INFO[ListItem.MPAA].png</value>
-        
+		
+		
+		
+		<value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),Germany:16) | String.Contains(Window(Home).Property(ListItem.mpaa),ab 16) | String.Contains(Window(Home).Property(ListItem.mpaa),16) | String.Contains(Window(Home).Property(ListItem.mpaa),FSK 16) | String.Contains(Window(Home).Property(ListItem.mpaa),Rated 16)]">$VAR[mediaflags_large_path]/mpaa/FSK-16.png</value>
+		<value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),Germany:6) | String.Contains(Window(Home).Property(ListItem.mpaa),ab 6) | String.Contains(Window(Home).Property(ListItem.mpaa),6) | String.Contains(Window(Home).Property(ListItem.mpaa),FSK 6) | String.Contains(Window(Home).Property(ListItem.mpaa),Rated 6)]">$VAR[mediaflags_large_path]/mpaa/FSK-6.png</value>
+		<value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),Germany:12) | String.Contains(Window(Home).Property(ListItem.mpaa),ab 12) | String.Contains(Window(Home).Property(ListItem.mpaa),12) | String.Contains(Window(Home).Property(ListItem.mpaa),FSK 12) | String.Contains(Window(Home).Property(ListItem.mpaa),Rated 12)]">$VAR[mediaflags_large_path]/mpaa/FSK-12.png</value>
+		<value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),Germany:18) | String.Contains(Window(Home).Property(ListItem.mpaa),ab 18) | String.Contains(Window(Home).Property(ListItem.mpaa),18) | String.Contains(Window(Home).Property(ListItem.mpaa),FSK 18) | String.Contains(Window(Home).Property(ListItem.mpaa),Rated 18)]">$VAR[mediaflags_large_path]/mpaa/FSK-18.png</value>
+		<value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),Germany:0) | String.Contains(Window(Home).Property(ListItem.mpaa),ab 0) | String.Contains(Window(Home).Property(ListItem.mpaa),0) | String.Contains(Window(Home).Property(ListItem.mpaa),FSK 0) | String.Contains(Window(Home).Property(ListItem.mpaa),Rated 0)]">$VAR[mediaflags_large_path]/mpaa/FSK-0.png</value>
+		
+		<value condition="!String.IsEmpty(Window(Home).Property(ListItem.MPAA))">$VAR[mediaflags_large_path]/mpaa/$INFO[Window(Home).Property(ListItem.MPAA)].png</value>
+		
 		<value condition="String.Contains(VideoPlayer.mpaa,US:G) | String.Contains(VideoPlayer.mpaa,USA:G) | String.Contains(VideoPlayer.mpaa,Rated G)">$VAR[mediaflags_large_path]/mpaa/G.png</value>
 		<value condition="String.Contains(VideoPlayer.mpaa,PG-13)">$VAR[mediaflags_large_path]/mpaa/PG-13.png</value>
 		<value condition="String.Contains(VideoPlayer.mpaa,Rated PG) | String.IsEqual(VideoPlayer.Mpaa,PG)">$VAR[mediaflags_large_path]/mpaa/PG.png</value>
@@ -368,16 +411,14 @@
 		<value condition="String.Contains(VideoPlayer.mpaa,UK:12)">$VAR[mediaflags_large_path]/mpaa/BBFC_12_Certificate_UK.png</value>
 		<value condition="String.Contains(VideoPlayer.mpaa,UK:15)">$VAR[mediaflags_large_path]/mpaa/BBFC_15_Certificate_UK.png</value>
 		<value condition="String.Contains(VideoPlayer.mpaa,UK:18)">$VAR[mediaflags_large_path]/mpaa/BBFC_18_Certificate_UK.png</value>
-		<value condition="String.Contains(VideoPlayer.mpaa,Germany:16) | String.Contains(VideoPlayer.mpaa,ab 16) | String.IsEqual(VideoPlayer.mpaa,16) | String.Contains(VideoPlayer.mpaa,FSK 16) | String.Contains(VideoPlayer.mpaa,Rated 16)">$VAR[mediaflags_large_path]/mpaa/FSK-16.png</value>
-		<value condition="String.Contains(VideoPlayer.mpaa,Germany:6)| String.Contains(VideoPlayer.mpaa,ab 6) | String.IsEqual(VideoPlayer.mpaa,6) | String.Contains(VideoPlayer.mpaa,FSK 16) | String.Contains(VideoPlayer.mpaa,Rated 6)">$VAR[mediaflags_large_path]/mpaa/FSK-6.png</value>
-		<value condition="String.Contains(VideoPlayer.mpaa,Germany:12) | String.Contains(VideoPlayer.mpaa,ab 12) | String.IsEqual(VideoPlayer.mpaa,12) | String.Contains(VideoPlayer.mpaa,FSK 12) | String.Contains(VideoPlayer.mpaa,Rated 12)">$VAR[mediaflags_large_path]/mpaa/FSK-12.png</value>
-		<value condition="String.Contains(VideoPlayer.mpaa,Germany:18) | String.Contains(VideoPlayer.mpaa,ab 18) | String.IsEqual(VideoPlayer.mpaa,18) | String.Contains(VideoPlayer.mpaa,FSK 18) | String.Contains(VideoPlayer.mpaa,Rated 18)">$VAR[mediaflags_large_path]/mpaa/FSK-18.png</value>
-		<value condition="String.Contains(VideoPlayer.mpaa,Germany)|String.Contains(VideoPlayer.mpaa,FSK)| String.Contains(VideoPlayer.mpaa,o.A)| String.Contains(VideoPlayer.mpaa,Rated 0)">$VAR[mediaflags_large_path]/mpaa/FSK-0</value>
-		<value condition="String.Contains(VideoPlayer.mpaa,besorolás alatt)">$VAR[mediaflags_large_path]/mpaa/HU_BA.png</value>
-		<value condition="String.Contains(VideoPlayer.mpaa,korhatárra való tekintett nélkül megtekintetheto)">$VAR[mediaflags_large_path]/mpaa/HU_KN.png</value>
-		<value condition="String.Contains(VideoPlayer.mpaa,12 éven aluliak számára a megtekintése nagykorú felügyelete mellett ajánlott)">$VAR[mediaflags_large_path]/mpaa/HU_12.png</value>
-		<value condition="String.Contains(VideoPlayer.mpaa,16 éven aluliak számára nem ajánlott)">$VAR[mediaflags_large_path]/mpaa/HU_16.png</value>
-		<value condition="String.Contains(VideoPlayer.mpaa,18 éven aluliak számára nem ajánlott)">$VAR[mediaflags_large_path]/mpaa/HU_18.png</value>
+		
+		<value condition="String.Contains(VideoPlayer.mpaa,Germany:16) | String.Contains(VideoPlayer.mpaa,ab 16) | String.Contains(VideoPlayer.mpaa,16) | String.Contains(VideoPlayer.mpaa,FSK 16) | String.Contains(VideoPlayer.mpaa,Rated 16)">$VAR[mediaflags_large_path]/mpaa/FSK-16.png</value>
+		<value condition="String.Contains(VideoPlayer.mpaa,Germany:6) | String.Contains(VideoPlayer.mpaa,ab 6) | String.Contains(VideoPlayer.mpaa,6) | String.Contains(VideoPlayer.mpaa,FSK 6) | String.Contains(VideoPlayer.mpaa,Rated 6)">$VAR[mediaflags_large_path]/mpaa/FSK-6.png</value>
+		<value condition="String.Contains(VideoPlayer.mpaa,Germany:12) | String.Contains(VideoPlayer.mpaa,ab 12) | String.Contains(VideoPlayer.mpaa,12) | String.Contains(VideoPlayer.mpaa,FSK 12) | String.Contains(VideoPlayer.mpaa,Rated 12)">$VAR[mediaflags_large_path]/mpaa/FSK-12.png</value>
+		<value condition="String.Contains(VideoPlayer.mpaa,Germany:18) | String.Contains(VideoPlayer.mpaa,ab 18) | String.Contains(VideoPlayer.mpaa,18) | String.Contains(VideoPlayer.mpaa,FSK 18) | String.Contains(VideoPlayer.mpaa,Rated 18)">$VAR[mediaflags_large_path]/mpaa/FSK-18.png</value>
+		<value condition="String.Contains(VideoPlayer.mpaa,Germany:0) | String.Contains(VideoPlayer.mpaa,ab 0) | String.Contains(VideoPlayer.mpaa,0) | String.Contains(VideoPlayer.mpaa,FSK 0) | String.Contains(VideoPlayer.mpaa,Rated 0)">$VAR[mediaflags_large_path]/mpaa/FSK-0.png</value>
+		
+		
 		<value condition="String.Contains(VideoPlayer.mpaa,France:U) | String.Contains(VideoPlayer.mpaa,partir de 3 ans) | String.Contains(VideoPlayer.mpaa,partir de 6 ans)">$VAR[mediaflags_large_path]/mpaa/csaU.png</value>
 		<value condition="String.Contains(VideoPlayer.mpaa,France:-10) | String.Contains(VideoPlayer.mpaa,Interdit aux moins de 10 ans) | String.Contains(VideoPlayer.mpaa,des propos ou des images peuvent heurter)">$VAR[mediaflags_large_path]/mpaa/csa10.png</value>
 		<value condition="String.Contains(VideoPlayer.mpaa,France:-12) | String.Contains(VideoPlayer.mpaa,Interdit aux moins de 12 ans)">$VAR[mediaflags_large_path]/mpaa/csa12.png</value>
@@ -394,9 +435,10 @@
 		<value condition="String.Contains(VideoPlayer.mpaa,Brazil:14) | String.Contains(VideoPlayer.mpaa,14 anos)">$VAR[mediaflags_large_path]/mpaa/MPAA_Brazil_14.png</value>
 		<value condition="String.Contains(VideoPlayer.mpaa,Brazil:16) | String.Contains(VideoPlayer.mpaa,16 anos)">$VAR[mediaflags_large_path]/mpaa/MPAA_Brazil_16.png</value>
 		<value condition="String.Contains(VideoPlayer.mpaa,Brazil:18) | String.Contains(VideoPlayer.mpaa,18 anos)">$VAR[mediaflags_large_path]/mpaa/MPAA_Brazil_18.png</value>
-		<value condition="!String.IsEmpty(VideoPlayer.MPAA)">$VAR[mediaflags_large_path]/mpaa/$INFO[VideoPlayer.MPAA].png</value>
+		
+        <value condition="!String.IsEmpty(VideoPlayer.MPAA)">$VAR[mediaflags_large_path]/mpaa/$INFO[VideoPlayer.MPAA].png</value>
         
-        <value condition="[String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),US:G) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),USA:G) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Rated G)]">$VAR[mediaflags_large_path]/mpaa/G.png</value>
+		<value condition="[String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),US:G) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),USA:G) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Rated G)]">$VAR[mediaflags_large_path]/mpaa/G.png</value>
 		<value condition="String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),PG-13)">$VAR[mediaflags_large_path]/mpaa/PG-13.png</value>
 		<value condition="[String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Rated PG) | String.IsEqual(Window(Home).Property(SkinHelper.Player.Mpaa),PG)]">$VAR[mediaflags_large_path]/mpaa/PG.png</value>
 		<value condition="[String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),US:R) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),USA:R) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Rated R) | String.IsEqual(Window(Home).Property(SkinHelper.Player.mpaa),R)]">$VAR[mediaflags_large_path]/mpaa/R.png</value>
@@ -407,16 +449,13 @@
 		<value condition="String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),UK:12)">$VAR[mediaflags_large_path]/mpaa/BBFC_12_Certificate_UK.png</value>
 		<value condition="String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),UK:15)">$VAR[mediaflags_large_path]/mpaa/BBFC_15_Certificate_UK.png</value>
 		<value condition="String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),UK:18)">$VAR[mediaflags_large_path]/mpaa/BBFC_18_Certificate_UK.png</value>
-		<value condition="[String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Germany:16) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),ab 16) | String.IsEqual(Window(Home).Property(SkinHelper.Player.mpaa),16) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),FSK 16) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Rated 16)]">$VAR[mediaflags_large_path]/mpaa/FSK-16.png</value>
-		<value condition="[String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Germany:6)| String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),ab 6) | String.IsEqual(Window(Home).Property(SkinHelper.Player.mpaa),6) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),FSK 16) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Rated 6)]">$VAR[mediaflags_large_path]/mpaa/FSK-6.png</value>
-		<value condition="[String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Germany:12) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),ab 12) | String.IsEqual(Window(Home).Property(SkinHelper.Player.mpaa),12) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),FSK 12) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Rated 12)]">$VAR[mediaflags_large_path]/mpaa/FSK-12.png</value>
-		<value condition="[String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Germany:18) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),ab 18) | String.IsEqual(Window(Home).Property(SkinHelper.Player.mpaa),18) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),FSK 18) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Rated 18)]">$VAR[mediaflags_large_path]/mpaa/FSK-18.png</value>
-		<value condition="[String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Germany) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),FSK)| String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),o.A)| String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Rated 0)]">$VAR[mediaflags_large_path]/mpaa/FSK-0.png</value>
-		<value condition="String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),besorolás alatt)">$VAR[mediaflags_large_path]/mpaa/HU_BA.png</value>
-		<value condition="String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),korhatárra való tekintett nélkül megtekintetheto)">$VAR[mediaflags_large_path]/mpaa/HU_KN.png</value>
-		<value condition="String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),12 éven aluliak számára a megtekintése nagykorú felügyelete mellett ajánlott)">$VAR[mediaflags_large_path]/mpaa/HU_12.png</value>
-		<value condition="String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),16 éven aluliak számára nem ajánlott)">$VAR[mediaflags_large_path]/mpaa/HU_16.png</value>
-		<value condition="String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),18 éven aluliak számára nem ajánlott)">$VAR[mediaflags_large_path]/mpaa/HU_18.png</value>
+		
+		<value condition="[String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Germany:16) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),ab 16) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),16) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),FSK 16) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Rated 16)]">$VAR[mediaflags_large_path]/mpaa/FSK-16.png</value>
+		<value condition="[String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Germany:6) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),ab 6) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),6) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),FSK 6) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Rated 6)]">$VAR[mediaflags_large_path]/mpaa/FSK-6.png</value>
+		<value condition="[String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Germany:12) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),ab 12) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),12) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),FSK 12) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Rated 12)]">$VAR[mediaflags_large_path]/mpaa/FSK-12.png</value>
+		<value condition="[String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Germany:18) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),ab 18) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),18) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),FSK 18) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Rated 18)]">$VAR[mediaflags_large_path]/mpaa/FSK-18.png</value>
+		<value condition="[String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Germany:0) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),ab 0) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),0) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),FSK 0) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Rated 0)]">$VAR[mediaflags_large_path]/mpaa/FSK-0.png</value>
+		
 		<value condition="[String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),France:U) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),partir de 3 ans) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),partir de 6 ans)]">$VAR[mediaflags_large_path]/mpaa/csaU.png</value>
 		<value condition="[String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),France:-10) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Interdit aux moins de 10 ans) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),des propos ou des images peuvent heurter)]">$VAR[mediaflags_large_path]/mpaa/csa10.png</value>
 		<value condition="[String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),France:-12) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Interdit aux moins de 12 ans)]">$VAR[mediaflags_large_path]/mpaa/csa12.png</value>
@@ -434,6 +473,8 @@
 		<value condition="[String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Brazil:16) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),16 anos)]">$VAR[mediaflags_large_path]/mpaa/MPAA_Brazil_16.png</value>
 		<value condition="[String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Brazil:18) | String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),18 anos)]">$VAR[mediaflags_large_path]/mpaa/MPAA_Brazil_18.png</value>
 		<value condition="String.Contains(Window(Home).Property(SkinHelper.Player.mpaa),Australia:)">$INFO[Window(Home).Property(SkinHelper.Player.MPAA),$VAR[mediaflags_large_path]/mpaa/australia_),.png]</value>
+		
+		<value condition="!String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.MPAA)) | String.IsEmpty(ListItem.MPAA) | String.IsEmpty(Window(Home).Property(ListItem.MPAA))">$VAR[mediaflags_large_path]/mpaa/$INFO[Window(Home).Property(SkinHelper.ListItem.MPAA)].png</value>
 		<value condition="!String.IsEmpty(Window(Home).Property(SkinHelper.Player.MPAA))">$VAR[mediaflags_large_path]/mpaa/$INFO[Window(Home).Property(SkinHelper.Player.MPAA)].png</value>
 	</variable>
     
@@ -446,9 +487,10 @@
 				<visible>!String.IsEmpty(Control.GetLabel(44223))</visible>
 				<width>141</width>
 				<height>30</height>
-
+				
 				<!-- Video Resolution -->
 				<control type="image">
+					<posx>10</posx>
 					<colordiffuse>$VAR[mediaFlagsFontColor]</colordiffuse>
 					<texture fallback="flags/flags_classic/resolution/default.png">$VAR[VideoResolutionVar,flags/flags_classic/resolution/,.png]</texture>
 				</control>
@@ -461,12 +503,14 @@
 				
 				<!-- Video Codec -->
 				<control type="image">
+					<posx>10</posx>
 					<colordiffuse>$VAR[mediaFlagsFontColor]</colordiffuse>
 					<texture fallback="flags/flags_classic/videocodec/default.png">$VAR[VideoCodecVar,flags/flags_classic/videocodec/,.png]</texture>
 				</control>
 
 				<!-- Aspect Ratio -->
 				<control type="image">
+					<posx>15</posx>
 					<colordiffuse>$VAR[mediaFlagsFontColor]</colordiffuse>
 					<texture fallback="flags/flags_classic/aspectration/default.png">$VAR[VideoAspectVar,flags/flags_classic/aspectration/,.png]</texture>
 				</control>
@@ -480,12 +524,14 @@
 
 				<!-- Audio Codec -->
 				<control type="image">
+					<posx>10</posx>
 					<colordiffuse>$VAR[mediaFlagsFontColor]</colordiffuse>
 					<texture fallback="flags/flags_classic/audiocodec/default.png">$VAR[AudioCodecVar,flags/flags_classic/audiocodec/,.png]</texture>
 				</control>
 
 				<!-- Audio Channels -->			
 				<control type="image">
+					<posx>10</posx>
 					<colordiffuse>$VAR[mediaFlagsFontColor]</colordiffuse>
 					<texture fallback="flags/flags_classic/audiochannels/default.png">$VAR[AudioChannelsVar,flags/flags_classic/audiochannels/,.png]</texture>
 				</control>
@@ -498,6 +544,7 @@
 				<width>70</width>
 				<height>30</height>
 				<control type="image">
+					<posx>10</posx>
 					<colordiffuse>$VAR[mediaFlagsFontColor]</colordiffuse>
 					<texture>flags/flags_classic/3dbd.png</texture>
 				</control>
@@ -512,6 +559,7 @@
 				<control type="group">
 					<animation effect="slide" start="0,0" end="84" center="auto" easing="out" tween="back" time="0" condition="ListItem.IsStereoScopic | !String.IsEmpty(ListItem.Property(Video3DFormat)) | String.Contains(ListItem.FileName,.3d.)">Conditional</animation>
 					<control type="image">
+						<posx>10</posx>
 						<colordiffuse>$VAR[mediaFlagsFontColor]</colordiffuse>
 						<texture>flags/flag_box_rating_classic.png</texture>
 						<aspectratio>stretch</aspectratio>
@@ -535,30 +583,32 @@
 				<visible>Container.content(tvshows) | Container.content(seasons)</visible>
 				<width>300</width>
 				<height>30</height>
-
+				
 				<control type="group">
 					<control type="image">
 						<width>180</width>
+						<left>5</left>
 						<colordiffuse>$VAR[mediaFlagsFontColor]</colordiffuse>
 						<texture>flags/flag_box_calendar_classic.png</texture>
 						<aspectratio>stretch</aspectratio>
 					</control>
 					<control type="label" id="44240">
 						<font>flags_classic</font>
-						<width>180</width>
+						<width>150</width>
 						<height>30</height>
-						<left>15</left>
+						<centerleft>110</centerleft>
 						<textcolor>$VAR[mediaFlagsFontColor]</textcolor>
 						<label>$INFO[Window(Home).Property(SkinHelper.ListItem.Status),, ]</label>						
 						<align>center</align>
 						<aligny>center</aligny>
+						<visible>String.IsEmpty(Window(home).Property(SkinHelper.ListItem.nextepisode.airdate)</visible>
 					</control>
 
 					<control type="label" id="44241">
 						<font>flags_classic</font>
-						<width>135</width>
+						<width>150</width>
 						<height>30</height>
-						<right>-5</right>
+						<centerleft>110</centerleft>
 						<textcolor>$VAR[mediaFlagsFontColor]</textcolor>
 						<label>$INFO[Window(Home).Property(SkinHelper.ListItem.nextepisode.airdate)]</label>
 						<align>center</align>
@@ -581,6 +631,7 @@
 				<visible>!String.IsEmpty(Control.GetLabel(54223))</visible>
 				<control type="image">
 					<height>36</height>
+					<posx>5</posx>
 					<colordiffuse>$VAR[mediaFlagsFontColor]</colordiffuse>
 					<texture border="25,0,0,0">flags/flag_box_video.png</texture>
 					<aspectratio>stretch</aspectratio>
@@ -645,6 +696,7 @@
 					<aligny>center</aligny>
 					<height>36</height>
 				</control>
+				<visible>![Container.content(tvshows) | Container.content(seasons)]</visible>
 			</control>
 			
 			<!--Aspectratio-->
@@ -752,7 +804,7 @@
 			<control type="group">
 				<width>8</width>
 				<height>36</height>
-				<visible>!String.IsEmpty(Control.GetLabel(54229))</visible>
+				<visible>!String.IsEmpty(Control.GetLabel(54229)) + ![Control.IsVisible(523) | Control.IsVisible(525)]</visible>
 			</control>
 			
 			<!-- star rating (widgets only) -->
@@ -790,26 +842,42 @@
             </control>
              <!-- nextaired info -->
             <control type="group">
-				<width>400</width>
+				<width>210</width>
+				<right>0</right>
 				<height>36</height>
-				<visible>!String.IsEmpty(Control.GetLabel(54240))</visible>
+				<visible>!String.IsEmpty(Control.GetLabel(54241))</visible>
                 <visible>Container.content(tvshows) | Container.content(seasons)</visible>
 				<control type="image">
-					<posx>-6</posx>
+					<posx>0</posx>
 					<colordiffuse>$VAR[mediaFlagsFontColor]</colordiffuse>
 					<texture>flags/flag_box.png</texture>
 					<aspectratio>stretch</aspectratio>
 				</control>
 				<control type="label" id="54240">
 					<font>flags</font>
-					<posx>-6</posx>
-					<width>400</width>
+					<posx>-45</posx>
+					<width>210</width>
 					<right>0</right>
 					<textcolor>$VAR[mediaFlagsFontColor]</textcolor>
-					<label>$INFO[Window(Home).Property(SkinHelper.ListItem.Status)]$INFO[Window(Home).Property(SkinHelper.ListItem.nextepisode.airdate), ]</label>
+					<label>$INFO[Window(Home).Property(SkinHelper.ListItem.nextepisode.airdate)]</label>
                 	<align>center</align>
 					<aligny>center</aligny>
 					<height>36</height>
+					<visible>Container.content(tvshows) | Container.content(seasons)</visible>
+                    <visible>!String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.nextepisode.airdate))</visible>
+				</control>
+				<control type="label" id="54241">
+					<font>flags</font>
+					<posx>-45</posx>
+					<width>210</width>
+					<right>0</right>
+					<textcolor>$VAR[mediaFlagsFontColor]</textcolor>
+					<label>$INFO[Window(Home).Property(SkinHelper.ListItem.Status)]</label>
+                	<align>center</align>
+					<aligny>center</aligny>
+					<height>36</height>
+					<visible>Container.content(tvshows) | Container.content(seasons)</visible>
+					<visible>String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.nextepisode.airdate)) + !String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.Status))</visible>
 				</control>
 			</control>
         
@@ -827,6 +895,7 @@
                 <texture>flags/video.png</texture>
                 <bordersize>3</bordersize>
                 <visible>!String.IsEmpty(Control.GetLabel(44223))</visible>
+				<visible>![Container.content(tvshows) | Container.content(seasons)]</visible>
             </control>
             <control type="label" id="44223">
                 <font>flags</font>
@@ -835,6 +904,7 @@
                 <label>$VAR[VideoFileTypeVar,, • ]$VAR[VideoCodecVar,, • ]$VAR[VideoAspectVar,, • ]$VAR[VideoResolutionVar]</label>
                 <textcolor>$VAR[mediaFlagsFontColor]</textcolor>
                 <visible>!String.IsEmpty(Control.GetLabel(44223))</visible>
+				<visible>![Container.content(tvshows) | Container.content(seasons)]</visible>
             </control>
 
             <control type="label">
@@ -955,14 +1025,15 @@
                 <control type="image">
                     <width>40</width>
                     <height>40</height>
-                    <posy>-5</posy>
+					<left>-5</left>
+                    
                     <colordiffuse>$VAR[mediaFlagsFontColor]</colordiffuse>
                     <texture>dialogs/videoinfo/time-icon.png</texture>
                 </control>
                 <control type="label" id="44227">
                     <font>flags</font>
                     <width>auto</width>
-                    <height>30</height>
+                    <height>40</height>
                     <left>40</left>
                     <textcolor>$VAR[mediaFlagsFontColor]</textcolor>
                     <label>$INFO[Window(Home).Property(SkinHelper.ListItem.nextepisode.airdate)]</label>
@@ -971,7 +1042,7 @@
                 <control type="label" id="44228">
                     <font>flags</font>
                     <width>auto</width>
-                    <height>30</height>
+                    <height>40</height>
                     <left>40</left>
                     <textcolor>$VAR[mediaFlagsFontColor]</textcolor>
                     <label>$INFO[Window(Home).Property(SkinHelper.ListItem.Status)]</label>
@@ -1689,13 +1760,9 @@
 		<value condition="String.Contains(ListItem.mpaa,Germany:6)| String.Contains(ListItem.mpaa,ab 6) | String.Contains(ListItem.mpaa,FSK 6)">FSK 6</value>
 		<value condition="String.Contains(ListItem.mpaa,Germany:12) | String.Contains(ListItem.mpaa,ab 12) | String.Contains(ListItem.mpaa,FSK 12)">FSK 12</value>
 		<value condition="String.Contains(ListItem.mpaa,Germany:18) | String.Contains(ListItem.mpaa,ab 18) | String.Contains(ListItem.mpaa,FSK 18)">FSK 18</value>
-		<value condition="String.Contains(ListItem.mpaa,Germany)|String.Contains(ListItem.mpaa,FSK)| String.Contains(ListItem.mpaa,o.A) | String.Contains(ListItem.mpaa,FSK 0)">FSK 0</value>
+		<value condition="String.Contains(ListItem.mpaa,Germany:0) | String.Contains(ListItem.mpaa,ab 0) | String.Contains(ListItem.mpaa,FSK 0)">FSK 0</value>
+		
 		<!-- HU -->
-        <value condition="String.Contains(ListItem.mpaa,besorolás alatt)">BA</value>
-		<value condition="String.Contains(ListItem.mpaa,korhatárra való tekintett nélkül megtekintetheto)">KN</value>
-        <value condition="String.Contains(ListItem.mpaa,12 éven aluliak számára a megtekintése nagykorú felügyelete mellett ajánlott)">12</value>
-        <value condition="String.Contains(ListItem.mpaa,16 éven aluliak számára nem ajánlott)">16</value>
-        <value condition="String.Contains(ListItem.mpaa,18 éven aluliak számára nem ajánlott)">18</value>
         <!-- FR -->
         <value condition="String.Contains(ListItem.mpaa,France:U) | String.Contains(ListItem.mpaa,partir de 3 ans) | String.Contains(ListItem.mpaa,partir de 6 ans)">CSA-U</value>
         <value condition="String.Contains(ListItem.mpaa,France:-10) | String.Contains(ListItem.mpaa,Interdit aux moins de 10 ans) | String.Contains(ListItem.mpaa,des propos ou des images peuvent heurter)">CSA-10</value>
@@ -1709,7 +1776,9 @@
         <value condition="String.Contains(ListItem.mpaa,Brazil:14) | String.Contains(ListItem.mpaa,14 anos)">14</value>
         <value condition="String.Contains(ListItem.mpaa,Brazil:16) | String.Contains(ListItem.mpaa,16 anos)">16</value>
         <value condition="String.Contains(ListItem.mpaa,Brazil:18) | String.Contains(ListItem.mpaa,18 anos)">18</value>
-        <value condition="!String.IsEmpty(ListItem.mpaa) + !String.Contains(ListItem.mpaa,not rated) + !String.Contains(ListItem.mpaa,n/a)">$INFO[ListItem.MPAA]</value>	
+		
+		<value condition="!String.IsEmpty(ListItem.MPAA)">$INFO[ListItem.MPAA]</value>
+			
         <!-- home widgets -->
         <value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),US:G) | String.Contains(Window(Home).Property(ListItem.mpaa),USA:G) | String.Contains(Window(Home).Property(ListItem.mpaa),Rated G)]">G</value>
         <value condition="String.Contains(Window(Home).Property(ListItem.mpaa),PG-13)">PG-13</value>
@@ -1722,16 +1791,13 @@
         <value condition="String.Contains(Window(Home).Property(ListItem.mpaa),UK:12)">UK-12</value>
         <value condition="String.Contains(Window(Home).Property(ListItem.mpaa),UK:15)">UK-15</value>
         <value condition="String.Contains(Window(Home).Property(ListItem.mpaa),UK:18)">UK-18</value>
+		
         <value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),Germany:16) | String.Contains(Window(Home).Property(ListItem.mpaa),ab 16) | String.Contains(Window(Home).Property(ListItem.mpaa),FSK 16)]">FSK 16</value>
 		<value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),Germany:6)| String.Contains(Window(Home).Property(ListItem.mpaa),ab 6) | String.Contains(Window(Home).Property(ListItem.mpaa),FSK 6)]">FSK 6</value>
 		<value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),Germany:12) | String.Contains(Window(Home).Property(ListItem.mpaa),ab 12) | String.Contains(Window(Home).Property(ListItem.mpaa),FSK 12)]">FSK 12</value>
 		<value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),Germany:18) | String.Contains(Window(Home).Property(ListItem.mpaa),ab 18) | String.Contains(Window(Home).Property(ListItem.mpaa),FSK 18)]">FSK 18</value>
-		<value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),Germany)|String.Contains(Window(Home).Property(ListItem.mpaa),FSK)| String.Contains(Window(Home).Property(ListItem.mpaa),o.A) | String.Contains(Window(Home).Property(ListItem.mpaa),FSK 0)]">FSK 0</value>
-		<value condition="String.Contains(Window(Home).Property(ListItem.mpaa),besorolás alatt)">BA</value>
-        <value condition="String.Contains(Window(Home).Property(ListItem.mpaa),korhatárra való tekintett nélkül megtekintetheto)">KN</value>
-        <value condition="String.Contains(Window(Home).Property(ListItem.mpaa),12 éven aluliak számára a megtekintése nagykorú felügyelete mellett ajánlott)">12</value>
-        <value condition="String.Contains(Window(Home).Property(ListItem.mpaa),16 éven aluliak számára nem ajánlott)">16</value>
-        <value condition="String.Contains(Window(Home).Property(ListItem.mpaa),18 éven aluliak számára nem ajánlott)">18</value>
+		<value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),Germany:0) | String.Contains(Window(Home).Property(ListItem.mpaa),ab 0) | String.Contains(Window(Home).Property(ListItem.mpaa),FSK 0)]">FSK 0</value>
+		
         <value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),France:U) | String.Contains(Window(Home).Property(ListItem.mpaa),partir de 3 ans) | String.Contains(Window(Home).Property(ListItem.mpaa),partir de 6 ans)]">CSA-U</value>
         <value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),France:-10) | String.Contains(Window(Home).Property(ListItem.mpaa),Interdit aux moins de 10 ans) | String.Contains(Window(Home).Property(ListItem.mpaa),des propos ou des images peuvent heurter)]">CSA-10</value>
         <value condition="[String.Contains(Window(Home).Property(ListItem.mpaa),France:-12) | String.Contains(Window(Home).Property(ListItem.mpaa),Interdit aux moins de 12 ans)]">CSA-12</value>
@@ -1752,8 +1818,12 @@
         <value condition="String.Contains(ListItem.Property(esrb),Mature)">M</value>
         <value condition="String.Contains(ListItem.Property(esrb),Adult)">A</value>
         <value condition="!String.IsEmpty(ListItem.Property(esrb))">$INFO[ListItem.Property(esrb)]</value>
-        <!-- fallback -->
-        <!-- value condition="!String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.MPAA)) + !String.Contains(Window(Home).Property(SkinHelper.ListItem.MPAA),not rated)">$INFO[Window(Home).Property(SkinHelper.ListItem.MPAA)]</value -->
+		
+		<value condition="!String.IsEmpty(Window(Home).Property(ListItem.MPAA))">$INFO[Window(Home).Property(ListItem.MPAA)]</value>
+		        <!-- fallback -->
+        <value condition="!String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.MPAA))">$INFO[Window(Home).Property(SkinHelper.ListItem.MPAA)]</value>
+		
+		
 		<value condition="[String.IsEqual(ListItem.DBTYPE,movie) | 
 				String.IsEqual(ListItem.Property(DBTYPE),movie) | 
 				String.IsEqual(Window(Home).Property(ListItem.DBTYPE,movie)) | 
@@ -1871,7 +1941,7 @@
 
 		<value condition="String.IsEqual(ListItem.AudioCodec,ac3)">DOLBY D</value>
 		<value condition="String.IsEqual(ListItem.AudioCodec,dca)">DTS</value>
-        <value condition="String.Contains(ListItem.Filenameandpath,atmos)">ATMOS</value><!-- check -->
+        <value condition="String.Contains(ListItem.Filenameandpath,.atmos.)">ATMOS</value><!-- check,  atmos ersetzt mit .atmos. -->
 		<value condition="String.Contains(ListItem.AudioCodec,dts-hd)">DTS HD</value>
 		<value condition="String.Contains(ListItem.AudioCodec,dtshd)">DTS HD</value>
 		<value condition="String.Contains(ListItem.AudioCodec,pcm)">PCM</value>
@@ -1900,7 +1970,7 @@
 		<value condition="!String.IsEmpty(Window(Home).Property(ListItem.AudioLanguage))">$INFO[Window(Home).Property(ListItem.AudioLanguage)]</value>
         <value condition="window.isactive(fullscreenvideo) + !String.IsEmpty(VideoPlayer.AudioLanguage)">$INFO[VideoPlayer.AudioLanguage]</value>
 	</variable>
-    
+   
     <variable name="SubtitleLanguageVar">
         <value condition="!String.IsEmpty(ListItem.SubtitleLanguage) + !String.IsEqual(ListItem.SubtitleLanguage,unknown)">$INFO[ListItem.SubtitleLanguage]</value>
 		<value condition="!String.IsEmpty(Window(Home).Property(ListItem.SubtitleLanguage)) + !String.IsEqual(Window(Home).Property(ListItem.SubTitleLanguage),unknown)">$INFO[Window(Home).Property(ListItem.SubTitleLanguage)]</value>

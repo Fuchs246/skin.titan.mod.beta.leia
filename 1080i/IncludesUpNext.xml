@@ -417,7 +417,7 @@
 				<aspectratio scalediffuse="false" align="center" aligny="center">scale</aspectratio>
 			</control>
 			<!-- Countdown image -->
-			<control type="image">
+			<!--control type="image">
 				<visible>Skin.HasSetting(UpNext_ShowCountdownAtThumb)</visible>
 				<top>95</top>
 				<left>210</left>
@@ -425,7 +425,7 @@
 				<height>80</height>
 				<texture aligny="center" align="center" colordiffuse="$INFO[Skin.String(upnext_text)]">$VAR[nextupbutton_TimeRemaining]</texture>
 				<animation effect="zoom" start="100,100" center="auto" end="120,120" delay="200" time="750" pulse="true" condition="true">Conditional</animation>
-			</control>
+			</control-->
 		</control>
 		<!-- Logo, Addon provided thumb ? if png, need check and possibility, or Studio Image of currently playing -->
 		<control type="image">
@@ -437,6 +437,26 @@
 			<texture colordiffuse="$INFO[Skin.String(upnext_text)]" background="true">$INFO[Skin.String(SkinHelper.studiologos.path)]$INFO[VideoPlayer.Studio].png</texture>
 			<visible>!String.IsEmpty(VideoPlayer.Studio)</visible>
 		</control>
+		
+				<control type="image">
+				<left>1420</left>
+			<top>720</top>
+					<width>450</width>
+					<height>253</height>
+					<aspect>keep</aspect>
+					<texture>$VAR[NextUpThumb]</texture>
+					<!--aspectratio scalediffuse="false" align="left" aligny="center">stretch</aspectratio-->
+				</control>
+				<control type="image">
+				<visible>Skin.HasSetting(UpNext_ShowCountdownAtThumb)</visible>
+				<top>810</top>
+				<left>1600</left>
+				<width>80</width>
+				<height>80</height>
+				<texture aligny="center" align="center" colordiffuse="$INFO[Skin.String(upnext_text)]">$VAR[nextupbutton_TimeRemaining]</texture>
+				<animation effect="zoom" start="100,100" center="auto" end="120,120" delay="200" time="750" pulse="true" condition="true">Conditional</animation>
+			</control>
+		
 		<!-- clearlogo -->
 		<control type="image">
 			<top>890</top>

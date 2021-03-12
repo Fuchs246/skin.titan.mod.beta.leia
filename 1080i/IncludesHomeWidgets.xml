@@ -11,55 +11,50 @@
             <visible>![String.Contains(Window.Property(widgetstyle), box) | String.Contains(Window.Property(widgetstyle), details)] + !String.IsEmpty(Window(home).Property(HomeFirstLoadDone))</visible>
             <visible>Control.HasFocus(77777) | String.IsEqual(Window(Home).Property(ShowWidget),show)</visible>
             <visible>!Skin.HasSetting(HideWidgetDetailsPanel)</visible>
-            <animation type="Visible">
-                <effect type="slide" start="0,-1000" end="0,0" time="300" tween="cubic" easing="inout" delay="0"/>
-            </animation>
-            <animation type="Hidden">
-                <effect type="slide" start="0,0" end="0,-1000" time="300" tween="cubic" easing="inout" delay="0"/>
-            </animation>
+			<animation time="200" delay="0" effect="slide" start="0,-1000" end="0,0">VisibleChange</animation>
             <control type="image">
                 <height>1000</height>
-                <top>-450</top>
+                <top>-20</top>
                 <texture border="15">diffuse/bgpanel.png</texture>
                 <colordiffuse>$VAR[ViewDetailsPanelColor]</colordiffuse>
                 <aspectratio>stretch</aspectratio>
                 <visible>!Skin.HasSetting(HideWidgetPanelBackground)</visible>
                 <!-- slide widget background panel matching the widget style -->
                 <animation type="Conditional" condition="String.IsEqual(Window.Property(widgetstyle), poster)">
-                    <effect type="slide" start="0,0" end="0,380" time="0" delay="0"/>
+                    <effect type="slide" start="0,0" end="0,-15" time="200" delay="0"/>
                 </animation>
-                <animation type="Conditional" condition="String.IsEqual(Window.Property(widgetstyle), posterdetails)">
+                <!--animation type="Conditional" condition="String.IsEqual(Window.Property(widgetstyle), posterdetails)">
                     <effect type="slide" start="0,0" end="0,380" time="0" delay="0"/>
                 </animation>
 				<animation type="Conditional" condition="String.IsEqual(Window.Property(widgetstyle), landscapewidedetails)">
                     <effect type="slide" start="0,0" end="0,420" time="0" delay="0"/>
-                </animation>
+                </animation-->
 				<animation type="Conditional" condition="String.IsEqual(Window.Property(widgetstyle), smallposter)">
-                    <effect type="slide" start="0,0" end="0,253" time="0" delay="0"/>
+                    <effect type="slide" start="0,0" end="0,-110" time="200" delay="0"/>
                 </animation>
                 <animation type="Conditional" condition="String.IsEqual(Window.Property(widgetstyle), square)">
-                    <effect type="slide" start="0,0" end="0,245" time="0" delay="0"/>
+                    <effect type="slide" start="0,0" end="0,-110" time="200" delay="0"/>
                 </animation>
                 <animation type="Conditional" condition="String.IsEqual(Window.Property(widgetstyle), minisquare)">
-                    <effect type="slide" start="0,0" end="0,131" time="0" delay="0"/>
+                    <effect type="slide" start="0,0" end="0,-230" time="200" delay="0"/>
                 </animation>
                 <animation type="Conditional" condition="String.IsEqual(Window.Property(widgetstyle), landscape)">
-                    <effect type="slide" start="0,0" end="0,210" time="0" delay="0"/>
+                    <effect type="slide" start="0,0" end="0,-150" time="200" delay="0"/>
                 </animation>
                 <animation type="Conditional" condition="String.IsEqual(Window.Property(widgetstyle), banner)">
-                    <effect type="slide" start="0,0" end="0,146" time="0" delay="0"/>
+                    <effect type="slide" start="0,0" end="0,-210" time="200" delay="0"/>
                 </animation>
                 <animation type="Conditional" condition="String.IsEqual(Window.Property(widgetstyle), landscapesmall)">
-                    <effect type="slide" start="0,0" end="0,148" time="0" delay="0"/>
+                    <effect type="slide" start="0,0" end="0,-130" time="200" delay="0"/>
                 </animation>
                 <animation type="Conditional" condition="String.IsEqual(Window.Property(widgetstyle), landscapelarge)">
-                    <effect type="slide" start="0,0" end="0,270" time="0" delay="0"/>
+                    <effect type="slide" start="0,0" end="0,-90" time="200" delay="0"/>
                 </animation>
-                <animation type="Conditional" condition="String.IsEqual(Window.Property(widgetstyle), landscapedetails)">
+                <!--animation type="Conditional" condition="String.IsEqual(Window.Property(widgetstyle), landscapedetails)">
                     <effect type="slide" start="0,0" end="0,210" time="0" delay="0"/>
-                </animation>
+                </animation-->
 				<animation type="Conditional" condition="String.IsEqual(Window.Property(widgetstyle), circle)">
-                    <effect type="slide" start="0,0" end="0,210" time="0" delay="0"/>
+                    <effect type="slide" start="0,0" end="0,-80" time="200" delay="0"/>
                 </animation>
             </control>
             <control type="label">
@@ -70,8 +65,8 @@
                 <font>Bold45</font>
                 <align>left</align>
                 <aligny>top</aligny>
-                <textcolor>$INFO[Skin.String(ViewDetailsTextColor)]</textcolor>
-                <shadowcolor>$INFO[Skin.String(ViewDetailsTextShadowColor)]</shadowcolor>
+                <textcolor>$INFO[Skin.String(ViewDetailsHighlightTextColor)]</textcolor>
+                <shadowcolor>$INFO[Skin.String(ViewDetailsHighlightTextShadowColor)]</shadowcolor>
                 <label>$VAR[HomeMenuWidgetInfoLabel]</label>
             </control>
             <control type="textbox">
@@ -100,6 +95,7 @@
                 <posx>405</posx>
                 <bottom>60</bottom>
                 <include>mediaflags</include>
+				<visible>!String.IsEmpty(Window(Home).Property(ListItem.VideoAspect)) | !String.IsEmpty(ListItem.VideoAspect)</visible>
             </control>
         </control>
         <!-- tagline or clearlogo at bottom -->
@@ -121,7 +117,7 @@
                 <pauseatend>0</pauseatend>
                 <visible>String.IsEmpty(Control.GetLabel(8821))</visible>
                 <animation time="300" effect="fade" delay="500">Visible</animation>
-                <animation time="200" effect="fade" delay="0">Hidden</animation>
+                <animation time="200" effect="fade" delay="500">Hidden</animation>
                 <visible>Control.IsVisible(77551)</visible>
             </control>
             <control type="image" id="8821">
@@ -131,16 +127,19 @@
                 <aspectratio align="center" aligny="bottom">keep</aspectratio>
                 <texture background="true">$VAR[HomeMenuWidgetInfoclearlogo]</texture>
                 <animation time="300" effect="fade" delay="500">Visible</animation>
-                <animation time="200" effect="fade" delay="0">Hidden</animation>
+                <animation time="200" effect="fade" delay="500">Hidden</animation>
                 <visible>Control.IsVisible(77551)</visible>
             </control>
         </control>
             
         <!-- widgets -->
         <control type="grouplist" id="77777">
-            <left>50</left>
-            <right>50</right>
-            <top>500</top>
+            <width>97%</width>
+			<left>40</left>
+            <right>40</right>   
+            
+			<include condition="Skin.HasSetting(LowerWidgets)">widget_layout_low</include>
+			<top>120</top>
             <bottom>0</bottom>
             <orientation>vertical</orientation>
             <onup>300</onup>
@@ -152,52 +151,211 @@
             <itemgap>0</itemgap>
             <visible>!String.IsEmpty(Window(Home).Property(HomeFirstLoadDone))</visible>
             <visible>![[String.Contains(Window(Home).Property(submenu),show) | Control.HasFocus(4444)] + Skin.String(SubmenuLayout, subpage)]</visible>
+			
             
             <!-- hide when no focus on widget and autoshow not enabled -->
             <animation effect="slide" start="0,0" end="0,-1000" time="300" tween="cubic" easing="inout" delay="0" condition="!String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
             <animation effect="slide" start="0,-1000" end="0,0" time="300" tween="cubic" easing="inout" delay="0" condition="String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
-            
+            <animation effect="fade" delay="0" start="100" end="30" time="100" condition="[String.Contains(Window(Home).Property(submenu),show) | Control.HasFocus(4444)] + Skin.String(SubmenuLayout, tiles) + Skin.HasSetting(AutoShowWidgets) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.String(HomeLayout,2small)">Conditional</animation> <!--automatisch widget, automatisch untermenu in skin setting festlegen-->
+			
             <!--  positioning for boxed layouts without infopanel -->
-            <animation effect="slide" delay="0" start="0" end="0,175" time="0" condition="String.IsEqual(Skin.AspectRatio,16:10) + String.IsEqual(Window.Property(widgetstyle),widebox) + String.Contains(Skin.String(HomeLayout),horizontal) + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
-            <animation effect="slide" delay="0" start="0" end="0,90" time="0" condition="String.IsEqual(Skin.AspectRatio,16:10) + String.IsEqual(Window.Property(widgetstyle),singlebox) + String.Contains(Skin.String(HomeLayout),horizontal) + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
-            <animation effect="slide" delay="0" start="0" end="0,220" time="0" condition="String.IsEqual(Skin.AspectRatio,16:10) + [String.IsEqual(Window.Property(widgetstyle),landscapedetails) | String.IsEqual(Window.Property(widgetstyle),circle)] + String.Contains(Skin.String(HomeLayout),horizontal) + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
-            <animation effect="slide" delay="0" start="0" end="0,50" time="0" condition="String.IsEqual(Skin.AspectRatio,16:10) + [String.IsEqual(Window.Property(widgetstyle),posterdetails) | String.IsEqual(Window.Property(widgetstyle),landscapewidedetails)] + String.Contains(Skin.String(HomeLayout),horizontal) + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
-            <animation effect="slide" delay="0" start="0" end="0,50" time="0" condition="String.IsEqual(Window.Property(widgetstyle),landscapedetails) + String.Contains(Skin.String(HomeLayout),horizontal) + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
 			
-            <animation effect="slide" delay="0" start="0" end="0,-70" time="0" condition="String.IsEqual(Window.Property(widgetstyle),widebox) + String.Contains(Skin.String(HomeLayout),simplehor) + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
-            <animation effect="slide" delay="0" start="0" end="0,-140" time="0" condition="String.IsEqual(Window.Property(widgetstyle),singlebox) + String.Contains(Skin.String(HomeLayout),simplehor) + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
-            <animation effect="slide" delay="0" start="0" end="0,0" time="0" condition="String.IsEqual(Window.Property(widgetstyle),circle) + String.Contains(Skin.String(HomeLayout),simplehor) + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
-			<animation effect="slide" delay="0" start="0" end="0,-60" time="0" condition="String.IsEqual(Window.Property(widgetstyle),landscapedetails) + String.Contains(Skin.String(HomeLayout),simplehor) + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
-            <animation effect="slide" delay="0" start="0" end="0,-150" time="0" condition="[String.IsEqual(Window.Property(widgetstyle),posterdetails) | String.IsEqual(Window.Property(widgetstyle),landscapewidedetails)] + String.Contains(Skin.String(HomeLayout),simplehor) + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
-            <animation effect="slide" delay="0" start="0" end="0,-370" time="0" condition="[String.IsEqual(Window.Property(widgetstyle),posterdetails) | String.IsEqual(Window.Property(widgetstyle),landscapewidedetails)] + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + !Skin.HasSetting(LowerWidgets) + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
-            <animation effect="slide" delay="0" start="0" end="0,-390" time="0" condition="[String.IsEqual(Window.Property(widgetstyle),posterdetails) | String.IsEqual(Window.Property(widgetstyle),landscapewidedetails)] + [Skin.String(HomeLayout,2) | Skin.String(HomeLayout,2small)] + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
+			   <!-- Widget Poster (HomeLayout,1) low/high -->
+			<animation effect="slide" delay="0" start="0,0" end="0,260" time="200" condition="String.IsEqual(Window.Property(widgetstyle),poster) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+			<animation effect="slide" delay="0" start="0,0" end="0,360" time="200" condition="String.IsEqual(Window.Property(widgetstyle),poster) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + !Skin.HasSetting(LowerWidgets)">Conditional</animation>
+				<!-- (HomeLayout,1) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,0" time="0" condition="String.IsEqual(Window.Property(widgetstyle),poster) + Skin.String(HomeLayout,1) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+				<!-- (HomeLayout,1small) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,40" time="0" condition="String.IsEqual(Window.Property(widgetstyle),poster) + Skin.String(HomeLayout,1small) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+				<!-- (HomeLayout,2) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,360" time="200" condition="String.IsEqual(Window.Property(widgetstyle),poster) + Skin.String(HomeLayout,2) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,2small) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,360" time="200" condition="String.IsEqual(Window.Property(widgetstyle),poster) + Skin.String(HomeLayout,2small) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,simplehor) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,260" time="200" condition="String.IsEqual(Window.Property(widgetstyle),poster) + Skin.String(HomeLayout,simplehor) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,lowhorizontal) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,260" time="200" condition="String.IsEqual(Window.Property(widgetstyle),poster) + Skin.String(HomeLayout,lowhorizontal) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,lowhorizontal_big) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,260" time="200" condition="String.IsEqual(Window.Property(widgetstyle),poster) + Skin.String(HomeLayout,lowhorizontal_big) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
 			
-			<animation effect="slide" delay="0" start="0" end="0,-80" time="0" condition="[[String.IsEqual(Window.Property(widgetstyle),landscapewidedetails) | String.IsEqual(Window.Property(widgetstyle),posterdetails)] + Skin.String(HomeLayout,simplehor)] + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
-            <animation effect="slide" delay="0" start="0" end="0,55" time="0" condition="String.IsEqual(Window.Property(widgetstyle),widebox) + String.Contains(Skin.String(HomeLayout),horizontal) + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
-			<animation effect="slide" delay="0" start="0" end="0,-30" time="0" condition="String.IsEqual(Window.Property(widgetstyle),singlebox) + String.Contains(Skin.String(HomeLayout),horizontal) + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
-			 
-            <animation effect="slide" delay="0" start="0" end="0,-300" time="0" condition="!String.IsEqual(Skin.AspectRatio,16:10) + [String.IsEqual(Window.Property(widgetstyle),posterdetails) | String.IsEqual(Window.Property(widgetstyle),landscapewidedetails)] + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
-            <animation effect="slide" delay="0" start="0" end="0,-180" time="0" condition="String.IsEqual(Skin.AspectRatio,16:10) + [String.IsEqual(Window.Property(widgetstyle),posterdetails) | String.IsEqual(Window.Property(widgetstyle),landscapewidedetails)] + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
-            
-			<animation effect="slide" delay="0" start="0" end="0,-370" time="0" condition="String.IsEqual(Window.Property(widgetstyle),landscapedetails) + [[[Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + !Skin.HasSetting(LowerWidgets)] | [Skin.String(HomeLayout,2) | Skin.String(HomeLayout,2small)]] + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
-            <animation effect="slide" delay="0" start="0" end="0,0" time="0" condition="String.IsEqual(Window.Property(widgetstyle),circle) + [[[Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + !Skin.HasSetting(LowerWidgets)] | [Skin.String(HomeLayout,2) | Skin.String(HomeLayout,2small)]] + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
-            <animation effect="slide" delay="0" start="0" end="0,0" time="0" condition="!String.IsEqual(Skin.AspectRatio,16:10) + String.IsEqual(Window.Property(widgetstyle),circle)] + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
-            <animation effect="slide" delay="0" start="0" end="0,-10" time="0" condition="String.IsEqual(Skin.AspectRatio,16:10) + [String.IsEqual(Window.Property(widgetstyle),landscapedetails) | String.IsEqual(Window.Property(widgetstyle),circle)] + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
-			<animation effect="slide" delay="0" start="0" end="0,-130" time="0" condition="!String.IsEqual(Skin.AspectRatio,16:10) + String.IsEqual(Window.Property(widgetstyle),landscapedetails) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
-            
-            <animation effect="slide" delay="0" start="0" end="0,-370" time="0" condition="String.IsEqual(Window.Property(widgetstyle),singlebox) + [[[Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + !Skin.HasSetting(LowerWidgets)] | [Skin.String(HomeLayout,2) | Skin.String(HomeLayout,2small)]] + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
-            <animation effect="slide" delay="0" start="0" end="0,-260" time="0" condition="!String.IsEqual(Skin.AspectRatio,16:10) + String.IsEqual(Window.Property(widgetstyle),singlebox) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
-            <animation effect="slide" delay="0" start="0" end="0,-140" time="0" condition="String.IsEqual(Skin.AspectRatio,16:10) + String.IsEqual(Window.Property(widgetstyle),singlebox) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
-            
-            <animation effect="slide" delay="0" start="0" end="0,-370" time="0" condition="String.IsEqual(Window.Property(widgetstyle),widebox) + [[[Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + !Skin.HasSetting(LowerWidgets)] | [Skin.String(HomeLayout,2) | Skin.String(HomeLayout,2small)]] + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
-            <animation effect="slide" delay="0" start="0" end="0,-175" time="0" condition="!String.IsEqual(Skin.AspectRatio,16:10) + String.IsEqual(Window.Property(widgetstyle),widebox) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
-            <animation effect="slide" delay="0" start="0" end="0,-55" time="0" condition="String.IsEqual(Skin.AspectRatio,16:10) + String.IsEqual(Window.Property(widgetstyle),widebox) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
 			
-			<animation effect="slide" delay="0" start="0" end="0,-120" time="0" condition="[[String.IsEqual(Window.Property(widgetstyle),landscapewidedetails) | String.IsEqual(Window.Property(widgetstyle),posterdetails)] + String.Contains(Skin.String(HomeLayout),horizontal)] + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
+			   <!-- Widget Landscape (HomeLayout,1) low/high -->
+			<animation effect="slide" delay="0" start="0,0" end="0,270" time="200" condition="String.IsEqual(Window.Property(widgetstyle),landscape) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+			<animation effect="slide" delay="0" start="0,0" end="0,370" time="200" condition="String.IsEqual(Window.Property(widgetstyle),landscape) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + !Skin.HasSetting(LowerWidgets)">Conditional</animation>
+				<!-- (HomeLayout,1) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,150" time="0" condition="String.IsEqual(Window.Property(widgetstyle),landscape) + Skin.String(HomeLayout,1) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+			<!-- (HomeLayout,1small) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,190" time="0" condition="String.IsEqual(Window.Property(widgetstyle),landscape) + Skin.String(HomeLayout,1small) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+			<!-- (HomeLayout,2) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,370" time="200" condition="String.IsEqual(Window.Property(widgetstyle),landscape) + Skin.String(HomeLayout,2) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,2small) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,370" time="200" condition="String.IsEqual(Window.Property(widgetstyle),landscape) + Skin.String(HomeLayout,2small) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,simplehor) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,270" time="200" condition="String.IsEqual(Window.Property(widgetstyle),landscape) + Skin.String(HomeLayout,simplehor) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,lowhorizontal) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,270" time="200" condition="String.IsEqual(Window.Property(widgetstyle),landscape) + Skin.String(HomeLayout,lowhorizontal) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,lowhorizontal_big) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,270" time="200" condition="String.IsEqual(Window.Property(widgetstyle),landscape) + Skin.String(HomeLayout,lowhorizontal_big) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
 			
-			<animation effect="slide" delay="0" start="0" end="0,0" time="0" condition="String.IsEqual(Window.Property(widgetstyle),circle) + String.Contains(Skin.String(HomeLayout),horizontal) + String.IsEqual(Window(Home).Property(ShowWidget),show)">Conditional</animation>
+			   <!-- Widget Poster_small (HomeLayout,1) low/high -->
+			<animation effect="slide" delay="0" start="0,0" end="0,280" time="200" condition="String.IsEqual(Window.Property(widgetstyle),smallposter) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+			<animation effect="slide" delay="0" start="0,0" end="0,380" time="200" condition="String.IsEqual(Window.Property(widgetstyle),smallposter) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + !Skin.HasSetting(LowerWidgets)">Conditional</animation>
+				<!-- (HomeLayout,1) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,120" time="0" condition="String.IsEqual(Window.Property(widgetstyle),smallposter) + Skin.String(HomeLayout,1) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+			<!-- (HomeLayout,1small) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,160" time="0" condition="String.IsEqual(Window.Property(widgetstyle),smallposter) + Skin.String(HomeLayout,1small) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+				<!-- (HomeLayout,2) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,380" time="200" condition="String.IsEqual(Window.Property(widgetstyle),smallposter) + Skin.String(HomeLayout,2) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,2small) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,380" time="200" condition="String.IsEqual(Window.Property(widgetstyle),smallposter) + Skin.String(HomeLayout,2small) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,simplehor) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,280" time="200" condition="String.IsEqual(Window.Property(widgetstyle),smallposter) + Skin.String(HomeLayout,simplehor) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,lowhorizontal) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,280" time="200" condition="String.IsEqual(Window.Property(widgetstyle),smallposter) + Skin.String(HomeLayout,lowhorizontal) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,lowhorizontal_big) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,280" time="200" condition="String.IsEqual(Window.Property(widgetstyle),smallposter) + Skin.String(HomeLayout,lowhorizontal_big) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+			
+			   <!-- Widget Banner (HomeLayout,1) low/high -->
+			<animation effect="slide" delay="0" start="0,0" end="0,280" time="200" condition="String.IsEqual(Window.Property(widgetstyle),banner) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+			<animation effect="slide" delay="0" start="0,0" end="0,380" time="200" condition="String.IsEqual(Window.Property(widgetstyle),banner) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + !Skin.HasSetting(LowerWidgets)">Conditional</animation>
+				<!-- (HomeLayout,1) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,210" time="0" condition="String.IsEqual(Window.Property(widgetstyle),banner) + Skin.String(HomeLayout,1) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+			<!-- (HomeLayout,1small) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,250" time="0" condition="String.IsEqual(Window.Property(widgetstyle),banner) + Skin.String(HomeLayout,1small) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+				<!-- (HomeLayout,2) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,380" time="200" condition="String.IsEqual(Window.Property(widgetstyle),banner) + Skin.String(HomeLayout,2) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,2small) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,380" time="200" condition="String.IsEqual(Window.Property(widgetstyle),banner) + Skin.String(HomeLayout,2small) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,simplehor) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,280" time="200" condition="String.IsEqual(Window.Property(widgetstyle),banner) + Skin.String(HomeLayout,simplehor) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,lowhorizontal) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,280" time="200" condition="String.IsEqual(Window.Property(widgetstyle),banner) + Skin.String(HomeLayout,lowhorizontal) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,lowhorizontal_big) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,280" time="200" condition="String.IsEqual(Window.Property(widgetstyle),banner) + Skin.String(HomeLayout,lowhorizontal_big) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+			
+			   <!-- Widget Landscapelarge (HomeLayout,1) low/high -->
+			<animation effect="slide" delay="0" start="0,0" end="0,280" time="200" condition="String.IsEqual(Window.Property(widgetstyle),landscapelarge) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+			<animation effect="slide" delay="0" start="0,0" end="0,380" time="200" condition="String.IsEqual(Window.Property(widgetstyle),landscapelarge) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + !Skin.HasSetting(LowerWidgets)">Conditional</animation>
+				<!-- (HomeLayout,1) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,100" time="0" condition="String.IsEqual(Window.Property(widgetstyle),landscapelarge) + Skin.String(HomeLayout,1) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+			<!-- (HomeLayout,1small) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,140" time="0" condition="String.IsEqual(Window.Property(widgetstyle),landscapelarge) + Skin.String(HomeLayout,1small) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+				<!-- (HomeLayout,2) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,380" time="200" condition="String.IsEqual(Window.Property(widgetstyle),landscapelarge) + Skin.String(HomeLayout,2) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,2small) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,380" time="200" condition="String.IsEqual(Window.Property(widgetstyle),landscapelarge) + Skin.String(HomeLayout,2small) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,simplehor) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,280" time="200" condition="String.IsEqual(Window.Property(widgetstyle),landscapelarge) + Skin.String(HomeLayout,simplehor) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,lowhorizontal) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,280" time="200" condition="String.IsEqual(Window.Property(widgetstyle),landscapelarge) + Skin.String(HomeLayout,lowhorizontal) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,lowhorizontal_big) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,280" time="200" condition="String.IsEqual(Window.Property(widgetstyle),landscapelarge) + Skin.String(HomeLayout,lowhorizontal_big) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+			
+			   <!-- Widget Circle (HomeLayout,1) low/high -->
+			<animation effect="slide" delay="0" start="0,0" end="0,280" time="200" condition="String.IsEqual(Window.Property(widgetstyle),circle) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+			<animation effect="slide" delay="0" start="0,0" end="0,380" time="200" condition="String.IsEqual(Window.Property(widgetstyle),circle) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + !Skin.HasSetting(LowerWidgets)">Conditional</animation>
+				<!-- (HomeLayout,1) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,90" time="0" condition="String.IsEqual(Window.Property(widgetstyle),circle) + Skin.String(HomeLayout,1) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+			<!-- (HomeLayout,1small) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,130" time="0" condition="String.IsEqual(Window.Property(widgetstyle),circle) + Skin.String(HomeLayout,1small) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+				<!-- (HomeLayout,2) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,380" time="200" condition="String.IsEqual(Window.Property(widgetstyle),circle) + Skin.String(HomeLayout,2) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,2small) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,380" time="200" condition="String.IsEqual(Window.Property(widgetstyle),circle) + Skin.String(HomeLayout,2small) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,simplehor) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,280" time="200" condition="String.IsEqual(Window.Property(widgetstyle),circle) + Skin.String(HomeLayout,simplehor) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,lowhorizontal) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,280" time="200" condition="String.IsEqual(Window.Property(widgetstyle),circle) + Skin.String(HomeLayout,lowhorizontal) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,lowhorizontal_big) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,280" time="200" condition="String.IsEqual(Window.Property(widgetstyle),circle) + Skin.String(HomeLayout,lowhorizontal_big) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+			
+			   <!-- Widget Square (HomeLayout,1) low/high -->
+			<animation effect="slide" delay="0" start="0,0" end="0,280" time="200" condition="String.IsEqual(Window.Property(widgetstyle),square) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+			<animation effect="slide" delay="0" start="0,0" end="0,380" time="200" condition="String.IsEqual(Window.Property(widgetstyle),square) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + !Skin.HasSetting(LowerWidgets)">Conditional</animation>
+				<!-- (HomeLayout,1) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,120" time="0" condition="String.IsEqual(Window.Property(widgetstyle),square) + Skin.String(HomeLayout,1) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+			<!-- (HomeLayout,1small) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,160" time="0" condition="String.IsEqual(Window.Property(widgetstyle),square) + Skin.String(HomeLayout,1small) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+				<!-- (HomeLayout,2) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,380" time="200" condition="String.IsEqual(Window.Property(widgetstyle),square) + Skin.String(HomeLayout,2) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,2small) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,380" time="200" condition="String.IsEqual(Window.Property(widgetstyle),square) + Skin.String(HomeLayout,2small) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,simplehor) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,280" time="200" condition="String.IsEqual(Window.Property(widgetstyle),square) + Skin.String(HomeLayout,simplehor) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,lowhorizontal) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,280" time="200" condition="String.IsEqual(Window.Property(widgetstyle),square) + Skin.String(HomeLayout,lowhorizontal) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,lowhorizontal_big) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,280" time="200" condition="String.IsEqual(Window.Property(widgetstyle),square) + Skin.String(HomeLayout,lowhorizontal_big) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+			
+			   <!-- Widget Minisquare (HomeLayout,1) low/high -->
+			<animation effect="slide" delay="0" start="0,0" end="0,280" time="200" condition="String.IsEqual(Window.Property(widgetstyle),minisquare) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+			<animation effect="slide" delay="0" start="0,0" end="0,380" time="200" condition="String.IsEqual(Window.Property(widgetstyle),minisquare) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + !Skin.HasSetting(LowerWidgets)">Conditional</animation>
+				<!-- (HomeLayout,1) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,240" time="0" condition="String.IsEqual(Window.Property(widgetstyle),minisquare) + Skin.String(HomeLayout,1) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+			<!-- (HomeLayout,1small) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,280" time="0" condition="String.IsEqual(Window.Property(widgetstyle),minisquare) + Skin.String(HomeLayout,1small) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+				<!-- (HomeLayout,2) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,380" time="200" condition="String.IsEqual(Window.Property(widgetstyle),minisquare) + Skin.String(HomeLayout,2) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,2small) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,380" time="200" condition="String.IsEqual(Window.Property(widgetstyle),minisquare) + Skin.String(HomeLayout,2small) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,simplehor) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,280" time="200" condition="String.IsEqual(Window.Property(widgetstyle),minisquare) + Skin.String(HomeLayout,simplehor) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,lowhorizontal) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,280" time="200" condition="String.IsEqual(Window.Property(widgetstyle),minisquare) + Skin.String(HomeLayout,lowhorizontal) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,lowhorizontal_big) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,280" time="200" condition="String.IsEqual(Window.Property(widgetstyle),minisquare) + Skin.String(HomeLayout,lowhorizontal_big) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+			
+			   <!-- Widget Landscapesmall (HomeLayout,1) low/high -->
+			<animation effect="slide" delay="0" start="0,0" end="0,350" time="200" condition="String.IsEqual(Window.Property(widgetstyle),landscapesmall) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+			<animation effect="slide" delay="0" start="0,0" end="0,450" time="200" condition="String.IsEqual(Window.Property(widgetstyle),landscapesmall) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + !Skin.HasSetting(LowerWidgets)">Conditional</animation>
+				<!-- (HomeLayout,1) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,210" time="0" condition="String.IsEqual(Window.Property(widgetstyle),landscapesmall) + Skin.String(HomeLayout,1) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+				<!-- (HomeLayout,1small) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,250" time="0" condition="String.IsEqual(Window.Property(widgetstyle),landscapesmall) + Skin.String(HomeLayout,1small) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+				<!-- (HomeLayout,2) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,450" time="200" condition="String.IsEqual(Window.Property(widgetstyle),landscapesmall) + Skin.String(HomeLayout,2) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,2small) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,450" time="200" condition="String.IsEqual(Window.Property(widgetstyle),landscapesmall) + Skin.String(HomeLayout,2small) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,simplehor) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,350" time="200" condition="String.IsEqual(Window.Property(widgetstyle),landscapesmall) + Skin.String(HomeLayout,simplehor) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,lowhorizontal) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,350" time="200" condition="String.IsEqual(Window.Property(widgetstyle),landscapesmall) + Skin.String(HomeLayout,lowhorizontal) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+				<!-- (HomeLayout,lowhorizontal_big) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,350" time="200" condition="String.IsEqual(Window.Property(widgetstyle),landscapesmall) + Skin.String(HomeLayout,lowhorizontal_big) + String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+			
+			   <!-- Widget Singlebox (HomeLayout,1) low/high -->
+				<!-- (HomeLayout,1) -->   
+			<animation effect="slide" delay="0" start="0,0" end="0,70" time="0" condition="String.IsEqual(Window.Property(widgetstyle),singlebox) + Skin.String(HomeLayout,1) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+				<!-- (HomeLayout,1small) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,110" time="0" condition="String.IsEqual(Window.Property(widgetstyle),singlebox) + Skin.String(HomeLayout,1small) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+			
+			   <!-- Widget Widebox (HomeLayout,1) low/high -->
+			   
+			<animation effect="slide" delay="0" start="0,0" end="0,150" time="0" condition="String.IsEqual(Window.Property(widgetstyle),widebox) + Skin.String(HomeLayout,1) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+				<!-- (HomeLayout,1small) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,190" time="0" condition="String.IsEqual(Window.Property(widgetstyle),widebox) + Skin.String(HomeLayout,1small) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+			
+			   <!-- Widget Posterdetails (HomeLayout,1) low/high -->
+			   
+			<animation effect="slide" delay="0" start="0,0" end="0,0" time="0" condition="String.IsEqual(Window.Property(widgetstyle),posterdetails) + Skin.String(HomeLayout,1) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+				<!-- (HomeLayout,1small) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,40" time="0" condition="String.IsEqual(Window.Property(widgetstyle),posterdetails) + Skin.String(HomeLayout,1small) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+			
+			   <!-- Widget Landscapedetails (HomeLayout,1) low/high -->
+			   
+			<animation effect="slide" delay="0" start="0,0" end="0,160" time="0" condition="String.IsEqual(Window.Property(widgetstyle),landscapedetails) + Skin.String(HomeLayout,1) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+				<!-- (HomeLayout,1small) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,200" time="0" condition="String.IsEqual(Window.Property(widgetstyle),landscapedetails) + Skin.String(HomeLayout,1small) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+			
+			   <!-- Widget Landscapewidedetails (HomeLayout,1) low/high -->
+			   
+			<animation effect="slide" delay="0" start="0,0" end="0,-10" time="0" condition="String.IsEqual(Window.Property(widgetstyle),landscapewidedetails) + Skin.String(HomeLayout,1) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+				<!-- (HomeLayout,1small) -->
+			<animation effect="slide" delay="0" start="0,0" end="0,30" time="0" condition="String.IsEqual(Window.Property(widgetstyle),landscapewidedetails) + Skin.String(HomeLayout,1small) + String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(LowerWidgets)">Conditional</animation>
+			
             <include>skinshortcuts-template-Widgets</include>
         </control>
+		        
     </include>
     
     <include name="widget_layout_default">
@@ -221,7 +379,7 @@
             <param name="widgetTags" value="$PARAM[widgetTags]"/>
             <param name="multiRows" value="$PARAM[multiRows]" />
         </include>
-        <include content="widget_layout_singlebox" condition="Skin.String(widgetstyle, single box) | Skin.String(widgetstyle, singlebox)">
+        <include content="widget_layout_singlebox" condition="Skin.String(widgetstyle, single box) | Skin.String(widgetstyle,singlebox)">
             <param name="widgetid" value="$PARAM[widgetid]"/>
             <param name="widgetTags" value="$PARAM[widgetTags]"/>
             <param name="multiRows" value="$PARAM[multiRows]" />
@@ -298,21 +456,22 @@
 	
     <include name="widget_layout_poster">
         <include content="height" condition="$PARAM[multiRows]">
-            <param name="height" value="840" />
+            <param name="height" value="820" />
         </include>
 		<include content="height" condition="String.Contains(Skin.String(HomeLayout),net)">
-            <param name="height" value="380" />
+            <param name="height" value="410" />
         </include>
         <include content="height" condition="![$PARAM[multiRows]] + !String.Contains(Skin.String(HomeLayout),net)">
             <param name="height" value="435" />
         </include>
-		<animation effect="slide" delay="0" start="0" end="0,-70" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,50" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-220" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.Contains(Skin.String(HomeLayout),simplehor) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-410" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + [[[Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + !Skin.HasSetting(LowerWidgets)] | [Skin.String(HomeLayout,2) | Skin.String(HomeLayout,2small)]] + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-280" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-180" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-		<animation effect="slide" delay="0" start="0" end="0,-30" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
+		
+		<animation effect="slide" delay="0" start="0,0" end="0,0" time="200" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		<animation effect="slide" delay="0" start="0,0" end="0,0" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		
+		<animation effect="slide" delay="0" start="0,0" end="0,40" time="200" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1small) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		<animation effect="slide" delay="0" start="0,0" end="0,40" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1small) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		
+		
 		<animation effect="slide" start="0" end="140" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + Skin.HasSetting(WidgetAlignRight) + String.Contains(Skin.String(HomeLayout),ver) + Skin.HasSetting(VerticalHomeLargeWidget) + !Integer.IsGreater(Container($PARAM[widgetid]).NumItems,4)">Conditional</animation>
         <animation effect="slide" start="0" end="261" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + Skin.HasSetting(WidgetAlignRight) + !Integer.IsGreater(Container($PARAM[widgetid]).NumItems,6) + !String.Contains(Skin.String(HomeLayout),ver)">Conditional</animation>
         <animation effect="slide" start="0" end="261" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + Skin.HasSetting(WidgetAlignRight) + !Integer.IsGreater(Container($PARAM[widgetid]).NumItems,5) + !String.Contains(Skin.String(HomeLayout),ver)">Conditional</animation>
@@ -325,7 +484,7 @@
 		
 		<!-- <include content="RespectBool_selectaction" /> -->
 		
-		<itemlayout height="435" width="261">
+		<itemlayout height="435" width="265">
             <control type="group">
                 <width>250</width>
                 <height>360</height>
@@ -338,12 +497,12 @@
 			<control type="group">
 				<include>$PARAM[widgetTags]</include>
 				<include content="Tag_NF">
-					<param name="tagwidth" value="250"/>
+					<param name="tagwidth" value="245"/>
 					<param name="tagtop" value="360" />
 				</include>
 			</control>
 		</itemlayout>
-        <focusedlayout height="435" width="261" condition="!Control.HasFocus($PARAM[widgetid])">
+        <focusedlayout height="435" width="265" condition="!Control.HasFocus($PARAM[widgetid])">
             <control type="group">
                 <width>250</width>
 				<height>360</height>
@@ -356,16 +515,16 @@
 			<control type="group">
 				<include>$PARAM[widgetTags]</include>
 				<include content="Tag_NF">
-					<param name="tagwidth" value="250"/>
+					<param name="tagwidth" value="245"/>
 					<param name="tagtop" value="360" />
 				</include>
 			</control>
 			</focusedlayout>
-        <focusedlayout height="435" width="261" condition="Control.HasFocus($PARAM[widgetid])">
+        <focusedlayout height="435" width="265" condition="Control.HasFocus($PARAM[widgetid])">
             <control type="group">
 				<include condition="Skin.HasSetting(WidgetsZoomFocus)">Focus_Zoom_Animation</include>
                 <width>250</width>
-                <height>360</height>
+                <height>360</height> 
 				<include content="PosterPanelLayout">
 					<param name="WatchedIndicator" value="WatchedIndicatorNormal" />
 					<param name="colordiffuse" value="$VAR[ViewDetailsBorderFocusColor]" />
@@ -378,7 +537,7 @@
 				<control type="group">
 					<include>$PARAM[widgetTags]</include>
 					<include content="Tag_NF">
-						<param name="tagwidth" value="250"/>
+						<param name="tagwidth" value="245"/>
 						<param name="tagtop" value="360" />
 					</include>
 				</control>
@@ -389,13 +548,13 @@
        
     <!-- widget poster details layout -->
     <include name="widget_layout_posterdetails">
-        <animation effect="slide" delay="0" start="0" end="0,-70" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,50" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-230" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.Contains(Skin.String(HomeLayout),simplehor) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-390" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + [[[Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + !Skin.HasSetting(LowerWidgets)] | [Skin.String(HomeLayout,2) | Skin.String(HomeLayout,2small)]] + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-300" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-180" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-		<animation effect="slide" delay="0" start="0" end="0,-50" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
+		
+		
+		<animation effect="slide" delay="0" start="0,0" end="0,0" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		
+		<animation effect="slide" delay="0" start="0,0" end="0,40" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1small) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		
+		
         
 		<include condition="!Skin.HasSetting(NetflixHomeDisableFirstRow) + String.Contains(Skin.String(HomeLayout),net)">Netflix_WidgetFade</include>
 		
@@ -403,7 +562,7 @@
             <param name="height" value="820" />
         </include>
 		<include content="height" condition="String.Contains(Skin.String(HomeLayout),net)">
-            <param name="height" value="380" />
+            <param name="height" value="410" />
         </include>
         <include content="height" condition="![$PARAM[multiRows]] + !String.Contains(Skin.String(HomeLayout),net)">
             <param name="height" value="435" />
@@ -413,7 +572,7 @@
         <itemlayout height="435" width="261">
           <control type="group">
             <width>250</width>
-            <height>370</height>          
+            <height>360</height>          
 			<include content="PosterPanelLayout">
 				<param name="WatchedIndicator" value="WatchedIndicatorNormal" />
 				<param name="colordiffuse" value="$VAR[ViewDetailsPanelColor]" />
@@ -423,7 +582,7 @@
 				<include>$PARAM[widgetTags]</include>
 				<include content="Tag_NF">
 					<param name="tagwidth" value="250"/>
-					<param name="tagtop" value="370" />
+					<param name="tagtop" value="360" />
 				</include>
 			</control>
           </control>
@@ -431,7 +590,7 @@
         <focusedlayout height="435" width="261" condition="!Control.HasFocus($PARAM[widgetid])">
           <control type="group">
             <width>250</width>
-            <height>370</height>
+            <height>360</height>
 			<include content="PosterPanelLayout">
 				<param name="WatchedIndicator" value="WatchedIndicatorNormal" />
 				<param name="colordiffuse" value="$VAR[ViewDetailsPanelColor]" />
@@ -441,7 +600,7 @@
 				<include>$PARAM[widgetTags]</include>
 				<include content="Tag_NF">
 					<param name="tagwidth" value="250"/>
-					<param name="tagtop" value="370" />
+					<param name="tagtop" value="360" />
 				</include>
 			</control>
             <include content="HiddenWidgetButton">
@@ -450,10 +609,11 @@
             </include>
           </control>
         </focusedlayout>
-        <focusedlayout width="780" height="380" condition="Control.HasFocus($PARAM[widgetid])">
+        <focusedlayout width="780" height="360" condition="Control.HasFocus($PARAM[widgetid])">
             <control type="group">
 				<width>750</width>
-				<include condition="Skin.HasSetting(WidgetsZoomFocus)">Focus_Zoom_Animation</include>
+				<height>360</height>
+				<!--include condition="Skin.HasSetting(WidgetsZoomFocus)">Focus_Zoom_Animation</include-->
 				<include content="widget_layout_posterdetails_widebox">
 					<param name="widgetid" value="$PARAM[widgetid]" />
 				</include>
@@ -480,10 +640,9 @@
 				</control>
 				<!-- poster image -->
 				<control type="group">
-					<left>5</left>
-					<top>5</top>
+					
 					<width>250</width>
-					<height>370</height>
+					<height>360</height>
 					<!-- check- border needed? -->
 					<include content="PosterPanelLayout">
 						<param name="WatchedIndicator" value="WatchedIndicatorNormal" />
@@ -500,20 +659,20 @@
 					<aligny>top</aligny>
 					<height>40</height>
 					<font>Reg30</font>
-					<textcolor>$INFO[Skin.String(MainMenuFocusTextColor)]</textcolor>
+					<textcolor>$INFO[Skin.String(ViewDetailsHighlightTextColor)]</textcolor>
 					<label>$VAR[HomeMenuWidgetInfoLabel]</label>
 				</control>
 				<control type="textbox">
 					<include>DetailsWidgets_FocusAnim</include>
 					<left>260</left>
 					<right>30</right>
-					<top>50</top>
-					<bottom>20</bottom>
+					<top>60</top>
+					<bottom>17</bottom>
 					<font>Reg24</font>
 					<align>justify</align>
 					<autoscroll delay="4000" time="3000" repeat="10000" condition="!Control.HasFocus(510)" />
 					<autoscroll delay="4000" time="3000" repeat="10000" condition="Control.HasFocus(510)" />
-					<textcolor>$INFO[Skin.String(MainMenuFocusTextColor)]</textcolor>
+					<textcolor>$INFO[Skin.String(ViewDetailsTextColor)]</textcolor>
 					<label>$VAR[HomeMenuWidgetInfoPlotAlt]</label>
 				</control>
 			</control>   
@@ -522,21 +681,20 @@
     <!-- widget small poster layout -->
     <include name="widget_layout_smallposter">
         <include content="height" condition="$PARAM[multiRows]">
-            <param name="height" value="609" />
+            <param name="height" value="820" />
         </include>
 		<include content="height" condition="String.Contains(Skin.String(HomeLayout),net)">
-            <param name="height" value="380" />
+            <param name="height" value="400" />
         </include>
         <include content="height" condition="!String.Contains(Skin.String(HomeLayout),net)">
             <param name="height" value="305" />
         </include>
-		<animation effect="slide" delay="0" start="0" end="0,57" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,177" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-100" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.Contains(Skin.String(HomeLayout),simplehor) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-370" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + [[[Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + !Skin.HasSetting(LowerWidgets)] | [Skin.String(HomeLayout,2) | Skin.String(HomeLayout,2small)]] + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-173" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-53" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-		<animation effect="slide" delay="0" start="0" end="0,-50" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
+		
+		<animation effect="slide" delay="0" start="0,0" end="0,120" time="200" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		<animation effect="slide" delay="0" start="0,0" end="0,120" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		
+		<animation effect="slide" delay="0" start="0,0" end="0,160" time="200" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1small) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		<animation effect="slide" delay="0" start="0,0" end="0,160" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1small) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
         
 		<include condition="!Skin.HasSetting(NetflixHomeDisableFirstRow) + Window.IsActive(Home) + String.Contains(Skin.String(HomeLayout),net)">Netflix_WidgetFade</include>
 		
@@ -624,22 +782,23 @@
     <!-- widget square layout -->
     <include name="widget_layout_square">
 		<include content="height" condition="$PARAM[multiRows]">
-            <param name="height" value="624" />
+            <param name="height" value="820" />
         </include>
         <include condition="$PARAM[multiRows]">widget_layout_square_multi</include>
 		<include content="height" condition="String.Contains(Skin.String(HomeLayout),net)">
-            <param name="height" value="380" />
+            <param name="height" value="400" />
         </include>
         <include content="height" condition="!String.Contains(Skin.String(HomeLayout),net)">
             <param name="height" value="313" />
         </include>
-        <animation effect="slide" delay="0" start="0" end="0,65" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,185" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-100" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.Contains(Skin.String(HomeLayout),simplehor) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-370" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + [[[Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + !Skin.HasSetting(LowerWidgets)] | [Skin.String(HomeLayout,2) | Skin.String(HomeLayout,2small)]] + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-165" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-45" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-		<animation effect="slide" delay="0" start="0" end="0,-50" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
+		
+		<animation effect="slide" delay="0" start="0,0" end="0,120" time="200" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		<animation effect="slide" delay="0" start="0,0" end="0,120" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		
+		<animation effect="slide" delay="0" start="0,0" end="0,160" time="200" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1small) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		<animation effect="slide" delay="0" start="0,0" end="0,160" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1small) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		
+        
         <animation effect="slide" start="0" end="140" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + Skin.HasSetting(WidgetAlignRight) + String.Contains(Skin.String(HomeLayout),ver) + Skin.HasSetting(VerticalHomeLargeWidget) + !Integer.IsGreater(Container($PARAM[widgetid]).NumItems,4)">Conditional</animation>
         <animation effect="slide" start="0" end="262" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + Skin.HasSetting(WidgetAlignRight) + !Integer.IsGreater(Container($PARAM[widgetid]).NumItems,6) + !String.Contains(Skin.String(HomeLayout),ver)">Conditional</animation>
         <animation effect="slide" start="0" end="262" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + Skin.HasSetting(WidgetAlignRight) + !Integer.IsGreater(Container($PARAM[widgetid]).NumItems,5) + !String.Contains(Skin.String(HomeLayout),ver)">Conditional</animation>
@@ -712,22 +871,23 @@
     <!-- widget minisquare layout -->
     <include name="widget_layout_minisquare">
 		<include content="height" condition="$PARAM[multiRows]">
-            <param name="height" value="760" />
+            <param name="height" value="820" />
         </include>
 		
 		<include content="height" condition="String.Contains(Skin.String(HomeLayout),net)">
-            <param name="height" value="135" />
+            <param name="height" value="400" />
         </include>
         <include content="height" condition="!String.Contains(Skin.String(HomeLayout),net)">
             <param name="height" value="190" />
         </include>
-		<animation effect="slide" delay="0" start="0" end="0,180" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,300" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-20" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.Contains(Skin.String(HomeLayout),simplehor) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-370" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + [[[Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + !Skin.HasSetting(LowerWidgets)] | [Skin.String(HomeLayout,2) | Skin.String(HomeLayout,2small)]] + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-51" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,69" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-		<animation effect="slide" delay="0" start="0" end="0,-50" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
+		
+		<animation effect="slide" delay="0" start="0,0" end="0,240" time="200" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		<animation effect="slide" delay="0" start="0,0" end="0,240" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		
+		<animation effect="slide" delay="0" start="0,0" end="0,280" time="200" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1small) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		<animation effect="slide" delay="0" start="0,0" end="0,280" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1small) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		
+		
         <animation effect="slide" start="0" end="130" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + Skin.HasSetting(WidgetAlignRight) + !Integer.IsGreater(Container($PARAM[widgetid]).NumItems,13) + !String.Contains(Skin.String(HomeLayout),ver)">Conditional</animation>
         <animation effect="slide" start="0" end="130" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + Skin.HasSetting(WidgetAlignRight) + !Integer.IsGreater(Container($PARAM[widgetid]).NumItems,12) + !String.Contains(Skin.String(HomeLayout),ver)">Conditional</animation>
         <animation effect="slide" start="0" end="130" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + Skin.HasSetting(WidgetAlignRight) + !Integer.IsGreater(Container($PARAM[widgetid]).NumItems,11) + !String.Contains(Skin.String(HomeLayout),ver)">Conditional</animation>
@@ -805,22 +965,22 @@
     <!-- widget landscape layout -->
     <include name="widget_layout_landscape">
        <include content="height" condition="$PARAM[multiRows]">
-            <param name="height" value="825" />
+            <param name="height" value="820" />
         </include>
         <include content="height" condition="String.Contains(Skin.String(HomeLayout),net)">
-            <param name="height" value="380" />
+            <param name="height" value="400" />
         </include>
-        <include content="height" condition="!String.Contains(Skin.String(HomeLayout),net)">
+		<include content="height" condition="!String.Contains(Skin.String(HomeLayout),net)">
             <param name="height" value="275" />
-        </include>
+        </include>		
+		
+		<animation effect="slide" delay="0" start="0,0" end="0,150" time="200" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		<animation effect="slide" delay="0" start="0,0" end="0,150" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		
+		<animation effect="slide" delay="0" start="0,0" end="0,190" time="200" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1small) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		<animation effect="slide" delay="0" start="0,0" end="0,190" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1small) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
 
-        <animation effect="slide" delay="0" start="0" end="0,100" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,220" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-100" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.Contains(Skin.String(HomeLayout),simplehor) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-370" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + [[[Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + !Skin.HasSetting(LowerWidgets)] | [Skin.String(HomeLayout,2) | Skin.String(HomeLayout,2small)]] + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-130" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-10" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-		<animation effect="slide" delay="0" start="0" end="0,-50" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
+
         <animation effect="slide" start="0" end="140" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + Skin.HasSetting(WidgetAlignRight) + String.Contains(Skin.String(HomeLayout),ver) + Skin.HasSetting(VerticalHomeLargeWidget) + !Integer.IsGreater(Container($PARAM[widgetid]).NumItems,3)">Conditional</animation>
         <animation effect="slide" start="0" end="366" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + Skin.HasSetting(WidgetAlignRight) + !String.Contains(Skin.String(HomeLayout),ver) + !Integer.IsGreater(Container($PARAM[widgetid]).NumItems,4)">Conditional</animation>
         <animation effect="slide" start="0" end="366" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + Skin.HasSetting(WidgetAlignRight) + !String.Contains(Skin.String(HomeLayout),ver) + !Integer.IsGreater(Container($PARAM[widgetid]).NumItems,3)">Conditional</animation>
@@ -897,10 +1057,8 @@
             <param name="height" value="380" />
         </include>
         <include content="height" condition="String.Contains(Skin.String(HomeLayout),net)">
-            <param name="height" value="380" />
+            <param name="height" value="410" />
         </include>
-       
-        
         <itemlayout width="375" height="275">
       		<control type="group">
 				<width>370</width>
@@ -962,23 +1120,22 @@
     <!-- widget netflix large landscape -->
     <include name="widget_layout_landscapelarge">
         <include content="height" condition="$PARAM[multiRows]">
-            <param name="height" value="649" />
+            <param name="height" value="820" />
         </include>
         <include content="height" condition="String.Contains(Skin.String(HomeLayout),net)">
-            <param name="height" value="380" />
+            <param name="height" value="400" />
         </include>
         <include content="height" condition="!String.Contains(Skin.String(HomeLayout),net)">
             <param name="height" value="325" />
         </include>
         
-        <animation effect="slide" delay="0" start="0" end="0,40" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,160" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-120" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.Contains(Skin.String(HomeLayout),simplehor) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-370" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + [[[Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + !Skin.HasSetting(LowerWidgets)] | [Skin.String(HomeLayout,2) | Skin.String(HomeLayout,2small)]] + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-180" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-70" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-		<animation effect="slide" delay="0" start="0" end="0,-40" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
+		
+		<animation effect="slide" delay="0" start="0,0" end="0,100" time="200" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		<animation effect="slide" delay="0" start="0,0" end="0,100" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
         
+		<animation effect="slide" delay="0" start="0,0" end="0,140" time="200" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1small) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		<animation effect="slide" delay="0" start="0,0" end="0,140" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1small) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		
 		<include condition="!Skin.HasSetting(NetflixHomeDisableFirstRow) + Window.IsActive(Home) + String.Contains(Skin.String(HomeLayout),net)">Netflix_WidgetFade</include>
 				
         <itemlayout width="445" height="325">
@@ -1049,23 +1206,19 @@
     <include name="widget_layout_landscapedetails">
         
 		<include content="height" condition="$PARAM[multiRows]">
-            <param name="height" value="739" />
+            <param name="height" value="820" />
         </include>
 		
 		<include content="height" condition="String.Contains(Skin.String(HomeLayout),net)">
-            <param name="height" value="380" />
+            <param name="height" value="400" />
         </include>
         <include content="height" condition="!String.Contains(Skin.String(HomeLayout),net)">
             <param name="height" value="260" />
         </include>
 		
-		<animation effect="slide" delay="0" start="0" end="0,100" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,220" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-60" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.Contains(Skin.String(HomeLayout),simplehor) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-370" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + [[[Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + !Skin.HasSetting(LowerWidgets)] | [Skin.String(HomeLayout,2) | Skin.String(HomeLayout,2small)]] + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-130" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-10" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-		<animation effect="slide" delay="0" start="0" end="0,-50" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
+		<animation effect="slide" delay="0" start="0,0" end="0,160" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		
+		<animation effect="slide" delay="0" start="0,0" end="0,200" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1small) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
         
         <orientation>horizontal</orientation>
         <itemlayout width="366" height="260">
@@ -1109,7 +1262,7 @@
 		<focusedlayout width="1090" height="225" condition="Control.HasFocus($PARAM[widgetid])">
             <control type="group">
 				<width>1050</width>
-				<include condition="Skin.HasSetting(WidgetsZoomFocus)">Focus_Zoom_Animation</include>
+				<!--include condition="Skin.HasSetting(WidgetsZoomFocus)">Focus_Zoom_Animation</include-->
 				<include>widget_layout_landscapelarge_widebox</include>
 				<include content="HiddenWidgetButton">
 					<param name="widgetstyle" value="landscapedetails" />
@@ -1121,21 +1274,18 @@
 	
 	<!-- widget layout circle -->
 	<include name="widget_layout_circle">
-		<animation effect="slide" delay="0" start="0" end="0,-170" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,220" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-120" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.Contains(Skin.String(HomeLayout),simplehor) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-370" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + [[[Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + !Skin.HasSetting(LowerWidgets)] | [Skin.String(HomeLayout,2) | Skin.String(HomeLayout,2small)]] + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-190" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-10" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-		<animation effect="slide" delay="0" start="0" end="0,170" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
 		
-		<!--animation effect="slide" delay="0" start="0" end="0,150" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.Contains(Skin.String(HomeLayout),lowhorizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation-->
-        
+		<animation effect="slide" delay="0" start="0,0" end="0,90" time="200" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		<animation effect="slide" delay="0" start="0,0" end="0,90" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		
+		<animation effect="slide" delay="0" start="0,0" end="0,130" time="200" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1small) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		<animation effect="slide" delay="0" start="0,0" end="0,130" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1small) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		
 		<include content="height" condition="$PARAM[multiRows]">
-            <param name="height" value="640" />
+            <param name="height" value="820" />
         </include>
 		<include content="height" condition="String.Contains(Skin.String(HomeLayout),net)">
-            <param name="height" value="360" />
+            <param name="height" value="400" />
         </include>
 		<include content="height" condition="!String.Contains(Skin.String(HomeLayout),net)">
             <param name="height" value="320" />
@@ -1219,7 +1369,7 @@
 				<height>40</height>
 				<font>Bold28</font>
 				<autoscroll>false</autoscroll>
-				<textcolor>$INFO[Skin.String(MainMenuFocusTextColor)]</textcolor>
+				<textcolor>$INFO[Skin.String(ViewDetailsHighlightTextColor)]</textcolor>
 				<label>$VAR[HomeMenuWidgetInfoLabel]</label>
 			</control>
 			<control type="textbox">
@@ -1231,7 +1381,7 @@
 				<font>Reg26</font>
 				<align>justify</align>
 				<autoscroll delay="4000" time="3000" repeat="10000" condition="!Control.HasFocus(510)" />
-				<textcolor>$INFO[Skin.String(MainMenuFocusTextColor)]</textcolor>
+				<textcolor>$INFO[Skin.String(ViewDetailsTextColor)]</textcolor>
 				<label>$VAR[HomeMenuWidgetInfoPlotAlt]</label>
 			</control>
 		</control>
@@ -1240,24 +1390,22 @@
 	<!-- widget banner layout -->
     <include name="widget_layout_banner">
         <include content="height" condition="$PARAM[multiRows]">
-            <param name="height" value="835" />
+            <param name="height" value="820" />
         </include>
         <include content="height" condition="String.Contains(Skin.String(HomeLayout),net)">
-            <param name="height" value="150" />
+            <param name="height" value="400" />
         </include>
         <include content="height" condition="!String.Contains(Skin.String(HomeLayout),net) + ![$PARAM[multiRows]]">
             <param name="height" value="210" />
         </include>
-	   
-        <animation effect="slide" delay="0" start="0" end="0,165" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,285" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-60" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.Contains(Skin.String(HomeLayout),simplehor) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-370" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + [[[Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + !Skin.HasSetting(LowerWidgets)] | [Skin.String(HomeLayout,2) | Skin.String(HomeLayout,2small)]] + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-66" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,54" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-		<animation effect="slide" delay="0" start="0" end="0,-50" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
+		
+		<animation effect="slide" delay="0" start="0,0" end="0,210" time="200" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		<animation effect="slide" delay="0" start="0,0" end="0,210" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		
+		<animation effect="slide" delay="0" start="0,0" end="0,250" time="200" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1small) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		<animation effect="slide" delay="0" start="0,0" end="0,250" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1small) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
 	
-		<include condition="!Skin.HasSetting(NetflixHomeDisableFirstRow) + Window.IsActive(Home) + String.Contains(Skin.String(HomeLayout),net)">Netflix_WidgetFade</include>
+		<!--include condition="!Skin.HasSetting(NetflixHomeDisableFirstRow) + Window.IsActive(Home) + String.Contains(Skin.String(HomeLayout),net)">Netflix_WidgetFade</include-->
 		
         <itemlayout height="210" width="665">
             <control type="group">
@@ -1323,21 +1471,19 @@
     
 	<!-- widget Netflix Wide(box) Landscape layout -->
     <include name="widget_layout_landscapewidedetails">
+		<include content="height" condition="$PARAM[multiRows]">
+            <param name="height" value="820" />
+        </include>
 		<include content="height" condition="String.Contains(Skin.String(HomeLayout),net)">
-            <param name="height" value="380" />
+            <param name="height" value="410" />
         </include>
         <include content="height" condition="!String.Contains(Skin.String(HomeLayout),net) + ![$PARAM[multiRows]]">
             <param name="height" value="435" />
         </include>
-
-        <animation effect="slide" delay="0" start="0" end="0,-70" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,50" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-240" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.Contains(Skin.String(HomeLayout),simplehor) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-370" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + !Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-		<animation effect="slide" delay="0" start="0" end="0,-390" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + [Skin.String(HomeLayout,2) | Skin.String(HomeLayout,2small)] + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-300" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-180" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-		<animation effect="slide" delay="0" start="0" end="0,-50" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
+		
+		<animation effect="slide" delay="0" start="0,0" end="0,-10" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		
+		<animation effect="slide" delay="0" start="0,0" end="0,30" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1small) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
 
         <orientation>horizontal</orientation>
 		
@@ -1345,8 +1491,8 @@
 		
         <itemlayout height="425" width="255">
             <control type="group">
-                <width>254</width>
-                <height>375</height>
+                <width>250</width>
+                <height>360</height>
 				<include content="PosterPanelLayout">
 					<param name="WatchedIndicator" value="WatchedIndicatorNormal" />
 					<param name="colordiffuse" value="$VAR[ViewDetailsPanelColor]" />
@@ -1356,15 +1502,15 @@
 					<include>$PARAM[widgetTags]</include>
 					<include content="Tag_NF">
 						<param name="tagwidth" value="254"/>
-						<param name="tagtop" value="380" />
+						<param name="tagtop" value="360" />
 					</include>
 				</control>
             </control>
         </itemlayout>
         <focusedlayout height="425" width="255" condition="!Control.HasFocus($PARAM[widgetid])">
            <control type="group">
-                <width>254</width>
-                <height>375</height>
+                <width>250</width>
+                <height>360</height>
 				<include content="PosterPanelLayout">
 					<param name="WatchedIndicator" value="WatchedIndicatorNormal" />
 					<param name="colordiffuse" value="$VAR[ViewDetailsPanelColor]" />
@@ -1374,7 +1520,7 @@
 					<include>$PARAM[widgetTags]</include>
 					<include content="Tag_NF">
 						<param name="tagwidth" value="254"/>
-						<param name="tagtop" value="380" />
+						<param name="tagtop" value="360" />
 					</include>
 				</control>
                 <include content="HiddenWidgetButton">
@@ -1385,8 +1531,8 @@
         </focusedlayout>
 		<focusedlayout width="645" height="425" condition="Control.HasFocus($PARAM[widgetid])">
             <control type="group">
-				<width>643</width>
-                <height>375</height>
+				<width>640</width>
+                <height>360</height>
 				<animation type="Focus" reversible="false">
 					<effect type="zoom" start="30,100" end="100,100" time="200" center="auto" tween="quadratic" easing="out" />
 				</animation>
@@ -1400,7 +1546,7 @@
 					<include>$PARAM[widgetTags]</include>
 					<include content="Tag_NF">
 						<param name="tagwidth" value="720"/>
-						<param name="tagtop" value="380" />
+						<param name="tagtop" value="360" />
 					</include>
 				</control>
             </control>
@@ -1413,23 +1559,22 @@
     <!-- widget landscapesmall layout -->
     <include name="widget_layout_landscapesmall">
         <include content="height" condition="$PARAM[multiRows]">
-            <param name="height" value="840" />
+            <param name="height" value="820" />
         </include>
 		<include content="height" condition="String.Contains(Skin.String(HomeLayout),net)">
-            <param name="height" value="148" />
+            <param name="height" value="400" />
         </include>
         <include content="height" condition="!String.Contains(Skin.String(HomeLayout),net)">
             <param name="height" value="210" />
         </include>
-        
-        <animation effect="slide" delay="0" start="0" end="0,162" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,282" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-20" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.Contains(Skin.String(HomeLayout),simplehor) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-370" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + [[[Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + !Skin.HasSetting(LowerWidgets)] | [Skin.String(HomeLayout,2) | Skin.String(HomeLayout,2small)]] + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-68" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,52" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-		<animation effect="slide" delay="0" start="0" end="0,-50" time="200" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" start="0" end="140" time="0" condition="Skin.HasSetting(WidgetAlignRight) + String.Contains(Skin.String(HomeLayout),ver) + Skin.HasSetting(VerticalHomeLargeWidget) + !Integer.IsGreater(Container($PARAM[widgetid]).NumItems,4)">Conditional</animation>
+		
+		<animation effect="slide" delay="0" start="0,0" end="0,210" time="200" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		<animation effect="slide" delay="0" start="0,0" end="0,210" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		
+		<animation effect="slide" delay="0" start="0,0" end="0,250" time="200" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1small) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + !Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		<animation effect="slide" delay="0" start="0,0" end="0,250" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1small) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(HideWidgetDetailsPanel) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		
+        <!--animation effect="slide" start="0" end="140" time="0" condition="Skin.HasSetting(WidgetAlignRight) + String.Contains(Skin.String(HomeLayout),ver) + Skin.HasSetting(VerticalHomeLargeWidget) + !Integer.IsGreater(Container($PARAM[widgetid]).NumItems,4)">Conditional</animation>
         <animation effect="slide" start="0" end="262" time="0" condition="Skin.HasSetting(WidgetAlignRight) + !String.Contains(Skin.String(HomeLayout),ver) + !Integer.IsGreater(Container($PARAM[widgetid]).NumItems,6)">Conditional</animation>
         <animation effect="slide" start="0" end="262" time="0" condition="Skin.HasSetting(WidgetAlignRight) + !String.Contains(Skin.String(HomeLayout),ver) + !Integer.IsGreater(Container($PARAM[widgetid]).NumItems,5)">Conditional</animation>
         <animation effect="slide" start="0" end="262" time="0" condition="Skin.HasSetting(WidgetAlignRight) + !String.Contains(Skin.String(HomeLayout),ver) + !Integer.IsGreater(Container($PARAM[widgetid]).NumItems,4)">Conditional</animation>
@@ -1439,7 +1584,7 @@
         <animation effect="slide" start="0" end="260" time="0" condition="Skin.HasSetting(WidgetAlignRight) + String.Contains(Skin.String(HomeLayout),ver) + !Integer.IsGreater(Container($PARAM[widgetid]).NumItems,4)">Conditional</animation>
         <animation effect="slide" start="0" end="260" time="0" condition="Skin.HasSetting(WidgetAlignRight) + String.Contains(Skin.String(HomeLayout),ver) + !Integer.IsGreater(Container($PARAM[widgetid]).NumItems,3)">Conditional</animation>
         <animation effect="slide" start="0" end="260" time="0" condition="Skin.HasSetting(WidgetAlignRight) + String.Contains(Skin.String(HomeLayout),ver) + !Integer.IsGreater(Container($PARAM[widgetid]).NumItems,2)">Conditional</animation>
-        <animation effect="slide" start="0" end="260" time="0" condition="Skin.HasSetting(WidgetAlignRight) + String.Contains(Skin.String(HomeLayout),ver) + !Integer.IsGreater(Container($PARAM[widgetid]).NumItems,1)">Conditional</animation>
+        <animation effect="slide" start="0" end="260" time="0" condition="Skin.HasSetting(WidgetAlignRight) + String.Contains(Skin.String(HomeLayout),ver) + !Integer.IsGreater(Container($PARAM[widgetid]).NumItems,1)">Conditional</animation-->
         
 		
 		<include condition="!Skin.HasSetting(NetflixHomeDisableFirstRow) + Window.IsActive(Home) + String.Contains(Skin.String(HomeLayout),net)">Netflix_WidgetFade</include>
@@ -1512,28 +1657,30 @@
     <!-- widget singlebox layout panel -->
     <include name="widget_layout_singlebox">
 		<include content="height" condition="$PARAM[multiRows]">
-            <param name="height" value="825" />
+            <param name="height" value="820" />
         </include>
-		<include content="height" condition="![$PARAM[multiRows]]">
+		<include content="height" condition="String.Contains(Skin.String(HomeLayout),net)">
+            <param name="height" value="400" />
+        </include>
+        <include content="height" condition="![$PARAM[multiRows]] + !String.Contains(Skin.String(HomeLayout),net)">
             <param name="height" value="345" />
         </include>
-		<animation effect="slide" delay="0" start="0" end="0,-30" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,90" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-140" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.Contains(Skin.String(HomeLayout),simplehor) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-370" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + [[[Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + !Skin.HasSetting(LowerWidgets)] | [Skin.String(HomeLayout,2) | Skin.String(HomeLayout,2small)]] + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-260" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-140" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
+		
+		<animation effect="slide" delay="0" start="0,0" end="0,70" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		
+		<animation effect="slide" delay="0" start="0,0" end="0,110" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1small) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
+		
 		
 		<include condition="!Skin.HasSetting(NetflixHomeDisableFirstRow) + Window.IsActive(Home) + String.Contains(Skin.String(HomeLayout),net)">Netflix_WidgetFade</include>
 				
 		<!-- check, cond def vertical width -->
-        <itemlayout height="340" width="1820">
+        <itemlayout height="340" width="1860">
             <include>itemlayout_singlebox_unfocus</include>
         </itemlayout>
-		<focusedlayout height="340" width="1820" condition="!Control.HasFocus($PARAM[widgetid])">
+		<focusedlayout height="340" width="1860" condition="!Control.HasFocus($PARAM[widgetid])">
             <include>itemlayout_singlebox_unfocus</include>
         </focusedlayout>
-        <focusedlayout height="340" width="1820" condition="Control.HasFocus($PARAM[widgetid])">
+        <focusedlayout height="340" width="1860" condition="Control.HasFocus($PARAM[widgetid])">
             <include content="HiddenWidgetButton">
                 <param name="widgetstyle" value="singlebox"/>
                 <param name="widgetid" value="$PARAM[widgetid]"/>
@@ -1576,12 +1723,12 @@
                 <aligny>center</aligny>
                 <height>60</height>
                 <font>Reg30</font>
-                <textcolor>$INFO[Skin.String(MainMenuFocusTextColor)]</textcolor>
+                <textcolor>$INFO[Skin.String(ViewDetailsHighlightTextColor)]</textcolor>
                 <label>$VAR[HomeMenuWidgetInfoLabel]</label>
             </control>
             <control type="textbox">
                 <!--description with mediaflags present -->
-                <visible>!String.IsEmpty(ListItem.VideoCodec)</visible>
+                <visible>!String.IsEmpty(ListItem.VideoAspect)</visible>
                 <left>251</left>
                 <width>650</width>
                 <top>60</top>
@@ -1590,21 +1737,21 @@
                 <align>justify</align>
                 <autoscroll delay="4000" time="3000" repeat="10000" condition="!Control.HasFocus($PARAM[widgetid])"/>
                 <autoscroll delay="4000" time="3000" repeat="10000" condition="Control.HasFocus($PARAM[widgetid])"/>
-                <textcolor>$INFO[Skin.String(MainMenuFocusTextColor)]</textcolor>
+                <textcolor>$INFO[Skin.String(ViewDetailsTextColor)]</textcolor>
                 <label>$VAR[HomeMenuWidgetInfoPlotAlt]</label>
             </control>
             <control type="textbox">
                 <!--description with no mediaflags -->
-                <visible>String.IsEmpty(ListItem.VideoCodec)</visible>
+                <visible>String.IsEmpty(ListItem.VideoAspect)</visible>
                 <left>251</left>
                 <width>650</width>
-                <top>60</top>
-                <bottom>17</bottom>
+                <top>65</top>
+                <bottom>35</bottom>
                 <font>Reg24</font>
                 <align>justify</align>
                 <autoscroll delay="4000" time="3000" repeat="10000" condition="!Control.HasFocus($PARAM[widgetid])"/>
                 <autoscroll delay="4000" time="3000" repeat="10000" condition="Control.HasFocus($PARAM[widgetid])"/>
-                <textcolor>$INFO[Skin.String(MainMenuFocusTextColor)]</textcolor>
+                <textcolor>$INFO[Skin.String(ViewDetailsTextColor)]</textcolor>
                 <label>$VAR[HomeMenuWidgetInfoPlotAlt]</label>
             </control>
             <control type="group">
@@ -1615,9 +1762,9 @@
                     <font>flags</font>
                     <width>auto</width>
                     <height>30</height>
-                    <visible>!String.IsEmpty(ListItem.VideoCodec)</visible>
+                    <visible>!String.IsEmpty(ListItem.VideoAspect)</visible>
                     <label>$VAR[VideoFileTypeVar,, • ]$VAR[VideoCodecVar,, • ]$VAR[VideoAspectVar,, • ]$VAR[VideoResolutionVar,, • ]$VAR[AudioCodecVar,, • ]$VAR[AudioChannelsVar]$VAR[AudioLanguageVar, • ]</label>
-                    <textcolor>$INFO[Skin.String(MainMenuFocusTextColor)]</textcolor>
+                    <textcolor>$INFO[Skin.String(ViewDetailsHighlightTextColor)]</textcolor>
                 </control>
             </control>
             <control type="group">
@@ -1674,7 +1821,7 @@
             </control>
             <control type="textbox">
                 <!--description with mediaflags present -->
-                <visible>!String.IsEmpty(ListItem.VideoCodec)</visible>
+                <visible>!String.IsEmpty(ListItem.VideoAspect)</visible>
                 <left>251</left>
                 <width>650</width>
                 <top>60</top>
@@ -1688,11 +1835,11 @@
             </control>
             <control type="textbox">
                 <!--description with no mediaflags -->
-                <visible>String.IsEmpty(ListItem.VideoCodec)</visible>
+                <visible>String.IsEmpty(ListItem.VideoAspect)</visible>
                 <left>251</left>
                 <width>650</width>
-                <top>60</top>
-                <bottom>17</bottom>
+                <top>65</top>
+                <bottom>35</bottom>
                 <font>Reg24</font>
                 <align>justify</align>
                 <autoscroll delay="4000" time="3000" repeat="10000" condition="!Control.HasFocus($PARAM[widgetid])"/>
@@ -1708,7 +1855,7 @@
                     <font>flags</font>
                     <width>auto</width>
                     <height>30</height>
-                    <visible>!String.IsEmpty(ListItem.VideoCodec)</visible>
+                    <visible>!String.IsEmpty(ListItem.VideoAspect)</visible>
                     <label>$VAR[VideoFileTypeVar,, • ]$VAR[VideoCodecVar,, • ]$VAR[VideoAspectVar,, • ]$VAR[VideoResolutionVar,, • ]$VAR[AudioCodecVar,, • ]$VAR[AudioChannelsVar]$VAR[AudioLanguageVar, • ]</label>
                     <textcolor>$INFO[Skin.String(MainMenuTextColor)]</textcolor>
                 </control>
@@ -1732,23 +1879,28 @@
     </include>
 	<!-- check, get const right align for all types ? -->
     <include name="widget_layout_singlebox_rightalign">
-        <right>0</right>
+        <right>440</right>
+		
+		<animation effect="slide" delay="0" start="0" end="340" time="0" condition="String.Contains(Skin.String(HomeLayout),netflix2)">Conditional</animation>
+		<animation effect="slide" delay="0" start="0" end="400" time="0" condition="!String.Contains(Skin.String(HomeLayout),ver) + !String.Contains(Skin.String(HomeLayout),netflix2)">Conditional</animation>
+		<animation effect="slide" delay="0" start="0" end="380" time="0" condition="String.Contains(Skin.String(HomeLayout),ver) + !Skin.HasSetting(UseDefaultVerticalLayout) + !String.Contains(Skin.String(HomeLayout),netflix2)">Conditional</animation>
     </include>
     
     <!-- widget widebox layout -->
     <include name="widget_layout_widebox">
         <include content="height" condition="$PARAM[multiRows]">
-            <param name="height" value="800" />
+            <param name="height" value="820" />
         </include>
-		<include content="height" condition="![$PARAM[multiRows]]">
+		<include content="height" condition="String.Contains(Skin.String(HomeLayout),net)">
+			<param name="height" value="400" />
+        </include>
+		<include content="height" condition="![$PARAM[multiRows]] + !String.Contains(Skin.String(HomeLayout),net)">
             <param name="height" value="270" />
         </include>
-        <animation effect="slide" delay="0" start="0" end="0,55" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,175" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + String.Contains(Skin.String(HomeLayout),horizontal) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-70" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.Contains(Skin.String(HomeLayout),simplehor) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-370" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + [[[Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + !Skin.HasSetting(LowerWidgets)] | [Skin.String(HomeLayout,2) | Skin.String(HomeLayout,2small)]] + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-175" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + !String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
-        <animation effect="slide" delay="0" start="0" end="0,-55" time="0" condition="String.IsEmpty(Window(Home).Property(netflixview)) + String.IsEqual(Skin.AspectRatio,16:10) + [Skin.String(HomeLayout,1) | Skin.String(HomeLayout,1small)] + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets) + [!String.IsEqual(Window(Home).Property(ShowWidget),show) | Skin.HasSetting(HideWidgetDetailsPanel)]">Conditional</animation>
+		
+		<animation effect="slide" delay="0" start="0,0" end="0,150" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation> 
+		
+		<animation effect="slide" delay="0" start="0,0" end="0,190" time="0" condition="![Window.IsActive(3018) | Window.IsActive(3017)] + Skin.String(HomeLayout,1small) + !String.IsEqual(Window(Home).Property(ShowWidget),show) + Skin.HasSetting(LowerWidgets) + Skin.HasSetting(AutoShowWidgets)">Conditional</animation>
         
 		<include condition="!Skin.HasSetting(NetflixHomeDisableFirstRow) + String.Contains(Skin.String(HomeLayout),net)">Netflix_WidgetFade</include>
 				
@@ -1867,7 +2019,7 @@
                 <aligny>top</aligny>
                 <height>80</height>
                 <font>Reg30</font>
-                <textcolor>$INFO[Skin.String(MainMenuFocusTextColor)]</textcolor>
+                <textcolor>$INFO[Skin.String(ViewDetailsHighlightTextColor)]</textcolor>
                 <label>$VAR[HomeMenuWidgetInfoLabel]</label>
             </control>
             <control type="textbox">
@@ -1879,7 +2031,7 @@
                 <align>justify</align>
                 <autoscroll delay="4000" time="3000" repeat="10000" condition="!Control.HasFocus(510)"/>
                 <autoscroll delay="4000" time="3000" repeat="10000" condition="Control.HasFocus(510)"/>
-                <textcolor>$INFO[Skin.String(MainMenuFocusTextColor)]</textcolor>
+                <textcolor>$INFO[Skin.String(ViewDetailsTextColor)]</textcolor>
                 <label>$VAR[HomeMenuWidgetInfoPlotAlt]</label>
             </control>
             <control type="group">
@@ -2798,15 +2950,6 @@
         <value condition="!String.IsEmpty(ListItem.Property(ChannelLogo))">$INFO[ListItem.Property(ChannelLogo)]</value>
     </variable>
     <variable name="SpotLightWidgetInfoThumb">
-        <!-- details widget -->
-        <value condition="!String.IsEmpty(ListItem.Art(tvshow.clearlogo))">$INFO[ListItem.Art(tvshow.clearlogo)]</value>
-        <value condition="!String.IsEmpty(ListItem.Art(clearlogo))">$INFO[ListItem.Art(clearlogo)]</value>
-        <value condition="!String.IsEmpty(ListItem.Art(landscape))">$INFO[ListItem.Art(landscape)]</value>
-        <value condition="!String.IsEmpty(ListItem.Art(tvshow.landscape))">$INFO[ListItem.Art(tvshow.landscape)]</value>
-        <value condition="!String.IsEmpty(ListItem.Art(poster))">$INFO[ListItem.Art(poster)]</value>
-        <value condition="!String.IsEmpty(ListItem.Art(tvshow.poster))">$INFO[ListItem.Art(tvshow.poster)]</value>
-        <value condition="!String.IsEmpty(ListItem.Property(ChannelLogo))">$INFO[ListItem.Property(ChannelLogo)]</value>
-        <value condition="!String.IsEmpty(ListItem.Icon)">$INFO[ListItem.Icon]</value>
         <!-- spotlight widget -->
         <value condition="!ControlGroup(77777).HasFocus + Control.IsVisible(1508) + !String.IsEmpty(Container(1508).ListItem.Art(tvshow.clearlogo))">$INFO[Container(1508).ListItem.Art(tvshow.clearlogo)]</value>
         <value condition="!ControlGroup(77777).HasFocus + Control.IsVisible(1508) + !String.IsEmpty(Container(1508).ListItem.Art(clearlogo))">$INFO[Container(1508).ListItem.Art(clearlogo)]</value>
@@ -2816,6 +2959,15 @@
         <value condition="!ControlGroup(77777).HasFocus + Control.IsVisible(1508) + !String.IsEmpty(Container(1508).ListItem.Art(tvshow.poster))">$INFO[Container(1508).ListItem.Art(tvshow.poster)]</value>
         <value condition="!ControlGroup(77777).HasFocus + Control.IsVisible(1508) + !String.IsEmpty(Container(1508).ListItem.Property(ChannelLogo))">$INFO[Container(1508).ListItem.Property(ChannelLogo)]</value>
         <value condition="!ControlGroup(77777).HasFocus + Control.IsVisible(1508) + !String.IsEmpty(Container(1508).ListItem.Icon)">$INFO[Container(1508).ListItem.Icon]</value>
+		<!-- details widget -->
+        <value condition="!String.IsEmpty(ListItem.Art(tvshow.clearlogo))">$INFO[ListItem.Art(tvshow.clearlogo)]</value>
+        <value condition="!String.IsEmpty(ListItem.Art(clearlogo))">$INFO[ListItem.Art(clearlogo)]</value>
+        <value condition="!String.IsEmpty(ListItem.Art(landscape))">$INFO[ListItem.Art(landscape)]</value>
+        <value condition="!String.IsEmpty(ListItem.Art(tvshow.landscape))">$INFO[ListItem.Art(tvshow.landscape)]</value>
+        <value condition="!String.IsEmpty(ListItem.Art(poster))">$INFO[ListItem.Art(poster)]</value>
+        <value condition="!String.IsEmpty(ListItem.Art(tvshow.poster))">$INFO[ListItem.Art(tvshow.poster)]</value>
+        <value condition="!String.IsEmpty(ListItem.Property(ChannelLogo))">$INFO[ListItem.Property(ChannelLogo)]</value>
+        <value condition="!String.IsEmpty(ListItem.Icon)">$INFO[ListItem.Icon]</value>
         <!-- normal widgets -->
         <value condition="!String.IsEmpty(Window(Home).Property(ListItem.Art.clearlogo))">$INFO[Window(Home).Property(ListItem.Art.clearlogo)]</value>
         <value condition="!String.IsEmpty(Window(Home).Property(ListItem.Art.landscape))">$INFO[Window(Home).Property(ListItem.Art.landscape)]</value>
@@ -2842,7 +2994,7 @@
         <value condition="!String.IsEmpty(ListItem.PictureComment)">$INFO[ListItem.PictureComment]</value>
         <value condition="!String.IsEmpty(ListItem.PictureKeywords)">$INFO[ListItem.PictureKeywords]</value>
         <!-- spotlight widget (outside container) -->
-        <value condition="!ControlGroup(77777).HasFocus + Control.IsVisible(1508) + !String.IsEmpty(Container(1508).ListItem.PlotOutline) + Skin.HasSetting(WidgetsPreferPlotOutline) + !String.Contains(Container(1508).ListItem.PlotOutline,$LOCALIZE[20339]: )">$INFO[Container(1508).ListItem.PlotOutline]</value>
+        <value condition="Control.IsVisible(1508) + !String.IsEmpty(Container(1508).ListItem.PlotOutline) + Skin.HasSetting(WidgetsPreferPlotOutline) + !String.Contains(Container(1508).ListItem.PlotOutline,$LOCALIZE[20339]: )">$INFO[Container(1508).ListItem.PlotOutline]</value>
         <value condition="!ControlGroup(77777).HasFocus + Control.IsVisible(1508) + !String.IsEmpty(Container(1508).ListItem.Plot)">$INFO[Container(1508).ListItem.Plot]</value>
         <value condition="!ControlGroup(77777).HasFocus + Control.IsVisible(1508) + !String.IsEmpty(Container(1508).ListItem.Property(Plot))">$INFO[Container(1508).ListItem.Property(Plot)]</value>
         <value condition="!ControlGroup(77777).HasFocus + Control.IsVisible(1508) + !String.IsEmpty(Container(1508).ListItem.Property(Album_Description))">$INFO[Container(1508).ListItem.Property(Album_Description)]</value>
@@ -2868,36 +3020,36 @@
         <value condition="!String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.PictureKeywords))">$INFO[Window(Home).Property(SkinHelper.ListItem.PictureKeywords)]</value>
     </variable>
     <variable name="HomeMenuWidgetInfoPlotAlt">
-        <!-- Landscspe and Poster details widget (filled first)--> 
+        <!-- Landscspe and Poster details widget (filled first)-->
 		<!-- muss noch mit skinhelper fallback abgeglichen werden -->
-        <value condition="!String.IsEmpty(ListItem.TvShowTitle)">[B]$INFO[Window(Home).Property(ListItem.Season),s, ]$INFO[Window(Home).Property(ListItem.Episode),e, - ]$INFO[ListItem.Title,, • ]$INFO[ListItem.Premiered,, • ]$INFO[ListItem.Genre,, • ]$VAR[ListItemDuration][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
-        <value condition="!String.IsEmpty(ListItem.Artist) + !String.IsEmpty(ListItem.Album)">[B]$INFO[ListItem.Artist]$INFO[ListItem.Album, • ]$VAR[ListItemDuration, • ,][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
-        <value condition="!String.IsEmpty(ListItem.Year)">[B]$INFO[ListItem.Year]$VAR[ListItemDuration, • ,]$INFO[ListItem.Genre, • ][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
-        <value condition="!String.IsEmpty(ListItem.Property(StartDateTime))">[B]$INFO[ListItem.Channel,, • ]$INFO[ListItem.Property(StartDateTime),, • ]$VAR[ListItemDuration,, • ]$INFO[ListItem.Genre][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
-        <value condition="!String.IsEmpty(ListItem.Property(DateTime)) + !String.IsEmpty(ListItem.Label2)">[B]$INFO[ListItem.Label2,, • ]$INFO[ListItem.Property(DateTime),, • ]$VAR[ListItemDuration,, • ]$INFO[ListItem.Genre][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
-        <value condition="!String.IsEmpty(ListItem.StartTime)">[B]$INFO[ListItem.Label,, • ]$INFO[ListItem.StartTime,, • ]$VAR[ListItemDuration,, • ]$INFO[ListItem.Genre][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
+        <value condition="!String.IsEmpty(ListItem.Artist)">[B]$INFO[ListItem.Artist,, • ]$INFO[ListItem.Album,, • ]$INFO[ListItem.Year,, • ]$VAR[ListItemDuration,, • ]$INFO[ListItem.Genre][/B][CR][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
+		<value condition="!String.IsEmpty(ListItem.TvShowTitle)">[B]$INFO[ListItem.TvShowTitle,, • ]$INFO[ListItem.Premiered,, • ]$INFO[ListItem.MPAA,, • ]$VAR[ListItemDuration,, • ]$INFO[ListItem.Genre][/B][CR][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
+        <value condition="!String.IsEmpty(ListItem.Year) + String.IsEmpty(ListItem.Property(StartDateTime))">[B]$INFO[ListItem.Year,, • ]$INFO[ListItem.MPAA,, • ]$VAR[ListItemDuration,, • ]$INFO[ListItem.Genre][/B][CR][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
+        <value condition="!String.IsEmpty(ListItem.Property(StartDateTime))">[B]$INFO[ListItem.ChannelName,, • ]$INFO[ListItem.Property(StartDateTime),, • ]$VAR[ListItemDuration,, • ]$INFO[ListItem.Genre][/B][CR][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
+        <value condition="!String.IsEmpty(ListItem.Property(DateTime)) + !String.IsEmpty(ListItem.Label2)">[B]$INFO[ListItem.Label2,, • ]$INFO[ListItem.Property(DateTime),, • ]$VAR[ListItemDuration,, • ]$INFO[ListItem.Genre][/B][CR][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
+        <value condition="!String.IsEmpty(ListItem.StartTime)">[B]$INFO[ListItem.Label,, • ]$INFO[ListItem.StartTime,, • ]$VAR[ListItemDuration,, • ]$INFO[ListItem.Genre][/B][CR][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
 		<!-- spotlight widget -->
-        <value condition="!ControlGroup(77777).HasFocus + Control.IsVisible(1508) + !String.IsEmpty(Container(1508).ListItem.TvShowTitle)">[B]$INFO[Container(1508).ListItem.TvShowTitle]$INFO[Container(1508).ListItem.Year, • ]$INFO[Container(1508).ListItem.Premiered, • ]$INFO[Container(1508).ListItem.Genre, • ]$INFO[Container(1508).ListItem.Duration, • ,min.][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
-        <value condition="!ControlGroup(77777).HasFocus + Control.IsVisible(1508) + !String.IsEmpty(Container(1508).ListItem.Artist) + !String.IsEmpty(Container(1508).ListItem.Album)">[B]$INFO[Container(1508).ListItem.Artist]$INFO[Container(1508).ListItem.Album, • ]$INFO[Container(1508).ListItem.Duration, • ][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
-        <value condition="!ControlGroup(77777).HasFocus + Control.IsVisible(1508) + !String.IsEmpty(Container(1508).ListItem.Year)">[B]$INFO[Container(1508).ListItem.Year]$INFO[Container(1508).ListItem.Duration, • ,min.]$INFO[Container(1508).ListItem.Genre, • ][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
-        <value condition="!ControlGroup(77777).HasFocus + Control.IsVisible(1508) + !String.IsEmpty(Container(1508).ListItem.Property(StartDateTime))">[B]$INFO[Container(1508).ListItem.Channel,, • ]$INFO[Container(1508).ListItem.Property(StartDateTime),, • ]$INFO[Container(1508).ListItem.Duration,, min. • ]$INFO[Container(1508).ListItem.Genre][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
-        <value condition="!ControlGroup(77777).HasFocus + Control.IsVisible(1508) + !String.IsEmpty(Container(1508).ListItem.Property(DateTime)) + !String.IsEmpty(Container(1508).ListItem.Label2)">[B]$INFO[Container(1508).ListItem.Label2,, • ]$INFO[Container(1508).ListItem.Property(DateTime),, • ]$INFO[Container(1508).ListItem.Duration,, min. • ]$INFO[Container(1508).ListItem.Genre][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
-        <value condition="!ControlGroup(77777).HasFocus + Control.IsVisible(1508) + !String.IsEmpty(Container(1508).ListItem.StartTime)">[B]$INFO[Container(1508).ListItem.Label,, • ]$INFO[Container(1508).ListItem.StartTime,, • ]$INFO[Container(1508).ListItem.Duration,, min. • ]$INFO[Container(1508).ListItem.Genre][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
+        <value condition="!ControlGroup(77777).HasFocus + Control.IsVisible(1508) + !String.IsEmpty(Container(1508).ListItem.Artist)">[B]$INFO[Container(1508).ListItem.Artist]$INFO[Container(1508).ListItem.Album,, • ]$INFO[Container(1508).ListItem.Duration,, min • ]$INFO[Container(1508).ListItem.Genre][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
+		<value condition="!ControlGroup(77777).HasFocus + Control.IsVisible(1508) + !String.IsEmpty(Container(1508).ListItem.TvShowTitle)">[B]$INFO[Container(1508).ListItem.TvShowTitle,, • ]$INFO[Container(1508).ListItem.Premiered,, • ]$INFO[Container(1508).ListItem.Duration(mins),, min • ]$INFO[Container(1508).ListItem.Genre][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>        
+        <value condition="!ControlGroup(77777).HasFocus + Control.IsVisible(1508) + !String.IsEmpty(Container(1508).ListItem.Year)">[B]$INFO[Container(1508).ListItem.Year,, • ]$INFO[Container(1508).ListItem.Duration(mins),, min • ]$INFO[Container(1508).ListItem.Genre][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
+        <value condition="!ControlGroup(77777).HasFocus + Control.IsVisible(1508) + !String.IsEmpty(Container(1508).ListItem.Property(StartDateTime))">[B]$INFO[Container(1508).ListItem.ChannelName ]$INFO[Container(1508).ListItem.Property(StartDateTime),, • ]$INFO[Container(1508).ListItem.Duration(mins),, min • ]$INFO[Container(1508).ListItem.Genre][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
+        <value condition="!ControlGroup(77777).HasFocus + Control.IsVisible(1508) + !String.IsEmpty(Container(1508).ListItem.Property(DateTime)) + !String.IsEmpty(Container(1508).ListItem.Label2)">[B]$INFO[Container(1508).ListItem.Label2,, • ]$INFO[Container(1508).ListItem.Property(DateTime),, • ]$INFO[Container(1508).ListItem.Duration(mins),, min • ]$INFO[Container(1508).ListItem.Genre][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
+        <value condition="!ControlGroup(77777).HasFocus + Control.IsVisible(1508) + !String.IsEmpty(Container(1508).ListItem.StartTime)">[B]$INFO[Container(1508).ListItem.Label]$INFO[Container(1508).ListItem.StartTime,, • ]$INFO[Container(1508).ListItem.Duration(mins),, min • ]$INFO[Container(1508).ListItem.Genre][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
         <!-- normal widgets -->
-        <value condition="!String.IsEmpty(Window(Home).Property(ListItem.TvShowTitle))">[B]$INFO[Window(Home).Property(ListItem.TvShowTitle),, • ]$INFO[Window(Home).Property(ListItem.Year),, • ]$INFO[Window(Home).Property(ListItem.Premiered),, • ]$INFO[Window(Home).Property(ListItem.Duration),, min. • ]$INFO[Window(Home).Property(ListItem.Genre)][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
-        <value condition="!String.IsEmpty(Window(Home).Property(ListItem.Year))">[B]$INFO[Window(Home).Property(ListItem.Year),, • ]$INFO[Window(Home).Property(ListItem.Duration),, min. • ]$INFO[Window(Home).Property(ListItem.Genre)][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
-        <value condition="!String.IsEmpty(Window(Home).Property(ListItem.Artist)) + !String.IsEmpty(Window(Home).Property(ListItem.Album))">[B]$INFO[Window(Home).Property(ListItem.Artist),, • ]$INFO[Window(Home).Property(ListItem.Album),, • ]$INFO[Window(Home).Property(ListItem.Duration)][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
-        <value condition="!String.IsEmpty(Window(Home).Property(ListItem.StartDateTime))">[B]$INFO[Window(Home).Property(ListItem.Label),, • ]$INFO[Window(Home).Property(ListItem.StartDateTime),, • ]$INFO[Window(Home).Property(ListItem.Duration),, min. • ]$INFO[Window(Home).Property(ListItem.Genre)][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
-        <value condition="!String.IsEmpty(Window(Home).Property(ListItem.Property(DateTime))) + !String.IsEmpty(Window(Home).Property(ListItem.Label2))">[B]$INFO[Window(Home).Property(ListItem.Label2),, • ]$INFO[Window(Home).Property(ListItem.Property(DateTime)),, • ]$INFO[Window(Home).Property(ListItem.Duration),, min. • ]$INFO[Window(Home).Property(ListItem.Genre)][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
-        <value condition="!String.IsEmpty(Window(Home).Property(ListItem.StartTime))">[B]$INFO[Window(Home).Property(ListItem.Label),, • ]$INFO[Window(Home).Property(ListItem.StartTime),, • ]$INFO[Window(Home).Property(ListItem.Duration),, min. • ]$INFO[Window(Home).Property(ListItem.Genre)][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
+		<value condition="!String.IsEmpty(Window(Home).Property(ListItem.Artist))">[B]$INFO[Window(Home).Property(ListItem.Artist),, • ]$INFO[Window(Home).Property(ListItem.Album),, • ]$VAR[ListItemDuration,, • ]$INFO[Window(Home).Property(ListItem.Genre)][/B][CR][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
+        <value condition="!String.IsEmpty(Window(Home).Property(ListItem.TvShowTitle))">[B]$INFO[Window(Home).Property(ListItem.TvShowTitle),, • ]$INFO[Window(Home).Property(ListItem.Year),, • ]$INFO[Window(Home).Property(ListItem.Premiered),, • ]$VAR[ListItemDuration,,  • ]$INFO[Window(Home).Property(ListItem.Genre)][/B][CR][CR]$VAR[HomeMenuWidgetInfoPlot]</value>		
+        <value condition="!String.IsEmpty(Window(Home).Property(ListItem.Year))">[B]$INFO[Window(Home).Property(ListItem.Year),, • ]$VAR[ListItemDuration,,  • ]$INFO[Window(Home).Property(ListItem.Genre)][/B][CR][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
+        <value condition="!String.IsEmpty(Window(Home).Property(ListItem.StartDateTime))">[B]$INFO[Window(Home).Property(ListItem.ChannelName ),, • ]$INFO[Window(Home).Property(ListItem.StartDateTime),, • ]$VAR[ListItemDuration,, • ]$INFO[Window(Home).Property(ListItem.Genre)][/B][CR][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
+        <value condition="!String.IsEmpty(Window(Home).Property(ListItem.Property(DateTime))) + !String.IsEmpty(Window(Home).Property(ListItem.Label2))">[B]$INFO[Window(Home).Property(ListItem.Label2),, • ]$INFO[Window(Home).Property(ListItem.Property(DateTime)),, • ]$VAR[ListItemDuration,, • ]$INFO[Window(Home).Property(ListItem.Genre)][/B][CR][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
+        <value condition="!String.IsEmpty(Window(Home).Property(ListItem.StartTime))">[B]$INFO[Window(Home).Property(ListItem.Label),, • ]$INFO[Window(Home).Property(ListItem.StartTime),, • ]$VAR[ListItemDuration,, • ]$INFO[Window(Home).Property(ListItem.Genre)][/B][CR][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
         <!-- skinhelper fallback -->
-        <value condition="!String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.TvShowTitle))">[B]$INFO[Window(Home).Property(SkinHelper.ListItem.TvShowTitle),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Year),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Premiered),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Runtime),, min • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Genre)][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
-        <value condition="!String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.Year)) + String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.Artist))">[B]$INFO[Window(Home).Property(SkinHelper.ListItem.Year),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Premiered),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Runtime),, min • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Genre)][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
-        <value condition="!String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.Artist))">[B]$INFO[Window(Home).Property(SkinHelper.ListItem.Artist),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Album),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Year),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Duration),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Genre)][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
-        <value condition="!String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.StartDateTime))">[B]$INFO[Window(Home).Property(SkinHelper.ListItem.Label),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.StartDateTime),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Runtime),, min. • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Genre)][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
-        <value condition="!String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.Property(DateTime))) + !String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.Label2))">[B]$INFO[Window(Home).Property(SkinHelper.ListItem.Label2),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Property(DateTime)),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Runtime),, min • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Genre)][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
-        <value condition="!String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.StartTime))">[B]$INFO[Window(Home).Property(SkinHelper.ListItem.Label),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.StartTime),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Runtime),, min • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Genre)][/B][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
-        <value>$VAR[HomeMenuWidgetInfoPlot]</value>
+		<value condition="!String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.Artist))">[B]$INFO[Window(Home).Property(SkinHelper.ListItem.Artist),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Album),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Year),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Duration),, min • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Genre)][/B][CR][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
+		<value condition="!String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.TvShowTitle)) + String.IsEmpty(ListItem.TvShowTitle) + Skin.HasSetting(DisableHoursDuration)">[B]$INFO[Window(Home).Property(SkinHelper.ListItem.TvShowTitle),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Premiered),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.MPAA),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Runtime),, min • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Genre)][/B][CR][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
+		<value condition="!String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.Year)) + String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.Artist)) + Skin.HasSetting(DisableHoursDuration)">[B]$INFO[Window(Home).Property(SkinHelper.ListItem.Year),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.MPAA),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Runtime),, min • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Genre)][/B][CR][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
+        
+		<value condition="!String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.TvShowTitle)) + String.IsEmpty(ListItem.TvShowTitle) + !Skin.HasSetting(DisableHoursDuration)">[B]$INFO[Window(Home).Property(SkinHelper.ListItem.TvShowTitle),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Premiered),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.MPAA),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Duration.Hours),,h] $INFO[Window(Home).Property(SkinHelper.ListItem.Duration.Minutes),,min • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Genre)][/B][CR][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
+		<value condition="!String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.Year)) + String.IsEmpty(Window(Home).Property(SkinHelper.ListItem.Artist)) + !Skin.HasSetting(DisableHoursDuration)">[B]$INFO[Window(Home).Property(SkinHelper.ListItem.Year),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.MPAA),, • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Duration.Hours),,h] $INFO[Window(Home).Property(SkinHelper.ListItem.Duration.Minutes),,min • ]$INFO[Window(Home).Property(SkinHelper.ListItem.Genre)][/B][CR][CR]$VAR[HomeMenuWidgetInfoPlot]</value>
+		<value>$VAR[HomeMenuWidgetInfoPlot]</value>
     </variable>
 
     <variable name="HomeMenuWidgetInfoPoster">

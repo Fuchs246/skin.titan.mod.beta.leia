@@ -8,7 +8,7 @@
 	<include file="IncludesDialogVideoInfo.xml" />
 	<include file="IncludesDialogMusicInfo.xml" />
 	<include file="IncludesCustomSearch.xml" />
-	<include file="Mod_Progress_Variables_Netflix.xml" />
+	<!--include file="Mod_Progress_Variables_Netflix.xml" /-->
     <include file="IncludesGames.xml" />
 	<include file="IncludesHomeTitanTiles.xml" />
     <include file="IncludesHomeWidgets.xml" />
@@ -88,7 +88,7 @@
             <align>right</align>
             <font>Light34</font>
             <textcolor>$INFO[Skin.String(FooterTextColor)]</textcolor>
-            <label>T i t a n - M O D - 18.1.17</label>
+            <label>T i t a n - M O D - 18.1.19~alpha.1</label>
 		</control>
     </include>
 
@@ -614,5 +614,12 @@
             <visible>!String.IsEmpty(Container(211).ListItem.Property(widget$PARAM[widgetprop]))</visible>
         </control>
     </include>
+	
+			<include name="SubMenu_netflix2">
+				<posx>420</posx>
+			</include>
+			<include name="widget_layout_low">
+				<top>220</top>
+			</include>
 
 </includes>

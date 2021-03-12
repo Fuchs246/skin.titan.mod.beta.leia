@@ -1,13 +1,14 @@
 <settings>
     <!-- Titan tiles based homelayouts -->
-    <setting id="HomeLayout" value="1" label="$LOCALIZE[31033]" condition="" icon="special://skin/extras/viewthumbs/homelayout_1.jpg" description="$LOCALIZE[31033]">
+    <setting id="HomeLayout" value="1" label="$LOCALIZE[31033]" condition="" icon="special://skin/extras/viewthumbs/homelayout_1.jpg" description="$LOCALIZE[31033][CR][B]Skin default[/B]" default="true">
         <onselect condition="True">Skin.Reset(OpenSubMenuOnClick)</onselect>
         <onselect condition="True">Skin.SetString(widgetstyle,landscape)</onselect>
         <onselect condition="True">Skin.SetString(widgetstyle.label,Landscape)</onselect>
+		<onselect condition="Skin.String(SubmenuLayout, tiles)">Skin.Reset(LowerWidgets)</onselect>
         <onselect condition="True">Skin.Reset(CompactHeader)</onselect>
         <onselect condition="True">Skin.Reset(ShowAllWidgets)</onselect>
     </setting>
-    <setting id="HomeLayout" value="2" label="$LOCALIZE[31031]" condition="" icon="special://skin/extras/viewthumbs/homelayout_2.jpg" description="$LOCALIZE[31031][CR][B]Skin default[/B]" default="true">
+    <setting id="HomeLayout" value="2" label="$LOCALIZE[31031]" condition="" icon="special://skin/extras/viewthumbs/homelayout_2.jpg" description="$LOCALIZE[31031]">
         <onselect condition="True">Skin.SetBool(OpenSubMenuOnClick)</onselect>
         <onselect condition="True">Skin.SetString(widgetstyle,landscape)</onselect>
         <onselect condition="True">Skin.SetString(widgetstyle.label,Landscape)</onselect>
@@ -19,6 +20,8 @@
         <onselect condition="True">Skin.SetBool(OpenSubMenuOnClick)</onselect>
         <onselect condition="True">Skin.SetString(widgetstyle,landscape)</onselect>
         <onselect condition="True">Skin.SetString(widgetstyle.label,Landscape)</onselect>
+		<onselect condition="Skin.String(SubmenuLayout, tiles)">Skin.SetString(SubmenuLayout, horizontal)</onselect>
+		<onselect condition="Skin.String(SubmenuLayout, tiles)">Skin.SetString(SubmenuLayout.label,Default)</onselect>
         <onselect condition="True">Skin.Reset(CompactHeader)</onselect>
         <onselect condition="True">Skin.Reset(ShowAllWidgets)</onselect>
     </setting>
@@ -26,6 +29,8 @@
         <onselect condition="True">Skin.Reset(OpenSubMenuOnClick)</onselect>
         <onselect condition="True">Skin.SetString(widgetstyle,landscape)</onselect>
         <onselect condition="True">Skin.SetString(widgetstyle.label,Landscape)</onselect>
+		<onselect condition="Skin.String(SubmenuLayout, vertical)">Skin.SetString(SubmenuLayout, horizontal)</onselect>
+		<onselect condition="Skin.String(SubmenuLayout, vertical)">Skin.SetString(SubmenuLayout.label,Default)</onselect>
         <onselect condition="True">Skin.Reset(CompactHeader)</onselect>
         <onselect condition="True">Skin.Reset(ShowAllWidgets)</onselect>
     </setting>
@@ -33,6 +38,8 @@
         <onselect condition="True">Skin.SetBool(OpenSubMenuOnClick)</onselect>
         <onselect condition="True">Skin.SetString(widgetstyle,landscape)</onselect>
         <onselect condition="True">Skin.SetString(widgetstyle.label,Landscape)</onselect>
+		<onselect condition="Skin.String(SubmenuLayout, vertical)">Skin.SetString(SubmenuLayout, horizontal)</onselect>
+		<onselect condition="Skin.String(SubmenuLayout, vertical)">Skin.SetString(SubmenuLayout.label,Default)</onselect>
         <onselect condition="True">Skin.Reset(CompactHeader)</onselect>
         <onselect condition="True">Skin.Reset(LowerWidgets)</onselect>
         <onselect condition="True">Skin.Reset(ShowAllWidgets)</onselect>
@@ -41,6 +48,8 @@
         <onselect condition="True">Skin.SetBool(OpenSubMenuOnClick)</onselect>
         <onselect condition="True">Skin.SetString(widgetstyle,landscape)</onselect>
         <onselect condition="True">Skin.SetString(widgetstyle.label,Landscape)</onselect>
+		<onselect condition="Skin.String(SubmenuLayout, vertical)">Skin.SetString(SubmenuLayout, horizontal)</onselect>
+		<onselect condition="Skin.String(SubmenuLayout, vertical)">Skin.SetString(SubmenuLayout.label,Default)</onselect>
         <onselect condition="True">Skin.Reset(CompactHeader)</onselect>
         <onselect condition="True">Skin.Reset(ShowAllWidgets)</onselect>
     </setting>
@@ -122,13 +131,13 @@
     </setting>
     
     <!-- submenu layout -->
-    <setting id="SubmenuLayout" value="vertical" label="$LOCALIZE[31313]" condition="!Skin.String(HomeLayout,1small) + !Skin.String(HomeLayout,2small) + !Skin.String(HomeLayout,3small)" icon="special://skin/extras/viewthumbs/submenulayout_vertical.jpg" description=""/>
-    <setting id="SubmenuLayout" value="horizontal" label="$LOCALIZE[31314]" condition="" icon="special://skin/extras/viewthumbs/submenulayout_horizontal.jpg" description="" default="true"/>
-    <setting id="SubmenuLayout" value="tiles" label="$LOCALIZE[31315]" condition="" icon="special://skin/extras/viewthumbs/submenulayout_tiles.jpg" description=""/>
+    <setting id="SubmenuLayout" value="vertical" label="$LOCALIZE[31313]" condition="![Skin.String(HomeLayout,1small) | Skin.String(HomeLayout,2small) | Skin.String(HomeLayout,3small)]" icon="special://skin/extras/viewthumbs/submenulayout_vertical.jpg" description=""/>
+    <setting id="SubmenuLayout" value="horizontal" label="$LOCALIZE[31314]" condition="" icon="special://skin/extras/viewthumbs/submenulayout_horizontal.jpg" description="[B]Default[/B]" default="true"/>
+    <setting id="SubmenuLayout" value="tiles" label="$LOCALIZE[31315]" condition="!Skin.String(HomeLayout,3)" icon="special://skin/extras/viewthumbs/submenulayout_tiles.jpg" description=""/>
     <setting id="SubmenuLayout" value="subpage" label="$LOCALIZE[31316]" condition="" icon="special://skin/extras/viewthumbs/submenulayout_subpage.jpg" description=""/>
     
     
-    <setting id="widgetstyle" value="None" label="$LOCALIZE[31641]" condition="!String.IsEmpty(Window.Property(widgetcontrols))+ !Skin.String(HomeLayout,win10)" icon="DefaultAddonNone.png" description="$INFO[Skin.String(widgetstyle)]"/>
+    <setting id="widgetstyle" value="None" label="$LOCALIZE[31641]" condition="!String.IsEmpty(Window.Property(widgetcontrols)) + !Skin.String(HomeLayout,win10)" icon="DefaultAddonNone.png" description="$INFO[Skin.String(widgetstyle)]"/>
     
     <!-- widget style: horizontal -->
     <setting id="widgetstyle" value="poster" label="Poster" condition="!String.Contains(Skin.String(HomeLayout),ver) + !Skin.String(HomeLayout,win10)" icon="special://skin/extras/viewthumbs/widget_hor_poster.jpg" description=""/>
@@ -319,6 +328,19 @@
     <setting id="defaultosdbutton_livetv" value="105" label="Teletext" condition="" icon="" description=""/>
     <setting id="defaultosdbutton_livetv" value="806" label="Channel list" condition="" icon="" description=""/>
     <setting id="defaultosdbutton_livetv" value="807" label="Mini guide" condition="" icon="" description="" default="Skin.HasSetting(OSDDisablePlaybackControls)"/>
+	
+	<setting id="defaultosdbutton_musicPVR" value="203" label="Play/Pause" condition="!Skin.HasSetting(OSDDisablePlaybackControls)" icon="" description="" default="!Skin.HasSetting(OSDDisablePlaybackControls)"/>
+    <setting id="defaultosdbutton_musicPVR" value="204" label="Stop" condition="!Skin.HasSetting(OSDDisablePlaybackControls)" icon="" description=""/>
+    <setting id="defaultosdbutton_musicPVR" value="201" label="Previous" condition="!Skin.HasSetting(OSDDisablePlaybackControls)" icon="" description=""/>
+    <setting id="defaultosdbutton_musicPVR" value="202" label="Rewind" condition="!Skin.HasSetting(OSDDisablePlaybackControls)" icon="" description=""/>
+    <setting id="defaultosdbutton_musicPVR" value="205" label="Fast Forward" condition="!Skin.HasSetting(OSDDisablePlaybackControls)" icon="" description=""/>
+    <setting id="defaultosdbutton_musicPVR" value="206" label="Next" condition="!Skin.HasSetting(OSDDisablePlaybackControls)" icon="" description=""/>
+    <setting id="defaultosdbutton_musicPVR" value="10" label="Record" condition="!Skin.HasSetting(OSDDisablePlaybackControls)" icon="" description=""/>
+    <setting id="defaultosdbutton_musicPVR" value="101" label="Audio Settings" condition="" icon="" description=""/>
+    <setting id="defaultosdbutton_musicPVR" value="102" label="Video Settings" condition="" icon="" description=""/>
+    <setting id="defaultosdbutton_musicPVR" value="105" label="Teletext" condition="" icon="" description=""/>
+    <setting id="defaultosdbutton_musicPVR" value="806" label="Channel list" condition="" icon="" description=""/>
+    <setting id="defaultosdbutton_musicPVR" value="807" label="Mini guide" condition="" icon="" description="" default="Skin.HasSetting(OSDDisablePlaybackControls)"/>
     
     <setting id="defaultosdbutton_music" value="203" label="Play/Pause" condition="!Skin.HasSetting(OSDDisablePlaybackControls)" icon="" description="" default="!Skin.HasSetting(OSDDisablePlaybackControls)"/>
     <setting id="defaultosdbutton_music" value="204" label="Stop" condition="!Skin.HasSetting(OSDDisablePlaybackControls)" icon="" description=""/>
@@ -347,8 +369,8 @@
     <setting id="CaseOverlays.Fallback" value="Clear" label="Clear" condition="" icon="" description=""/>
     
     <!--thumbs border size unfocused-->
-    <setting id="thumbsborder_unfocused" value="0" label="$LOCALIZE[1223]" condition="" icon="" description=""/>
-    <setting id="thumbsborder_unfocused" value="2" label="$LOCALIZE[31729]" condition="" icon="" description="" default="true" />
+    <setting id="thumbsborder_unfocused" value="0" label="$LOCALIZE[1223]" condition="" icon="" description="" default="true"/>
+    <setting id="thumbsborder_unfocused" value="2" label="$LOCALIZE[31729]" condition="" icon="" description=""/>
     <setting id="thumbsborder_unfocused" value="4" label="$LOCALIZE[31729]" condition="" icon="" description=""/>
     <setting id="thumbsborder_unfocused" value="6" label="$LOCALIZE[31729]" condition="" icon="" description=""/>
     
@@ -534,47 +556,16 @@
     <!-- Game thumbnail options -->
     <setting id="game.thumbshape.default" value="auto" default="true" label="Automatic shape" condition="" icon="" description="Automatically apply default type of thumbnail"/>
     <setting id="game.thumbshape.default" value="||SUBLEVEL||game.thumbshapes" label="Custom shape" condition="" icon="" description="Choose the desired type of thumbnail"/>
-    <setting id="game.thumbshape.nes" value="auto" default="true" label="Automatic shape" condition="" icon="" description="Automatically apply default type of thumbnail"/>
-    <setting id="game.thumbshape.nes" value="||SUBLEVEL||game.thumbshapes" label="Custom shape" condition="" icon="" description="Choose the desired type of thumbnail"/>
-    <setting id="game.thumbshape.snes" value="auto" default="true" label="Automatic shape" condition="" icon="" description="Automatically apply default type of thumbnail"/>
-    <setting id="game.thumbshape.snes" value="||SUBLEVEL||game.thumbshapes" label="Custom shape" condition="" icon="" description="Choose the desired type of thumbnail"/>    
-    <setting id="game.thumbshape.n64" value="auto" default="true" label="Automatic shape" condition="" icon="" description="Automatically apply default type of thumbnail"/>
-    <setting id="game.thumbshape.n64" value="||SUBLEVEL||game.thumbshapes" label="Custom shape" condition="" icon="" description="Choose the desired type of thumbnail"/>
-    <setting id="game.thumbshape.gb" value="auto" default="true" label="Automatic shape" condition="" icon="" description="Automatically apply default type of thumbnail"/>
-    <setting id="game.thumbshape.gb" value="||SUBLEVEL||game.thumbshapes" label="Custom shape" condition="" icon="" description="Choose the desired type of thumbnail"/>
-    <setting id="game.thumbshape.switch" value="auto" default="true" label="Automatic shape" condition="" icon="" description="Automatically apply default type of thumbnail"/>
-    <setting id="game.thumbshape.switch" value="||SUBLEVEL||game.thumbshapes" label="Custom shape" condition="" icon="" description="Choose the desired type of thumbnail"/>
-    <setting id="game.thumbshape.nds" value="auto" default="true" label="Automatic shape" condition="" icon="" description="Automatically apply default type of thumbnail"/>
-    <setting id="game.thumbshape.nds" value="||SUBLEVEL||game.thumbshapes" label="Custom shape" condition="" icon="" description="Choose the desired type of thumbnail"/>
-    <setting id="game.thumbshape.ps3" value="auto" default="true" label="Automatic shape" condition="" icon="" description="Automatically apply default type of thumbnail"/>
-    <setting id="game.thumbshape.ps3" value="||SUBLEVEL||game.thumbshapes" label="Custom shape" condition="" icon="" description="Choose the desired type of thumbnail"/>
-    <setting id="game.thumbshape.ps2" value="auto" default="true" label="Automatic shape" condition="" icon="" description="Automatically apply default type of thumbnail"/>
-    <setting id="game.thumbshape.ps2" value="||SUBLEVEL||game.thumbshapes" label="Custom shape" condition="" icon="" description="Choose the desired type of thumbnail"/>
-    <setting id="game.thumbshape.ps1" value="auto" default="true" label="Automatic shape" condition="" icon="" description="Automatically apply default type of thumbnail"/>
-    <setting id="game.thumbshape.ps1" value="||SUBLEVEL||game.thumbshapes" label="Custom shape" condition="" icon="" description="Choose the desired type of thumbnail"/>
-    <setting id="game.thumbshape.psp" value="auto" default="true" label="Automatic shape" condition="" icon="" description="Automatically apply default type of thumbnail"/>
-    <setting id="game.thumbshape.psp" value="||SUBLEVEL||game.thumbshapes" label="Custom shape" condition="" icon="" description="Choose the desired type of thumbnail"/>
-    <setting id="game.thumbshape.win" value="auto" default="true" label="Automatic shape" condition="" icon="" description="Automatically apply default type of thumbnail"/>
-    <setting id="game.thumbshape.win" value="||SUBLEVEL||game.thumbshapes" label="Custom shape" condition="" icon="" description="Choose the desired type of thumbnail"/>
-    <setting id="game.thumbshape.dos" value="auto" default="true" label="Automatic shape" condition="" icon="" description="Automatically apply default type of thumbnail"/>
-    <setting id="game.thumbshape.dos" value="||SUBLEVEL||game.thumbshapes" label="Custom shape" condition="" icon="" description="Choose the desired type of thumbnail"/>    
-    <setting id="game.thumbshape.msys" value="auto" default="true" label="Automatic shape" condition="" icon="" description="Automatically apply default type of thumbnail"/>
-    <setting id="game.thumbshape.msys" value="||SUBLEVEL||game.thumbshapes" label="Custom shape" condition="" icon="" description="Choose the desired type of thumbnail"/>    
-    <setting id="game.thumbshape.megadr" value="auto" default="true" label="Automatic shape" condition="" icon="" description="Automatically apply default type of thumbnail"/>
-    <setting id="game.thumbshape.megadr" value="||SUBLEVEL||game.thumbshapes" label="Custom shape" condition="" icon="" description="Choose the desired type of thumbnail"/>    
-    <setting id="game.thumbshape.32x" value="auto" default="true" label="Automatic shape" condition="" icon="" description="Automatically apply default type of thumbnail"/>
-    <setting id="game.thumbshape.32x" value="||SUBLEVEL||game.thumbshapes" label="Custom shape" condition="" icon="" description="Choose the desired type of thumbnail"/>    
-    <setting id="game.thumbshape.dcast" value="auto" default="true" label="Automatic shape" condition="" icon="" description="Automatically apply default type of thumbnail"/>
-    <setting id="game.thumbshape.dcast" value="||SUBLEVEL||game.thumbshapes" label="Custom shape" condition="" icon="" description="Choose the desired type of thumbnail"/>    
-    <setting id="game.thumbshape.gear" value="auto" default="true" label="Automatic shape" condition="" icon="" description="Automatically apply default type of thumbnail"/>
-    <setting id="game.thumbshape.gear" value="||SUBLEVEL||game.thumbshapes" label="Custom shape" condition="" icon="" description="Choose the desired type of thumbnail"/>    
-    
+	
     <setting id="game.thumbshapes" value="poster" label="Poster" condition="" icon="" description="Apply poster type of thumbnail"/>
     <setting id="game.thumbshapes" value="bluray" label="Blu-ray" condition="" icon="" description="Apply Blu-ray type of thumbnail"/>
-    <setting id="game.thumbshapes" value="slim" label="Slim poster" condition="" icon="" description="Apply slim poster type of thumbnail"/>
-    <setting id="game.thumbshapes" value="wide" label="Wide box" condition="" icon="" description="Apply wide box type of thumbnail"/>
-    <setting id="game.thumbshapes" value="square" label="Square" condition="" icon="" description="Apply square type of thumbnail"/>
-    <setting id="game.thumbshapes" value="3ds" label="NDS box" condition="" icon="" description="Apply NDS/3DS box type of thumbnail"/>
-    <setting id="game.thumbshapes" value="steam" label="Steam banner" condition="" icon="" description="Apply steam banner type of thumbnail"/>
-
+    <setting id="game.thumbshapes" value="dvd" label="DVD" condition="" icon="" description="Apply DVD type of thumbnail"/>
+    <setting id="game.thumbshapes" value="cd" label="CD" condition="" icon="" description="Apply CD type of thumbnail"/>
+    <setting id="game.thumbshapes" value="widebox" label="Wide box" condition="" icon="" description="Apply wide box type of thumbnail"/>
+    <setting id="game.thumbshapes" value="slimbox" label="Slim poster" condition="" icon="" description="Apply slim poster type of thumbnail"/>
+    <setting id="game.thumbshapes" value="squarebox" label="Square" condition="" icon="" description="Apply square type of thumbnail"/>
+    <setting id="game.thumbshapes" value="3dsbox" label="NDS box" condition="" icon="" description="Apply NDS/3DS box type of thumbnail"/>
+    <setting id="game.thumbshapes" value="steambanner" label="Steam banner" condition="" icon="" description="Apply steam banner type of thumbnail"/>
+    <setting id="game.thumbshapes" value="screenshot" label="Screenshot" condition="" icon="" description="Apply screenshot type of thumbnail"/>
+ 
 </settings>

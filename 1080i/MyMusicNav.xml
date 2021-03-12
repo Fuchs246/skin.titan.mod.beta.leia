@@ -105,7 +105,7 @@
                     <description>Files</description>
                     <include>SideBladeMenuButton</include>
                     <label>1214</label>
-                    <onclick>SetFocus(50)</onclick>
+                    <onclick>ActivateWindow(music,files,return)</onclick>
                 </control>
 				<control type="togglebutton" id="20">
 					<description>Update library</description>

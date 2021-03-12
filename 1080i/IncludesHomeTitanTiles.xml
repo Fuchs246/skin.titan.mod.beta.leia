@@ -9,7 +9,7 @@
 			<include>animation_window_open_close</include>
             
             <!-- widgets -->
-            <include condition="!Skin.HasSetting(DisableAllWidgets) + !String.Contains(Skin.String(HomeLayout),3) + !String.IsEqual(Skin.String(HomeLayout),2)">HorizontalWidgets</include> 
+            <include condition="!Skin.HasSetting(DisableAllWidgets) + !String.Contains(Skin.String(HomeLayout),3)">HorizontalWidgets</include> 
             <!-- mainmenu -->
             <include condition="[!Skin.HasSetting(UseFixedHomeFocus) + [Skin.String(HomeLayout, 1) | Skin.String(HomeLayout, 1small)]] | Skin.String(HomeLayout, 2) | Skin.String(HomeLayout, 3) | Skin.String(HomeLayout, 2small) | Skin.String(HomeLayout, 3small)">HomeTitanTilesNormal</include>
             <include condition="Skin.HasSetting(UseFixedHomeFocus) + [Skin.String(HomeLayout, 1) | Skin.String(HomeLayout, 1small)]">HomeTitanTilesFixedFocus</include>
@@ -69,8 +69,9 @@
         <control type="group">
             <!-- show arrow up button if widget available -->
             <visible>!Skin.HasSetting(DisableAllWidgets)</visible>
-            <visible>!String.IsEmpty(Container(300).ListItem.Property(widget)) + [[[Skin.String(HomeLayout, 2) | Skin.String(HomeLayout, 2small)] + [String.IsEqual(Container(300).Position,0) | String.IsEqual(Container(300).Position,2) | String.IsEqual(Container(300).Position,4) | String.IsEqual(Container(300).Position,6) | String.IsEqual(Container(300).Position,8)]] | Skin.String(HomeLayout, 1) | Skin.String(HomeLayout, 1small)]</visible>
-            <animation effect="fade" start="0" end="100" delay="1200" time="800" pulse="false">Focus</animation>
+            <visible>!String.IsEmpty(Container(300).ListItem.Property(widget)) + [[[Skin.String(HomeLayout, 2) | [Skin.String(HomeLayout, 2small) + !Skin.HasSetting(AutoShowSubmenu) + !Skin.HasSetting(AutoShowWidgets)]] + [String.IsEqual(Container(300).Position,0) | String.IsEqual(Container(300).Position,2) | String.IsEqual(Container(300).Position,4) | String.IsEqual(Container(300).Position,6) | String.IsEqual(Container(300).Position,8)]] | Skin.String(HomeLayout, 1) | Skin.String(HomeLayout, 1small)]</visible>
+            <!--visible>Skin.String(HomeLayout, 2small) + !Skin.HasSetting(AutoShowSubmenu) + !Skin.HasSetting(AutoShowWidgets)</visible-->
+			<animation effect="fade" start="0" end="100" delay="1200" time="800" pulse="false">Focus</animation>
             <control type="image">
                 <left>35%</left>
                 <posy>0</posy>
@@ -83,7 +84,7 @@
                 <posy>0</posy>
                 <width>25%</width>
                 <height>30</height>
-                <texture colordiffuse="$VAR[ViewDetailsFocusColor]">home/home_arrow_up.png</texture>
+                <texture colordiffuse="$INFO[Skin.String(ViewDetailsListItemTextColor)]">home/home_arrow_up.png</texture>
                 <aspectratio>keep</aspectratio>
             </control>
         </control>
@@ -91,8 +92,9 @@
         <control type="group">
             <!-- show arrow down button if submenu available or widget at 2 rows of home tiles -->
             <visible>!Skin.HasSetting(DisableAllSubmenus)</visible>
-            <visible>[[Integer.IsGreater(Container(4444).NumItems,0) + [Skin.String(HomeLayout, 1) | Skin.String(HomeLayout, 1small)]] | [!String.IsEmpty(Container(300).ListItem.Property(widget)) + [Skin.String(HomeLayout, 2) | Skin.String(HomeLayout, 2small)] + [String.IsEqual(Container(300).Position,1) | String.IsEqual(Container(300).Position,3) | String.IsEqual(Container(300).Position,5) | String.IsEqual(Container(300).Position,7) | String.IsEqual(Container(300).Position,9)]]]</visible>
-            <animation effect="fade" start="0" end="100" delay="1200" time="800" pulse="false">Focus</animation>
+            <visible>[[Integer.IsGreater(Container(4444).NumItems,0) + [Skin.String(HomeLayout, 1) | Skin.String(HomeLayout, 1small)]] | [!String.IsEmpty(Container(300).ListItem.Property(widget)) + [Skin.String(HomeLayout, 2) | [Skin.String(HomeLayout, 2small) + !Skin.HasSetting(AutoShowSubmenu) + !Skin.HasSetting(AutoShowWidgets)]] + [String.IsEqual(Container(300).Position,1) | String.IsEqual(Container(300).Position,3) | String.IsEqual(Container(300).Position,5) | String.IsEqual(Container(300).Position,7) | String.IsEqual(Container(300).Position,9)]]]</visible>
+            <!--visible>Skin.String(HomeLayout, 2small) + !Skin.HasSetting(AutoShowSubmenu) + !Skin.HasSetting(AutoShowWidgets)</visible-->
+			<animation effect="fade" start="0" end="100" delay="1200" time="800" pulse="false">Focus</animation>
             <control type="image">
                 <left>35%</left>
                 <bottom>0</bottom>
@@ -105,7 +107,7 @@
                 <bottom>0</bottom>
                 <width>25%</width>
                 <height>30</height>
-                <texture colordiffuse="$VAR[ViewDetailsFocusColor]">home/home_arrow_down.png</texture>
+                <texture colordiffuse="$INFO[Skin.String(ViewDetailsListItemTextColor)]">home/home_arrow_down.png</texture>
                 <aspectratio>keep</aspectratio>
             </control>
         </control>
@@ -125,21 +127,30 @@
  		<animation type="Conditional" condition="Control.IsVisible(77551)">
 			<effect type="slide" start="0,-0" end="0,800" time="300" tween="cubic" easing="inout" delay="0" />
 		</animation>
-        <animation type="Conditional" condition="[Control.IsVisible(77551) | Control.HasFocus(77777)]">
-			<effect type="fade" start="100" end="50" time="400" tween="cubic" easing="inout" delay="0" />
-		</animation>
+        
 
-		<animation type="Conditional" condition="Control.IsVisible(4444) + Skin.String(SubmenuLayout, tiles)">
-			<effect type="slide" start="0,0" end="0,-60" time="200" tween="cubic" easing="inout" delay="0" />
+		<animation type="Conditional" condition="Control.IsVisible(4444) + Skin.String(SubmenuLayout, tiles) + [!Skin.String(HomeLayout,2small) | !Skin.String(HomeLayout,2)]">
+			<effect type="slide" start="0,0" end="0,-80" time="200" tween="cubic" easing="inout" delay="0" /> <!-- end=60 -->
+		</animation>
+		<animation type="Conditional" condition="Control.IsVisible(4444) + Skin.String(SubmenuLayout, tiles) + Skin.String(HomeLayout,2small)">
+			<effect type="slide" start="0,0" end="0,-80" time="200" tween="cubic" easing="inout" delay="0" /> 
+		</animation>
+		<animation type="Conditional" condition="Control.IsVisible(4444) + Skin.String(SubmenuLayout, tiles) + Skin.String(HomeLayout,2)">
+			<effect type="slide" start="0,0" end="0,-10" time="200" tween="cubic" easing="inout" delay="0" /> 
 		</animation>
 		
-		<animation type="Conditional" condition="Skin.HasSetting(HideHomeTileIndicators)">
+		
+		<animation type="Conditional" condition="Skin.HasSetting(HideHomeTileIndicators) + !Skin.String(HomeLayout,2)">
 			<effect type="slide" start="0,0" end="0,30" time="200" tween="cubic" easing="inout" delay="0" />
 		</animation>
 
 		<animation type="Conditional" condition="[String.Contains(Window(Home).Property(submenu),show) | Control.HasFocus(4444)] + Skin.String(SubmenuLayout, subpage)">
 			<effect type="slide" start="0,0" end="0,1000" time="0" delay="0" />
 		</animation>
+		
+		<animation type="Conditional" condition="[String.Contains(Window(Home).Property(submenu),show) | Control.HasFocus(4444)] + Skin.String(SubmenuLayout, vertical)">
+                <effect type="fade" start="100" end="30" time="250" />
+        </animation>
 
 		<onup>$VAR[HomeButtonUpAction]</onup>
 		<ondown>$VAR[HomeButtonDownAction]</ondown>
@@ -238,14 +249,20 @@
         <bottom>110</bottom>
 		<focusposition>1</focusposition>
 		<animation effect="slide" delay="0" start="0" end="0,40" time="0" condition="!Skin.HasSetting(HideHomeTileIndicators)">Conditional</animation>
+		<animation effect="slide" delay="0" start="0" end="0,10" time="0" condition="Skin.HasSetting(HideHomeTileIndicators) + Skin.String(SubmenuLayout, vertical)">Conditional</animation>
+		<animation effect="slide" delay="0" start="0" end="0,-10" time="0" condition="!Skin.HasSetting(HideHomeTileIndicators) + Skin.String(SubmenuLayout, tiles)">Conditional</animation>
     </include>
     <include name="TitanTiles_2Row">
         <height>605</height>
         <bottom>90</bottom>
+		<animation effect="slide" delay="0" start="0" end="0,190" time="200" condition="[String.Contains(Window.Property(widgetstyle), box) | String.Contains(Window.Property(widgetstyle), details)] + [Control.HasFocus(77777) | String.IsEqual(Window(Home).Property(ShowWidget),show)] + !Skin.HasSetting(HideWidgetDetailsPanel) + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+		<animation effect="fade" delay="0" start="100" end="30" time="200" condition="[String.Contains(Window.Property(widgetstyle), box) | String.Contains(Window.Property(widgetstyle), details)] + [Control.HasFocus(77777) | String.IsEqual(Window(Home).Property(ShowWidget),show)] + !Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
+		<animation effect="slide" delay="0" start="0" end="0,190" time="200" condition="[Control.HasFocus(77777) | String.IsEqual(Window(Home).Property(ShowWidget),show)] + Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation> <!-- + Skin.HasSetting(HideWidgetDetailsPanel) -->
+		<animation effect="fade" delay="0" start="100" end="30" time="200" condition="[Control.HasFocus(77777) | String.IsEqual(Window(Home).Property(ShowWidget),show)] + Skin.HasSetting(HideWidgetDetailsPanel)">Conditional</animation>
     </include>
 	<include name="TitanTiles_3Row">
         <height>870</height>
-        <bottom>90</bottom>
+        <bottom>110</bottom>
     </include>
 	<include name="TitanTiles_1RowSmall">
         <height>227</height>
@@ -257,9 +274,10 @@
     </include>
     <include name="TitanTiles_2RowSmall">
         <height>454</height>
-        <bottom>90</bottom>
+        <bottom>100</bottom>
         <posx>60</posx>
         <width>1825</width>
+		<animation effect="slide" delay="0" start="0" end="0,10" time="0" condition="Skin.HasSetting(HideHomeTileIndicators)">Conditional</animation>
 		<animation effect="slide" delay="0" start="0" end="0,40" time="0" condition="!Skin.HasSetting(HideHomeTileIndicators)">Conditional</animation>
     </include>
 	<include name="TitanTiles_3RowSmall">
